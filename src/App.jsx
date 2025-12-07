@@ -1,107 +1,141 @@
-import { Parallax } from 'react-scroll-parallax';
-import { motion } from 'framer-motion';
+import { Parallax } from "react-scroll-parallax";
+import { motion } from "framer-motion";
+import Poster from "./components/Poster";
+import Details from "./components/Details";
+import RSVPForm from "./components/RSVPForm";
+import NotebookSection from "./components/NotebookSection";
+import React, { useRef, useState, useEffect } from "react";
 
 function App() {
+
+  const posterRef = useRef(null);
+  const detailsRef = useRef(null);
+  const formRef = useRef(null);
+
+    // Scroll function
+  const scrollToSection = (ref) => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const [menuOpen, setMenuOpen] = useState(false);
+
+
+  const [showMenuButton, setShowMenuButton] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // show button only after leaving the very top
+      setShowMenuButton(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    
+    // initialize once
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 text-slate-100">
-      {/* Hero section */}
-      <header className="relative flex flex-col items-center justify-center min-h-screen px-6 text-center">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight mb-4">
-          Alex &amp; Sam
-        </h1>
-        <p className="text-lg sm:text-xl opacity-80 mb-2">
-          We&apos;re getting married!
-        </p>
-        <p className="text-sm sm:text-base opacity-60 mb-8">
-          21 June 2025 · Bucharest, Romania
-        </p>
+    <div className="min-h-screen bg-pink px-0 sm:px-20">
+      {/* HAMBURGER MENU */}
+      {showMenuButton && (
 
-        <a
-          href="#rsvp"
-          className="inline-flex items-center justify-center rounded-full px-8 py-3 text-sm font-medium bg-white text-slate-900 hover:bg-slate-200 transition"
+      <nav className="hamburger-wrapper">
+        {/* round button */}
+        <button
+          onClick={() => setMenuOpen((prev) => !prev)}
+          className={`hamburger-toggle ${menuOpen ? "is-open" : ""}`}
+          aria-label="Toggle navigation"
         >
-          RSVP
-        </a>
-      </header>
+          <img   className="w-32 sm:w-36 md:w-40 max-w-none"
+                    src="/images/cake.svg"
+                    alt="Theo & Didi"
+              />
+          {/* <span className="hamburger-line line-1" />
+          <span className="hamburger-line line-2" />
+          <span className="hamburger-line line-3" /> */}
+        </button>
 
-      {/* Info section */}
-      <section id="details" className="px-6 py-16 max-w-3xl mx-auto space-y-6">
-        <h2 className="text-2xl font-semibold mb-2">Wedding Details</h2>
-        <p className="opacity-80">
-          Here you can add information about the ceremony, reception, dress code,
-          and anything else your guests should know.
-        </p>
+        {menuOpen && (
+          <div className="hamburger-panel">
+            <div className="panel-header">
+              <span className="panel-label">PROGRAMUL ZILEI</span>
+            </div>
+
+            <div className="panel-buttons">
+              <button
+                onClick={() => {
+                  scrollToSection(posterRef);
+                  setMenuOpen(false);
+                }}
+              >
+                AFIȘ
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection(detailsRef);
+                  setMenuOpen(false);
+                }}
+              >
+                SINOPSIS
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection(formRef);
+                  setMenuOpen(false);
+                }}
+              >
+                BILETE
+              </button>
+            </div>
+
+          </div>
+        )}
+      </nav>
+      )}
+
+      {/* POSTER SECTION */}
+      <section ref={posterRef} className="min-h-[55vh] flex flex-col items-center justify-center px-6 text-center">
+        <Poster />
       </section>
 
-      {/* RSVP section */}
-      <section
-        id="rsvp"
-        className="px-6 py-16 max-w-xl mx-auto border-t border-slate-800"
-      >
-        <h2 className="text-2xl font-semibold mb-4">RSVP</h2>
-        <p className="opacity-80 mb-6">
-          Please let us know if you&apos;ll be joining us.
-        </p>
-
-        <form className="space-y-4">
-          <div>
-            <label className="block text-sm mb-1" htmlFor="name">
-              Full name
-            </label>
-            <input
-              id="name"
-              name="name"
-              required
-              className="w-full rounded-md bg-slate-900 border border-slate-700 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm mb-1" htmlFor="email">
-              Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              className="w-full rounded-md bg-slate-900 border border-slate-700 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm mb-1" htmlFor="guests">
-              Number of guests (including you)
-            </label>
-            <input
-              id="guests"
-              name="guests"
-              type="number"
-              min="1"
-              className="w-full rounded-md bg-slate-900 border border-slate-700 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm mb-1" htmlFor="notes">
-              Notes (allergies, song requests, etc.)
-            </label>
-            <textarea
-              id="notes"
-              name="notes"
-              rows="3"
-              className="w-full rounded-md bg-slate-900 border border-slate-700 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="inline-flex items-center justify-center rounded-full px-6 py-2 text-sm font-medium bg-white text-slate-900 hover:bg-slate-200 transition"
-          >
-            Send RSVP
-          </button>
-        </form>
+      {/* PARALLAX SECTION */}
+      <section ref={detailsRef} className="min-h-[150vh] px-6 pt-0 sm:pt-40">
+        <Details/>
       </section>
+      
+
+            {/* PARALLAX SECTION */}
+    <section ref={formRef} className=" px-6 pt-0 sm:pt-40">
+
+
+      {/* Scrollable area */}
+      <div title="BILETE" className="relative max-w-4xl mx-auto ">
+ 
+
+        <div className="sticky top-0 pt-2 overflow-hidden z-40 bg-pink mb-10">
+          <div className="flex flex-row items-center justify-center gap-4">
+              <img
+                    className="w-24 sm:w-28 md:w-32"
+                    src="/images/carnation.svg"
+                    alt="Theo & Didi"
+              />
+              <h2 className="text-2xl font-semibold mb-8 text-center font-fascinate z-40  uppercase">
+                ia-ti biletul acum
+              </h2>
+
+          </div>
+
+        </div>
+          <RSVPForm/>
+
+      </div>
+        
+
+    </section>
+      
     </div>
   );
 }
