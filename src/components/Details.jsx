@@ -3,11 +3,18 @@ import { Parallax } from "react-scroll-parallax";
 import { motion } from "framer-motion";
 import NotebookSection from "./NotebookSection";
 import React, { useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Details() {
+  const { t } = useTranslation();
+
   return (
     <div>
-      <div title="SINOPSIS" className="relative max-w-4xl mx-auto min-h-[170vh] sm:min-h-[220vh]">
+      <div title="schedule" className="relative max-w-4xl mx-auto
+    min-h-[170vh]
+    sm:min-h-[200vh]
+    [@media(min-height:900px)]:min-h-[140vh]
+    [@media(min-height:1200px)]:min-h-[120vh]">
         <div className="sticky top-0 pt-2 overflow-hidden z-40 bg-pink">
           <div className="flex flex-row items-center justify-center gap-4">
             {/* <h2 className="text-2xl font-semibold mb-8 text-center font-monoton z-40 text-beige">

@@ -1,13 +1,15 @@
 import { Parallax } from "react-scroll-parallax";
 import { motion } from "framer-motion";
 import React, { useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Poster() {
+  const { t } = useTranslation();
 
   return (
     <div title="AFIS">
       <h1 className="mt-14 sm:mt-10 text-4xl sm:text-5xl font-semibold font-prata uppercase leading-none mb-[-1.8rem] sm:mb-[0rem]">
-        NOI,
+        {t("us")},
       </h1>
       <div className="grid grid-cols-3 items-center pt-5 mt-12 text-beige w-full px-0 sm:px-12">
 
@@ -57,7 +59,7 @@ export default function Poster() {
         </Parallax>
 
         <p className="mt-16 sm:mt-0 md:mt-28 min-h-[20vh] max-w-xl font-prata z-40">
-          vă invităm să ne fiți alături la sărbătorirea căsătoriei noastre  &#x3c;3
+          {t("invitation text")}  &#x3c;3
         </p>
       </div>
 

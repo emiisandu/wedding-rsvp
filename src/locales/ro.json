@@ -1,0 +1,19 @@
+{
+  "menu": "meniu",
+  "home": "acasă",
+  "schedule": "programul zilei",
+  "confirmation": "CONFIRMARE",
+  "confirm attendance": "confirmare prezență",
+  "us": "noi",
+  "invitation text": "vă invităm să ne fiți alături la sărbătorirea căsătoriei noastre",
+  "guests": "Invitați",
+  "firstName": "Prenume",
+  "lastName": "Nume",
+  "email": "Adresa de e-mail",
+  "message": "Mesaj",
+  "send": "TRIMITE",
+  "accommodation_sug": "Vrei sugestii de cazare?",
+  "accommodation_yes": "Da, trimite-mi sugestii",
+  "accommodation_no": "Nu, mulțumesc",
+  "write us": "Scrie-ne ceva drăguț… (opțional)"
+}

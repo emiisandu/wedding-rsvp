@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function RSVPForm() {
+  const { t } = useTranslation();
+  
   const [formData, setFormData] = useState({
     guests: [
       {
@@ -68,12 +71,12 @@ export default function RSVPForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-lg mx-auto flex flex-col gap-6 px-4 pb-10 "
+      className="w-full max-w-lg mx-auto flex flex-col gap-6 px-4 pb-10 font-prata-light "
     >
       {/* === GUESTS SECTION === */}
       <div className="flex flex-col gap-3 ">
         <h3 className="text-s tracking-widest uppercase font-semibold font-monoton">
-          Invitați
+          {t("guests")}
         </h3>
 
         {formData.guests.map((guest, index) => (
@@ -86,10 +89,10 @@ export default function RSVPForm() {
             "
           >
             {/* Prenume + Nume */}
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 min-w-0">
               <label className="flex-1 flex flex-col gap-1">
                 <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
-                  Prenume
+                  {t("Prenume")}
                 </span>
                 <input
                   type="text"
@@ -98,20 +101,21 @@ export default function RSVPForm() {
                     handleGuestChange(index, "firstName", e.target.value)
                   }
                   className="
-                    px-3 py-2 
+                    w-full
+                    px-2 py-2 
                     border border-black/30 
                     rounded-sm
                     bg-[#f5ead5]
                     focus:outline-none focus:border-black
                     shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
                   "
-                  placeholder="Prenume"
+                  placeholder={t('Prenume')}
                 />
               </label>
 
               <label className="flex-1 flex flex-col gap-1">
                 <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
-                  Nume
+                  {t("Nume")}
                 </span>
                 <input
                   type="text"
@@ -120,6 +124,7 @@ export default function RSVPForm() {
                     handleGuestChange(index, "lastName", e.target.value)
                   }
                   className="
+                    w-full
                     px-3 py-2 
                     border border-black/30 
                     rounded-sm
@@ -127,7 +132,7 @@ export default function RSVPForm() {
                     focus:outline-none focus:border-black
                     shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
                   "
-                  placeholder="Nume"
+                  placeholder={t("Nume")}
                 />
               </label>
             </div>
@@ -135,7 +140,7 @@ export default function RSVPForm() {
             {/* ADULT / CHILD */}
             <div className="flex flex-col gap-2 mt-1">
               <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
-                Tip invitat
+                {t("Tip invitat")}
               </span>
 
               <div className="flex flex-col sm:flex-row gap-2">
@@ -165,9 +170,9 @@ export default function RSVPForm() {
                           rounded-full
                           relative
                           before:content-['']
-                          before:absolute before:inset-0 before:rounded-full
+                          before:absolute before:inset-[3px] before:rounded-full
                           before:bg-transparent
-                          checked:before::bg-[#d62423]
+                          checked:before:bg-[#d62423]
                         "
                   />
                   <span className="text-sm tracking-wide">Adult</span>
@@ -199,12 +204,12 @@ export default function RSVPForm() {
                             rounded-full
                             relative
                             before:content-['']
-                            before:absolute before:inset-0 before:rounded-full
+                            before:absolute before:inset-[3px] before:rounded-full
                             before:bg-transparent
-                            checked:before::bg-[#d62423]
+                            checked:before:bg-[#d62423]
                           "
                   />
-                  <span className="text-sm tracking-wide">Copil</span>
+                  <span className="text-sm tracking-wide">{t("Copil")}</span>
                 </label>
               </div>
             </div>
@@ -213,7 +218,7 @@ export default function RSVPForm() {
             {guest.ageType === "adult" && (
               <label className="flex flex-col gap-1">
                 <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
-                  Adresa de e-mail 
+                  {t("email")}
                 </span>
                 <input
                   type="email"
@@ -234,74 +239,74 @@ export default function RSVPForm() {
               </label>
             )}
 
-       {/* PARTICIPARE — only for FIRST guest */}
-          {index === 0 && (
-            <div className="flex flex-col gap-2 mt-1">
-              <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
-                Participare
-              </span>
+            {/* PARTICIPARE — only for FIRST guest */}
+            {index === 0 && (
+              <div className="flex flex-col gap-2 mt-1">
+                <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
+                  {t("Participare")}
+                </span>
 
-              <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2">
 
-                {/* DA */}
-                <label className="flex items-center gap-3 px-3 py-2 bg-[#f5ead5] border border-black/30 rounded-sm shadow-[2px_2px_0px_rgba(0,0,0,0.35)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none">
-                  <input
-                    type="radio"
-                    name="attendance-main"
-                    value="da"
-                    checked={guest.attendance === "da"}
-                    onChange={(e) =>
-                      handleGuestChange(index, "attendance", e.target.value)
-                    }
-                    className="
+                  {/* DA */}
+                  <label className="flex items-center gap-3 px-3 py-2 bg-[#f5ead5] border border-black/30 rounded-sm shadow-[2px_2px_0px_rgba(0,0,0,0.35)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none">
+                    <input
+                      type="radio"
+                      name="attendance-main"
+                      value="da"
+                      checked={guest.attendance === "da"}
+                      onChange={(e) =>
+                        handleGuestChange(index, "attendance", e.target.value)
+                      }
+                      className="
                         appearance-none
                         h-4 w-4
                         border border-black/70
                         rounded-full
                         relative
                         before:content-['']
-                        before:absolute before:inset-0 before:rounded-full
+                        before:absolute before:inset-[3px] before:rounded-full
                         before:bg-transparent
-                        checked:before::bg-[#d62423]
+                        checked:before:bg-[#d62423]
                       "
-                  />
-                  <span className="text-sm tracking-wide">Da</span>
-                </label>
+                    />
+                    <span className="text-sm tracking-wide">{t("Da")}</span>
+                  </label>
 
-                {/* NU */}
-                <label className="flex items-center gap-3 px-3 py-2 bg-[#f5ead5] border border-black/30 rounded-sm shadow-[2px_2px_0px_rgba(0,0,0,0.35)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none">
-                  <input
-                    type="radio"
-                    name="attendance-main"
-                    value="nu"
-                    checked={guest.attendance === "nu"}
-                    onChange={(e) =>
-                      handleGuestChange(index, "attendance", e.target.value)
-                    }
-                    className="
+                  {/* NU */}
+                  <label className="flex items-center gap-3 px-3 py-2 bg-[#f5ead5] border border-black/30 rounded-sm shadow-[2px_2px_0px_rgba(0,0,0,0.35)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none">
+                    <input
+                      type="radio"
+                      name="attendance-main"
+                      value="nu"
+                      checked={guest.attendance === "nu"}
+                      onChange={(e) =>
+                        handleGuestChange(index, "attendance", e.target.value)
+                      }
+                      className="
                       appearance-none
                       h-4 w-4
                       border border-black/70
                       rounded-full
                       relative
                       before:content-['']
-                      before:absolute before:inset-0 before:rounded-full
+                      before:absolute before:inset-[3px] before:rounded-full
                       before:bg-transparent
-                      checked:before::bg-[#d62423]
+                      checked:before:bg-[#d62423]
                     "
-                  />
-                  <span className="text-sm tracking-wide">Nu</span>
-                </label>
+                    />
+                    <span className="text-sm tracking-wide">{t("Nu")}</span>
+                  </label>
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
 
             {/* MENU – only if attendance === "da" */}
             {(guest.attendance === "da" || index !== 0) && (
               <div className="flex flex-col gap-2 mt-1">
                 <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
-                  Meniu
+                  {t("menu")}
                 </span>
 
                 <div className="flex flex-col gap-2">
@@ -324,19 +329,19 @@ export default function RSVPForm() {
                       onChange={(e) =>
                         handleGuestChange(index, "menu", e.target.value)
                       }
-                     className="
+                      className="
                             appearance-none
                             h-4 w-4
                             border border-black/70
                             rounded-full
                             relative
                             before:content-['']
-                            before:absolute before:inset-0 before:rounded-full
+                            before:absolute before:inset-[3px] before:rounded-full
                             before:bg-transparent
-                            checked:before::bg-[#d62423]
+                            checked:before:bg-[#d62423]
                           "
                     />
-                    <span className="text-sm tracking-wide">Tradițional</span>
+                    <span className="text-sm tracking-wide">{t("Tradițional")}</span>
                   </label>
 
                   <label
@@ -359,15 +364,15 @@ export default function RSVPForm() {
                         handleGuestChange(index, "menu", e.target.value)
                       }
                       className="
-                        appearance-none
+                       appearance-none
                         h-4 w-4
                         border border-black/70
                         rounded-full
                         relative
                         before:content-['']
-                        before:absolute before:inset-0 before:rounded-full
+                        before:absolute before:inset-[3px] before:rounded-full
                         before:bg-transparent
-                        checked:before::bg-[#d62423]
+                        checked:before:bg-[#d62423]
                       "
                     />
                     <span className="text-sm tracking-wide">Vegetarian</span>
@@ -383,6 +388,7 @@ export default function RSVPForm() {
                   type="button"
                   onClick={() => removeGuest(index)}
                   className="
+                    font-monoton
                     text-[0.65rem] uppercase tracking-widest font-semibold
                     px-3 py-1
                     border border-black/40
@@ -393,7 +399,7 @@ export default function RSVPForm() {
                     active:translate-x-[2px] active:translate-y-[2px] active:shadow-none
                   "
                 >
-                  Șterge invitat
+                  {t("Șterge invitat")}
                 </button>
               )}
             </div>
@@ -405,6 +411,7 @@ export default function RSVPForm() {
           type="button"
           onClick={addGuest}
           className="
+            font-monoton
             self-start mt-1
             bg-[#f5ead5]
             text-black
@@ -416,14 +423,14 @@ export default function RSVPForm() {
             active:translate-x-[2px] active:translate-y-[2px] active:shadow-none
           "
         >
-          + Adaugă invitat
+          + {t("Adaugă invitat")}
         </button>
       </div>
 
       {/* LODGING SUGGESTIONS */}
       <div className="flex flex-col gap-2">
-        <span className="text-xs tracking-widest uppercase font-semibold font-prata">
-          Vrei sugestii de cazare?
+        <span className="text-xs tracking-widest uppercase font-semibold font-monoton">
+          {t("accommodation_sug")}
         </span>
 
         <div className="flex flex-col gap-2">
@@ -451,13 +458,13 @@ export default function RSVPForm() {
                         rounded-full
                         relative
                         before:content-['']
-                        before:absolute before:inset-0 before:rounded-full
+                        before:absolute before:inset-[3px] before:rounded-full
                         before:bg-transparent
-                        checked:before::bg-[#d62423]
+                        checked:before:bg-[#d62423]
                       "
             />
             <span className="text-sm tracking-wide">
-              Da, trimite-mi sugestii
+              {t("accommodation_yes")}
             </span>
           </label>
 
@@ -478,27 +485,27 @@ export default function RSVPForm() {
               value="no"
               checked={formData.lodgingSuggestions === "no"}
               onChange={handleChange}
-             className="
+              className="
                         appearance-none
                         h-4 w-4
                         border border-black/70
                         rounded-full
                         relative
                         before:content-['']
-                        before:absolute before:inset-0 before:rounded-full
+                        before:absolute before:inset-[3px] before:rounded-full
                         before:bg-transparent
-                        checked:before::bg-[#d62423]
+                        checked:before:bg-[#d62423]
                       "
             />
-            <span className="text-sm tracking-wide">Nu, mulțumesc</span>
+            <span className="text-sm tracking-wide">{t("accommodation_no")}</span>
           </label>
         </div>
       </div>
 
       {/* MESSAGE */}
       <label className="flex flex-col gap-1">
-        <span className="text-xs tracking-widest uppercase font-semibold font-prata">
-          Mesaj
+        <span className="text-xs tracking-widest uppercase font-semibold font-monoton">
+          {t("Mesaj")}
         </span>
 
         <textarea
@@ -516,7 +523,7 @@ export default function RSVPForm() {
             focus:outline-none focus:border-black
             h-24
           "
-          placeholder="Scrie-ne ceva drăguț…"
+          placeholder={t("write us")}
         />
       </label>
 
@@ -536,9 +543,9 @@ export default function RSVPForm() {
           active:translate-x-[2px] active:translate-y-[2px] active:shadow-none
           font-monoton
           "
-          title="trimite"
+        title="send"
       >
-        TRIMITE
+        {t("send")}
       </button>
     </form>
   );

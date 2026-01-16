@@ -5,8 +5,13 @@ import Details from "./components/Details";
 import RSVPForm from "./components/RSVPForm";
 import NotebookSection from "./components/NotebookSection";
 import React, { useRef, useState, useEffect } from "react";
+import LangSwitch from "./components/LangSwitch";
+import { useTranslation } from "react-i18next";
+
 
 function App() {
+
+  const { t } = useTranslation();
 
   const posterRef = useRef(null);
   const detailsRef = useRef(null);
@@ -57,6 +62,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-pink px-0 sm:px-20">
+       <LangSwitch/>
       {/* HAMBURGER MENU */}
       {showMenuButton && (
 
@@ -79,7 +85,7 @@ function App() {
         {menuOpen && (
           <div className="hamburger-panel font-prata">
             <div className="panel-header">
-              <span className="panel-label">MENIU</span>
+              <span className="panel-label">{t("menu")}</span>
             </div>
 
             <div className="panel-buttons">
@@ -89,7 +95,7 @@ function App() {
                   setMenuOpen(false);
                 }}
               >
-                ACASĂ
+                {t("home")}
               </button>
               <button
                 onClick={() => {
@@ -97,7 +103,7 @@ function App() {
                   setMenuOpen(false);
                 }}
               >
-                PROGRAMUL ZILEI
+                {t("schedule")}
               </button>
               <button
                 onClick={() => {
@@ -105,7 +111,7 @@ function App() {
                   setMenuOpen(false);
                 }}
               >
-                CONFIRMARE
+                {t("confirmation")}
               </button>
             </div>
 
@@ -140,8 +146,8 @@ function App() {
                     src="/images/carnation.svg"
                     alt="Theo & Didi"
               />
-              <h2 className="text-2xl sml:3xl mb-8 text-center font-monoton z-40  uppercase">
-                CONFIRMĂ PREZENȚA
+              <h2 className="text-2xl sml:3xl mb-8 text-center font-monoton z-40  uppercase [word-spacing:0.4em]">
+                {t("confirm attendance")}
               </h2>
 
           </div>
