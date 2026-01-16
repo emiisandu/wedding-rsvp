@@ -14,7 +14,7 @@ export default function LangSwitch() {
      ${active === lng ? "opacity-100 underline" : "opacity-60 hover:opacity-100"}`;
 
   return (
-    <div className="fixed top-4 left-4 z-50 flex items-center gap-2 select-none text-beige">
+    <div className="fixed top-4 left-4 z-50 flex items-center gap-2 select-none text-beige font-prata">
       <button className={linkClass("ro")} onClick={() => setLang("ro")}>RO</button>
       <span className="opacity-60">|</span>
       <button className={linkClass("en")} onClick={() => setLang("en")}>EN</button>

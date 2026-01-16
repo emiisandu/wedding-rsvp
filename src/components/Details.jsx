@@ -10,7 +10,7 @@ export default function Details() {
 
   return (
     <div>
-      <div title="schedule" className="relative max-w-4xl mx-auto
+      <div className="relative max-w-4xl mx-auto
     min-h-[170vh]
     sm:min-h-[200vh]
     [@media(min-height:900px)]:min-h-[140vh]

@@ -10,10 +10,13 @@
   "ORA 16": "4:00 PM",
   "ORA 18": "6:00 PM",
   "Iertăciune,": "Iertăciune – the traditional blessing and forgiveness ritual,",
+  "Iertăciune": "Traditional Ceremony",
   "Cununia religioasă,": "Religious Wedding Ceremony,",
+  "Cununie religioasă": "Religious Wedding Ceremony",
   "Pensiunea La Moara": "\"La Moara\" Guesthouse",
   "Biserica Sf. Dumitru": "Saint Dumitru Church",
   "Petrecerea,": "The party,",
+  "Petrecere": "Party",
   "Sala de Evenimente La Baciu": "\"La Baciu\" Ballroom",
   "guests": "Guests",
   "Prenume": "First Name",
@@ -21,7 +24,7 @@
   "Tip invitat": "Guest Type",
   "Copil": "Child",
   "email": "Email address",
-  "Participare": "Attendance",
+  "Participare": "Attending",
   "Da": "Yes",
   "Nu": "No",
   "Tradițional": "Traditional",
@@ -33,5 +36,12 @@
   "accommodation_yes": "Yes, I would like to receive some suggestions",
   "accommodation_no": "No, thanks",
   "Mesaj": "Message",
-  "write us": "Leave us a message… (optional)"
+  "write us": "Leave us a message… (optional)",
+  "25 iulie 2026": "25th of July 2026",
+  "Detalii eveniment": "Event details",
+  "screenshot-friendly": "Screenshot-friendly",
+  "event-title": "Theodora & Cozmin — Wedding Day",
+  "add_to_calendar" : "Add to Calendar",
+  "quick_details":"Quick Details"
+  
 }

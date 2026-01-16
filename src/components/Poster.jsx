@@ -7,7 +7,7 @@ export default function Poster() {
   const { t } = useTranslation();
 
   return (
-    <div title="AFIS">
+    <div>
       <h1 className="mt-14 sm:mt-10 text-4xl sm:text-5xl font-semibold font-prata uppercase leading-none mb-[-1.8rem] sm:mb-[0rem]">
         {t("us")},
       </h1>

@@ -7,6 +7,8 @@ import NotebookSection from "./components/NotebookSection";
 import React, { useRef, useState, useEffect } from "react";
 import LangSwitch from "./components/LangSwitch";
 import { useTranslation } from "react-i18next";
+import Footer from "./components/Footer";
+import QuickDetails from "./components/QuickDetails";
 
 
 function App() {
@@ -17,9 +19,10 @@ function App() {
   const detailsRef = useRef(null);
   const formRef = useRef(null);
   const menuRef = useRef(null);
+  const quickDetailsRef = useRef(null);
 
 
-    // Scroll function
+  // Scroll function
   const scrollToSection = (ref) => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -36,7 +39,7 @@ function App() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    
+
     // initialize once
     handleScroll();
 
@@ -45,79 +48,115 @@ function App() {
 
 
   useEffect(() => {
-  const handleClickOutside = (event) => {
-    if (menuOpen && menuRef.current && !menuRef.current.contains(event.target)) {
-      setMenuOpen(false);
-    }
-  };
+    const handleClickOutside = (event) => {
+      if (menuOpen && menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
 
-  document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
 
-  return () => {
-    document.removeEventListener("mousedown", handleClickOutside);
-  };
-}, [menuOpen]);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuOpen]);
 
+
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const images = Array.from(document.images);
+
+    const preloadImages = Promise.all(
+      images.map(
+        (img) =>
+          new Promise((resolve) => {
+            if (img.complete) resolve();
+            else {
+              img.onload = resolve;
+              img.onerror = resolve; // don’t block on errors
+            }
+          })
+      )
+    );
+
+    const minDelay = new Promise((resolve) =>
+      setTimeout(resolve, 600) // 👈 small timer (adjust)
+    );
+
+    Promise.all([preloadImages, minDelay]).then(() => {
+      setReady(true);
+    });
+  }, []);
 
 
   return (
     <div className="min-h-screen bg-pink px-0 sm:px-20">
-       <LangSwitch/>
+      <LangSwitch />
       {/* HAMBURGER MENU */}
       {showMenuButton && (
 
-      <nav className="hamburger-wrapper right-4 sm:right-8" ref={menuRef}>
-        {/* round button */}
-        <button
-          onClick={() => setMenuOpen((prev) => !prev)}
-          className={`hamburger-toggle ${menuOpen ? "is-open" : ""}`}
-          aria-label="Toggle navigation"
-        >
-          <img   className="w-32 sm:w-36 md:w-40 max-w-none"
-                    src="/images/cake.svg"
-                    alt="Theo & Didi"
-              />
-          {/* <span className="hamburger-line line-1" />
+        <nav className="hamburger-wrapper right-4 sm:right-8" ref={menuRef}>
+          {/* round button */}
+          <button
+            onClick={() => setMenuOpen((prev) => !prev)}
+            className={`hamburger-toggle ${menuOpen ? "is-open" : ""}`}
+            aria-label="Toggle navigation"
+          >
+            <img className="w-32 sm:w-36 md:w-40 max-w-none"
+              src="/images/cake.svg"
+              alt="Theo & Didi"
+            />
+            {/* <span className="hamburger-line line-1" />
           <span className="hamburger-line line-2" />
           <span className="hamburger-line line-3" /> */}
-        </button>
+          </button>
 
-        {menuOpen && (
-          <div className="hamburger-panel font-prata">
-            <div className="panel-header">
-              <span className="panel-label">{t("menu")}</span>
+          {menuOpen && (
+            <div className="hamburger-panel font-prata">
+              <div className="panel-header">
+                <span className="panel-label">{t("menu")}</span>
+              </div>
+
+              <div className="panel-buttons">
+                <button
+                  onClick={() => {
+                    scrollToSection(posterRef);
+                    setMenuOpen(false);
+                  }}
+                >
+                  {t("home")}
+                </button>
+                <button
+                  onClick={() => {
+                    scrollToSection(detailsRef);
+                    setMenuOpen(false);
+                  }}
+                >
+                  {t("schedule")}
+                </button>
+                <button
+                  onClick={() => {
+                    scrollToSection(formRef);
+                    setMenuOpen(false);
+                  }}
+                >
+                  {t("confirmation")}
+                </button>
+
+                <button
+                  onClick={() => {
+                    scrollToSection(quickDetailsRef);
+                    setMenuOpen(false);
+                  }}
+                >
+                  {t("quick_details")}
+                </button>
+              </div>
+
             </div>
-
-            <div className="panel-buttons">
-              <button
-                onClick={() => {
-                  scrollToSection(posterRef);
-                  setMenuOpen(false);
-                }}
-              >
-                {t("home")}
-              </button>
-              <button
-                onClick={() => {
-                  scrollToSection(detailsRef);
-                  setMenuOpen(false);
-                }}
-              >
-                {t("schedule")}
-              </button>
-              <button
-                onClick={() => {
-                  scrollToSection(formRef);
-                  setMenuOpen(false);
-                }}
-              >
-                {t("confirmation")}
-              </button>
-            </div>
-
-          </div>
-        )}
-      </nav>
+          )}
+        </nav>
       )}
 
       {/* POSTER SECTION */}
@@ -127,39 +166,46 @@ function App() {
 
       {/* PARALLAX SECTION */}
       <section ref={detailsRef} className="min-h-[150vh] px-6 pt-0 sm:pt-40">
-        <Details/>
+        <Details />
       </section>
-      
-
-            {/* PARALLAX SECTION */}
-    <section ref={formRef} className=" px-6 pt-10">
 
 
-      {/* Scrollable area */}
-      <div title="CONFIRMARE" className="relative max-w-4xl mx-auto ">
- 
+      {/* PARALLAX SECTION */}
+      <section ref={formRef} className=" px-6 pt-10">
 
-        <div className="sticky top-0 pt-2 overflow-hidden z-40 bg-pink mb-10">
-          <div className="flex flex-row items-center justify-center gap-4">
+
+        {/* Scrollable area */}
+        <div className="relative max-w-4xl mx-auto ">
+
+
+          <div className="sticky top-0 pt-2 overflow-hidden z-40 bg-pink mb-10">
+            <div className="flex flex-row items-center justify-center gap-4">
               <img
-                    className="w-24 sm:w-28 md:w-32"
-                    src="/images/carnation.svg"
-                    alt="Theo & Didi"
+                className="w-24 sm:w-28 md:w-32"
+                src="/images/carnation.svg"
+                alt="Theo & Didi"
               />
               <h2 className="text-2xl sml:3xl mb-8 text-center font-monoton z-40  uppercase [word-spacing:0.4em]">
                 {t("confirm attendance")}
               </h2>
 
+            </div>
+
           </div>
+          <RSVPForm />
 
         </div>
-          <RSVPForm/>
+      </section>
 
-      </div>
-        
 
-    </section>
-      
+
+      <section ref={quickDetailsRef}>
+        <QuickDetails
+        />
+      </section>
+
+      <Footer />
+
     </div>
   );
 }
