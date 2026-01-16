@@ -72,14 +72,18 @@ export default function RSVPForm() {
         body: JSON.stringify(formData),
       });
 
-      const json = await res.json();
+      const text = await res.text();
+      console.log("RSVP raw response:", text);
+
+      let json;
+      try {
+        json = JSON.parse(text);
+      } catch {
+        throw new Error("Server returned non-JSON. Check console for HTML response.");
+      }
+
       if (!json.ok) throw new Error(json.error || "Failed");
 
-
-      console.log("RSVP saved successfully");
-
-      // OPTIONAL: reset form or show success message
-      // setFormData(initialState);
 
     } catch (err) {
       console.error("RSVP submission failed:", err);
