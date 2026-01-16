@@ -62,34 +62,30 @@ export default function RSVPForm() {
     });
   }
 
- async function handleSubmit(e) {
-  e.preventDefault();
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-  try {
-    const res = await fetch(import.meta.env.VITE_RSVP_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8",
-      },
-      body: JSON.stringify(formData),
-    });
+    try {
+      const res = await fetch("/.netlify/functions/rsvp", {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(formData),
+      });
 
-    const json = await res.json();
+      const json = await res.json();
+      if (!json.ok) throw new Error(json.error || "Failed");
 
-    if (!json.ok) {
-      throw new Error(json.error || "Failed to save RSVP");
+
+      console.log("RSVP saved successfully");
+
+      // OPTIONAL: reset form or show success message
+      // setFormData(initialState);
+
+    } catch (err) {
+      console.error("RSVP submission failed:", err);
+      // OPTIONAL: show error message in UI
     }
-
-    console.log("RSVP saved successfully");
-
-    // OPTIONAL: reset form or show success message
-    // setFormData(initialState);
-
-  } catch (err) {
-    console.error("RSVP submission failed:", err);
-    // OPTIONAL: show error message in UI
   }
-}
 
 
 
