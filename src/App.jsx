@@ -9,6 +9,7 @@ import LangSwitch from "./components/LangSwitch";
 import { useTranslation } from "react-i18next";
 import Footer from "./components/Footer";
 import QuickDetails from "./components/QuickDetails";
+import Loader from "./components/Loader";
 
 
 function App() {
@@ -74,20 +75,25 @@ function App() {
             if (img.complete) resolve();
             else {
               img.onload = resolve;
-              img.onerror = resolve; // don’t block on errors
+              img.onerror = resolve;
             }
           })
       )
     );
 
     const minDelay = new Promise((resolve) =>
-      setTimeout(resolve, 600) // 👈 small timer (adjust)
+      setTimeout(resolve, 600)
     );
 
     Promise.all([preloadImages, minDelay]).then(() => {
       setReady(true);
     });
   }, []);
+
+
+   if (!ready) {
+    return <Loader />;
+  }
 
 
   return (

@@ -12,7 +12,7 @@
   "Iertăciune,": "Iertăciune – the traditional blessing and forgiveness ritual,",
   "Iertăciune": "Traditional Ceremony",
   "Cununia religioasă,": "Religious Wedding Ceremony,",
-  "Cununie religioasă": "Religious Wedding Ceremony",
+  "Cununie religioasă": "Religious Ceremony",
   "Pensiunea La Moara": "\"La Moara\" Guesthouse",
   "Biserica Sf. Dumitru": "Saint Dumitru Church",
   "Petrecerea,": "The party,",
@@ -42,6 +42,7 @@
   "screenshot-friendly": "Screenshot-friendly",
   "event-title": "Theodora & Cozmin — Wedding Day",
   "add_to_calendar" : "Add to Calendar",
-  "quick_details":"Quick Details"
+  "quick_details":"Quick Details",
+  "loading":"Loading"
   
 }
