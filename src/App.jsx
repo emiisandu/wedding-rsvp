@@ -177,14 +177,14 @@ function App() {
 
 
       {/* PARALLAX SECTION */}
-      <section ref={formRef} className=" px-6 pt-10">
+      <section ref={formRef} className=" px-6 pt-10 ">
 
 
         {/* Scrollable area */}
         <div className="relative max-w-4xl mx-auto ">
 
 
-          <div className="sticky top-0 pt-2 overflow-hidden z-40 bg-pink mb-10">
+          <div className="sticky top-0 pt-4 overflow-hidden z-40 bg-pink mb-10">
             <div className="flex flex-row items-center justify-center gap-4">
               <img
                 className="w-24 sm:w-28 md:w-32"
