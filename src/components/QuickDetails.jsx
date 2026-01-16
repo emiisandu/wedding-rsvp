@@ -59,19 +59,19 @@ export default function QuickDetails() {
 
     const schedule = [
         {
-            timeLabel: "2:00 PM",
+            timeLabel: t("ORA 14"),
             title: t("Iertăciune"),
             place: t("Pensiunea La Moara"),
             link: "https://maps.app.goo.gl/PN59jzskmuTTfvYR7",
         },
         {
-            timeLabel: "4:00 PM",
+            timeLabel: t("ORA 16"),
             title: t("Cununie religioasă"),
             place: t("Biserica Sf. Dumitru"),
             link: "https://maps.app.goo.gl/GnNc6iYsGZYJq1BZ9",
         },
         {
-            timeLabel: "6:00 PM",
+            timeLabel: t("ORA 18"),
             title: t("Petrecere"),
             place: t("Sala de Evenimente La Baciu"),
             link: "https://maps.app.goo.gl/SYgho5d2TUPX75JNA",
@@ -109,10 +109,10 @@ export default function QuickDetails() {
                     {/* Header */}
                     <div className="flex items-start justify-between">
                         <div>
-                            <h3 className="font-monoton uppercase tracking-widest text-sm">
+                            <h3 className="font-monoton uppercase tracking-widest text-sm [word-spacing:0.4em]">
                                 {t("Detalii eveniment")}
                             </h3>
-                            <h3 className="font-monoton uppercase tracking-widest text-sm mt-8">
+                            <h3 className="font-monoton uppercase tracking-widest text-sm mt-8 [word-spacing:0.4em]">
                                 {t("event-title")}</h3>
                             <p className="font-prata text-xs tracking-widest uppercase mt-2">
                                 {dateLabel}

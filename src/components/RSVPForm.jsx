@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 export default function RSVPForm() {
   const { t } = useTranslation();
-  
+
   const [formData, setFormData] = useState({
     guests: [
       {
@@ -62,11 +62,36 @@ export default function RSVPForm() {
     });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log("Submitted:", formData);
-    // TODO: send data
+ async function handleSubmit(e) {
+  e.preventDefault();
+
+  try {
+    const res = await fetch(import.meta.env.VITE_RSVP_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const json = await res.json();
+
+    if (!json.ok) {
+      throw new Error(json.error || "Failed to save RSVP");
+    }
+
+    console.log("RSVP saved successfully");
+
+    // OPTIONAL: reset form or show success message
+    // setFormData(initialState);
+
+  } catch (err) {
+    console.error("RSVP submission failed:", err);
+    // OPTIONAL: show error message in UI
   }
+}
+
+
 
   return (
     <form
