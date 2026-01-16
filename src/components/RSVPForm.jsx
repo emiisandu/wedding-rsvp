@@ -6,16 +6,17 @@ export default function RSVPForm() {
       {
         firstName: "",
         lastName: "",
-        attendance: "",
+        ageType: "adult",     // "adult" | "child"
+        attendance: "",       // "da" | "nu"
         email: "",
-        menu: "traditional",
+        menu: "traditional",  // "traditional" | "vegetarian"
       },
     ],
     lodgingSuggestions: "no",
     message: "",
   });
 
-  // Top-level (global) fields: lodgingSuggestions, message
+  // Global fields (lodgingSuggestions, message)
   function handleChange(e) {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -24,7 +25,7 @@ export default function RSVPForm() {
     }));
   }
 
-  // Guest fields
+  // Guest-specific fields
   function handleGuestChange(index, field, value) {
     setFormData((prev) => {
       const guests = [...prev.guests];
@@ -41,6 +42,7 @@ export default function RSVPForm() {
         {
           firstName: "",
           lastName: "",
+          ageType: "adult",
           attendance: "",
           email: "",
           menu: "traditional",
@@ -51,7 +53,7 @@ export default function RSVPForm() {
 
   function removeGuest(index) {
     setFormData((prev) => {
-      if (prev.guests.length === 1) return prev; // keep at least one
+      if (prev.guests.length === 1) return prev; // keep at least one guest
       const guests = prev.guests.filter((_, i) => i !== index);
       return { ...prev, guests };
     });
@@ -60,17 +62,17 @@ export default function RSVPForm() {
   function handleSubmit(e) {
     e.preventDefault();
     console.log("Submitted:", formData);
-    // TODO: send formData somewhere
+    // TODO: send data
   }
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-lg mx-auto flex flex-col gap-6 px-4 pb-10"
+      className="w-full max-w-lg mx-auto flex flex-col gap-6 px-4 pb-10 "
     >
       {/* === GUESTS SECTION === */}
-      <div className="flex flex-col gap-3">
-        <h3 className="text-xs tracking-widest uppercase font-semibold font-fascinate">
+      <div className="flex flex-col gap-3 ">
+        <h3 className="text-s tracking-widest uppercase font-semibold font-monoton">
           Invitați
         </h3>
 
@@ -78,15 +80,15 @@ export default function RSVPForm() {
           <div
             key={index}
             className="
-              border border-black/30 bg-[#faf7f1] rounded-sm
-              shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
-              px-3 py-3 flex flex-col gap-3
+               bg-[#f5ead5] rounded-sm
+              
+              px-3 py-3 flex flex-col gap-3  guests-form
             "
           >
             {/* Prenume + Nume */}
             <div className="flex flex-col sm:flex-row gap-3">
               <label className="flex-1 flex flex-col gap-1">
-                <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-fascinate">
+                <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
                   Prenume
                 </span>
                 <input
@@ -99,15 +101,16 @@ export default function RSVPForm() {
                     px-3 py-2 
                     border border-black/30 
                     rounded-sm
-                    bg-[#faf7f1]
+                    bg-[#f5ead5]
                     focus:outline-none focus:border-black
+                    shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
                   "
                   placeholder="Prenume"
                 />
               </label>
 
               <label className="flex-1 flex flex-col gap-1">
-                <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-fascinate">
+                <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
                   Nume
                 </span>
                 <input
@@ -120,178 +123,258 @@ export default function RSVPForm() {
                     px-3 py-2 
                     border border-black/30 
                     rounded-sm
-                    bg-[#faf7f1]
+                    bg-[#f5ead5]
                     focus:outline-none focus:border-black
+                    shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
                   "
                   placeholder="Nume"
                 />
               </label>
             </div>
 
-            {/* EMAIL (per guest) */}
-            <label className="flex flex-col gap-1">
-              <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-fascinate">
-                Adresa de e-mail
-              </span>
-              <input
-                type="email"
-                value={guest.email}
-                onChange={(e) =>
-                  handleGuestChange(index, "email", e.target.value)
-                }
-                className="
-                  px-3 py-2 
-                  border border-black/30 
-                  rounded-sm
-                  bg-[#faf7f1]
-                  shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
-                  focus:outline-none focus:border-black
-                "
-                placeholder="abc@def.com"
-              />
-            </label>
-
-            {/* PARTICIPARE */}
+            {/* ADULT / CHILD */}
             <div className="flex flex-col gap-2 mt-1">
-              <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-fascinate">
+              <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
+                Tip invitat
+              </span>
+
+              <div className="flex flex-col sm:flex-row gap-2">
+                <label
+                  className="
+                    flex items-center gap-3 
+                    px-3 py-2 
+                    bg-[#f5ead5] 
+                    border border-black/30 
+                    rounded-sm
+                    shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
+                    active:translate-x-[1px] active:translate-y-[1px] active:shadow-none
+                  "
+                >
+                  <input
+                    type="radio"
+                    name={`ageType-${index}`}
+                    value="adult"
+                    checked={guest.ageType === "adult"}
+                    onChange={(e) =>
+                      handleGuestChange(index, "ageType", e.target.value)
+                    }
+                    className="
+                          appearance-none
+                          h-4 w-4
+                          border border-black/70
+                          rounded-full
+                          relative
+                          before:content-['']
+                          before:absolute before:inset-0 before:rounded-full
+                          before:bg-transparent
+                          checked:before::bg-[#d62423]
+                        "
+                  />
+                  <span className="text-sm tracking-wide">Adult</span>
+                </label>
+
+                <label
+                  className="
+                    flex items-center gap-3 
+                    px-3 py-2 
+                    bg-[#f5ead5] 
+                    border border-black/30 
+                    rounded-sm
+                    shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
+                    active:translate-x-[1px] active:translate-y-[1px] active:shadow-none
+                  "
+                >
+                  <input
+                    type="radio"
+                    name={`ageType-${index}`}
+                    value="child"
+                    checked={guest.ageType === "child"}
+                    onChange={(e) =>
+                      handleGuestChange(index, "ageType", e.target.value)
+                    }
+                    className="
+                            appearance-none
+                            h-4 w-4
+                            border border-black/70
+                            rounded-full
+                            relative
+                            before:content-['']
+                            before:absolute before:inset-0 before:rounded-full
+                            before:bg-transparent
+                            checked:before::bg-[#d62423]
+                          "
+                  />
+                  <span className="text-sm tracking-wide">Copil</span>
+                </label>
+              </div>
+            </div>
+
+            {/* EMAIL – only if COPIL */}
+            {guest.ageType === "adult" && (
+              <label className="flex flex-col gap-1">
+                <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
+                  Adresa de e-mail 
+                </span>
+                <input
+                  type="email"
+                  value={guest.email}
+                  onChange={(e) =>
+                    handleGuestChange(index, "email", e.target.value)
+                  }
+                  className="
+                    px-3 py-2 
+                    border border-black/30 
+                    rounded-sm
+                    bg-[#f5ead5]
+                    shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
+                    focus:outline-none focus:border-black
+                  "
+                  placeholder="abc@def.com"
+                />
+              </label>
+            )}
+
+       {/* PARTICIPARE — only for FIRST guest */}
+          {index === 0 && (
+            <div className="flex flex-col gap-2 mt-1">
+              <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
                 Participare
               </span>
 
               <div className="flex flex-col gap-2">
-                <label
-                  className="
-                    flex items-center gap-3 
-                    px-3 py-2 
-                    bg-[#faf7f1] 
-                    border border-black/30 
-                    rounded-sm
-                    shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
-                    active:translate-x-[1px] active:translate-y-[1px] active:shadow-none
-                  "
-                >
+
+                {/* DA */}
+                <label className="flex items-center gap-3 px-3 py-2 bg-[#f5ead5] border border-black/30 rounded-sm shadow-[2px_2px_0px_rgba(0,0,0,0.35)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none">
                   <input
                     type="radio"
-                    name={`attendance-${index}`}
-                    value="yes"
-                    checked={guest.attendance === "yes"}
+                    name="attendance-main"
+                    value="da"
+                    checked={guest.attendance === "da"}
+                    onChange={(e) =>
+                      handleGuestChange(index, "attendance", e.target.value)
+                    }
+                    className="
+                        appearance-none
+                        h-4 w-4
+                        border border-black/70
+                        rounded-full
+                        relative
+                        before:content-['']
+                        before:absolute before:inset-0 before:rounded-full
+                        before:bg-transparent
+                        checked:before::bg-[#d62423]
+                      "
+                  />
+                  <span className="text-sm tracking-wide">Da</span>
+                </label>
+
+                {/* NU */}
+                <label className="flex items-center gap-3 px-3 py-2 bg-[#f5ead5] border border-black/30 rounded-sm shadow-[2px_2px_0px_rgba(0,0,0,0.35)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none">
+                  <input
+                    type="radio"
+                    name="attendance-main"
+                    value="nu"
+                    checked={guest.attendance === "nu"}
                     onChange={(e) =>
                       handleGuestChange(index, "attendance", e.target.value)
                     }
                     className="
                       appearance-none
                       h-4 w-4
-                      border border-black/70 
-                      rounded-full 
-                      checked:bg-black 
-                      checked:border-black
+                      border border-black/70
+                      rounded-full
+                      relative
+                      before:content-['']
+                      before:absolute before:inset-0 before:rounded-full
+                      before:bg-transparent
+                      checked:before::bg-[#d62423]
                     "
                   />
-                  <span className="text-sm tracking-wide">Vin</span>
-                </label>
-
-                <label
-                  className="
-                    flex items-center gap-3 
-                    px-3 py-2 
-                    bg-[#faf7f1] 
-                    border border-black/30 
-                    rounded-sm
-                    shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
-                    active:translate-x-[1px] active:translate-y-[1px] active:shadow-none
-                  "
-                >
-                  <input
-                    type="radio"
-                    name={`attendance-${index}`}
-                    value="no"
-                    checked={guest.attendance === "no"}
-                    onChange={(e) =>
-                      handleGuestChange(index, "attendance", e.target.value)
-                    }
-                    className="
-                      appearance-none
-                      h-4 w-4
-                      border border-black/70 
-                      rounded-full 
-                      checked:bg-black 
-                      checked:border-black
-                    "
-                  />
-                  <span className="text-sm tracking-wide">Nu vin</span>
+                  <span className="text-sm tracking-wide">Nu</span>
                 </label>
               </div>
             </div>
+          )}
 
-            {/* MENU (per guest) */}
-            <div className="flex flex-col gap-2 mt-1">
-              <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-fascinate">
-                Meniu
-              </span>
 
-              <div className="flex flex-col gap-2">
-                <label
-                  className="
-                    flex items-center gap-3 
-                    px-3 py-2 
-                    bg-[#faf7f1] 
-                    border border-black/30 
-                    rounded-sm
-                    shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
-                    active:translate-x-[1px] active:translate-y-[1px] active:shadow-none
-                  "
-                >
-                  <input
-                    type="radio"
-                    name={`menu-${index}`}
-                    value="traditional"
-                    checked={guest.menu === "traditional"}
-                    onChange={(e) =>
-                      handleGuestChange(index, "menu", e.target.value)
-                    }
+            {/* MENU – only if attendance === "da" */}
+            {(guest.attendance === "da" || index !== 0) && (
+              <div className="flex flex-col gap-2 mt-1">
+                <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
+                  Meniu
+                </span>
+
+                <div className="flex flex-col gap-2">
+                  <label
                     className="
-                      appearance-none
-                      h-4 w-4
-                      border border-black/70 
-                      rounded-full 
-                      checked:bg-black 
-                      checked:border-black
+                      flex items-center gap-3 
+                      px-3 py-2 
+                      bg-[#f5ead5] 
+                      border border-black/30 
+                      rounded-sm
+                      shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
+                      active:translate-x-[1px] active:translate-y-[1px] active:shadow-none
                     "
-                  />
-                  <span className="text-sm tracking-wide">Tradițional</span>
-                </label>
+                  >
+                    <input
+                      type="radio"
+                      name={`menu-${index}`}
+                      value="traditional"
+                      checked={guest.menu === "traditional"}
+                      onChange={(e) =>
+                        handleGuestChange(index, "menu", e.target.value)
+                      }
+                     className="
+                            appearance-none
+                            h-4 w-4
+                            border border-black/70
+                            rounded-full
+                            relative
+                            before:content-['']
+                            before:absolute before:inset-0 before:rounded-full
+                            before:bg-transparent
+                            checked:before::bg-[#d62423]
+                          "
+                    />
+                    <span className="text-sm tracking-wide">Tradițional</span>
+                  </label>
 
-                <label
-                  className="
-                    flex items-center gap-3 
-                    px-3 py-2 
-                    bg-[#faf7f1] 
-                    border border-black/30 
-                    rounded-sm
-                    shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
-                    active:translate-x-[1px] active:translate-y-[1px] active:shadow-none
-                  "
-                >
-                  <input
-                    type="radio"
-                    name={`menu-${index}`}
-                    value="vegetarian"
-                    checked={guest.menu === "vegetarian"}
-                    onChange={(e) =>
-                      handleGuestChange(index, "menu", e.target.value)
-                    }
+                  <label
                     className="
-                      appearance-none
-                      h-4 w-4
-                      border border-black/70 
-                      rounded-full 
-                      checked:bg-black 
-                      checked:border-black
+                      flex items-center gap-3 
+                      px-3 py-2 
+                      bg-[#f5ead5] 
+                      border border-black/30 
+                      rounded-sm
+                      shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
+                      active:translate-x-[1px] active:translate-y-[1px] active:shadow-none
                     "
-                  />
-                  <span className="text-sm tracking-wide">Vegetarian</span>
-                </label>
+                  >
+                    <input
+                      type="radio"
+                      name={`menu-${index}`}
+                      value="vegetarian"
+                      checked={guest.menu === "vegetarian"}
+                      onChange={(e) =>
+                        handleGuestChange(index, "menu", e.target.value)
+                      }
+                      className="
+                        appearance-none
+                        h-4 w-4
+                        border border-black/70
+                        rounded-full
+                        relative
+                        before:content-['']
+                        before:absolute before:inset-0 before:rounded-full
+                        before:bg-transparent
+                        checked:before::bg-[#d62423]
+                      "
+                    />
+                    <span className="text-sm tracking-wide">Vegetarian</span>
+                  </label>
+                </div>
               </div>
-            </div>
+            )}
 
             {/* DELETE GUEST BUTTON */}
             <div className="flex justify-end mt-1">
@@ -304,7 +387,7 @@ export default function RSVPForm() {
                     px-3 py-1
                     border border-black/40
                     rounded-sm
-                    bg-[#faf7f1]
+                    bg-[#f5ead5]
                     text-black
                     shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
                     active:translate-x-[2px] active:translate-y-[2px] active:shadow-none
@@ -323,7 +406,7 @@ export default function RSVPForm() {
           onClick={addGuest}
           className="
             self-start mt-1
-            bg-[#faf7f1]
+            bg-[#f5ead5]
             text-black
             px-3 py-1.5
             rounded-sm
@@ -337,9 +420,9 @@ export default function RSVPForm() {
         </button>
       </div>
 
-      {/* === LODGING SUGGESTIONS (APPLIES TO ALL) === */}
+      {/* LODGING SUGGESTIONS */}
       <div className="flex flex-col gap-2">
-        <span className="text-xs tracking-widest uppercase font-semibold font-fascinate">
+        <span className="text-xs tracking-widest uppercase font-semibold font-prata">
           Vrei sugestii de cazare?
         </span>
 
@@ -348,7 +431,7 @@ export default function RSVPForm() {
             className="
               flex items-center gap-3 
               px-3 py-2 
-              bg-[#faf7f1] 
+              bg-[#f5ead5] 
               border border-black/30 
               rounded-sm
               shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
@@ -362,13 +445,16 @@ export default function RSVPForm() {
               checked={formData.lodgingSuggestions === "yes"}
               onChange={handleChange}
               className="
-                appearance-none
-                h-4 w-4
-                border border-black/70 
-                rounded-full 
-                checked:bg-black 
-                checked:border-black
-              "
+                        appearance-none
+                        h-4 w-4
+                        border border-black/70
+                        rounded-full
+                        relative
+                        before:content-['']
+                        before:absolute before:inset-0 before:rounded-full
+                        before:bg-transparent
+                        checked:before::bg-[#d62423]
+                      "
             />
             <span className="text-sm tracking-wide">
               Da, trimite-mi sugestii
@@ -379,7 +465,7 @@ export default function RSVPForm() {
             className="
               flex items-center gap-3 
               px-3 py-2 
-              bg-[#faf7f1] 
+              bg-[#f5ead5] 
               border border-black/30 
               rounded-sm
               shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
@@ -392,23 +478,26 @@ export default function RSVPForm() {
               value="no"
               checked={formData.lodgingSuggestions === "no"}
               onChange={handleChange}
-              className="
-                appearance-none
-                h-4 w-4
-                border border-black/70 
-                rounded-full 
-                checked:bg-black 
-                checked:border-black
-              "
+             className="
+                        appearance-none
+                        h-4 w-4
+                        border border-black/70
+                        rounded-full
+                        relative
+                        before:content-['']
+                        before:absolute before:inset-0 before:rounded-full
+                        before:bg-transparent
+                        checked:before::bg-[#d62423]
+                      "
             />
             <span className="text-sm tracking-wide">Nu, mulțumesc</span>
           </label>
         </div>
       </div>
 
-      {/* === MESSAGE FIELD === */}
+      {/* MESSAGE */}
       <label className="flex flex-col gap-1">
-        <span className="text-xs tracking-widest uppercase font-semibold font-fascinate">
+        <span className="text-xs tracking-widest uppercase font-semibold font-prata">
           Mesaj
         </span>
 
@@ -420,7 +509,7 @@ export default function RSVPForm() {
             px-3 py-2 
             border border-black/30 
             rounded-sm
-            bg-[#faf7f1]
+            bg-[#f5ead5]
             text-black
             placeholder-black/40
             shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
@@ -431,7 +520,7 @@ export default function RSVPForm() {
         />
       </label>
 
-      {/* === SUBMIT BUTTON === */}
+      {/* SUBMIT */}
       <button
         type="submit"
         className="
@@ -442,10 +531,12 @@ export default function RSVPForm() {
           rounded-sm
           uppercase tracking-widest text-sm font-bold
           border border-black/40
-          shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
+          shadow-[2px_2px_0px_rgba(0,0,0,0.5)]
           [text-shadow:0.5px_0.5px_1px_white]
           active:translate-x-[2px] active:translate-y-[2px] active:shadow-none
-        "
+          font-monoton
+          "
+          title="trimite"
       >
         TRIMITE
       </button>

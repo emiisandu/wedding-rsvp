@@ -11,6 +11,8 @@ function App() {
   const posterRef = useRef(null);
   const detailsRef = useRef(null);
   const formRef = useRef(null);
+  const menuRef = useRef(null);
+
 
     // Scroll function
   const scrollToSection = (ref) => {
@@ -37,12 +39,28 @@ function App() {
   }, []);
 
 
+  useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (menuOpen && menuRef.current && !menuRef.current.contains(event.target)) {
+      setMenuOpen(false);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, [menuOpen]);
+
+
+
   return (
     <div className="min-h-screen bg-pink px-0 sm:px-20">
       {/* HAMBURGER MENU */}
       {showMenuButton && (
 
-      <nav className="hamburger-wrapper">
+      <nav className="hamburger-wrapper right-4 sm:right-8" ref={menuRef}>
         {/* round button */}
         <button
           onClick={() => setMenuOpen((prev) => !prev)}
@@ -59,9 +77,9 @@ function App() {
         </button>
 
         {menuOpen && (
-          <div className="hamburger-panel">
+          <div className="hamburger-panel font-prata">
             <div className="panel-header">
-              <span className="panel-label">PROGRAMUL ZILEI</span>
+              <span className="panel-label">MENIU</span>
             </div>
 
             <div className="panel-buttons">
@@ -71,7 +89,7 @@ function App() {
                   setMenuOpen(false);
                 }}
               >
-                AFIȘ
+                ACASĂ
               </button>
               <button
                 onClick={() => {
@@ -79,7 +97,7 @@ function App() {
                   setMenuOpen(false);
                 }}
               >
-                SINOPSIS
+                PROGRAMUL ZILEI
               </button>
               <button
                 onClick={() => {
@@ -87,7 +105,7 @@ function App() {
                   setMenuOpen(false);
                 }}
               >
-                BILETE
+                CONFIRMARE
               </button>
             </div>
 
@@ -108,11 +126,11 @@ function App() {
       
 
             {/* PARALLAX SECTION */}
-    <section ref={formRef} className=" px-6 pt-0 sm:pt-40">
+    <section ref={formRef} className=" px-6 pt-10">
 
 
       {/* Scrollable area */}
-      <div title="BILETE" className="relative max-w-4xl mx-auto ">
+      <div title="CONFIRMARE" className="relative max-w-4xl mx-auto ">
  
 
         <div className="sticky top-0 pt-2 overflow-hidden z-40 bg-pink mb-10">
@@ -122,8 +140,8 @@ function App() {
                     src="/images/carnation.svg"
                     alt="Theo & Didi"
               />
-              <h2 className="text-2xl font-semibold mb-8 text-center font-fascinate z-40  uppercase">
-                ia-ti biletul acum
+              <h2 className="text-2xl sml:3xl mb-8 text-center font-monoton z-40  uppercase">
+                CONFIRMĂ PREZENȚA
               </h2>
 
           </div>
