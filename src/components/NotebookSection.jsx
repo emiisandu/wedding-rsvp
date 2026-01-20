@@ -20,7 +20,7 @@ export default function NotebookSection({
         >
           {title && <h2 className="notebook-title font-prata text-black mb-4 text-xl sm:text-2xl z-0 pl-2 sm:pl-14 md:pl-10">{t(title)}</h2>}
 
-          <div className="notebook-content font-meow text-black text-2xl sm:text-3xl pl-2 sm:pl-14 md:pl-10">
+          <div className="notebook-content font-meow text-black text-2xl sm:text-3xl pl-2 sm:pl-14 md:pl-12">
             {Array.isArray(rows)
               ? rows.map((line, i) => {
                   const isLocationLine = Boolean(locationLink) && i === 1;
@@ -39,13 +39,20 @@ export default function NotebookSection({
                         href={locationLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 underline underline-offset-2"
+                        className="inline-flex items-center gap-1 underline text-blue-600 hover:text-blue-700" 
+                    //     underline-offset-2
+                    //     border border-black/40
+                    // rounded-sm cursor-pointer
+                    
+                    // text-black
+                    // shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
+                    // active:translate-x-[2px] active:translate-y-[2px] active:shadow-none
                       >
                         <span>
                         <img
-                          src="/images/pin.png"
+                          src="/images/maps-2.png"
                           alt=""
-                          className="inline-block w-5 h-5 align-middle"
+                          className="inline-block w-7 h-7 sm:w-8 sm:h-8 align-middle "
                           aria-hidden="true"
                         />
                         {t(line)}

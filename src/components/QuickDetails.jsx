@@ -88,13 +88,13 @@ export default function QuickDetails() {
         title: t("event-title"),
         dateISO,
         start: "14:00",
-        end:"23:59",
+        end: "23:59",
         location: town,
         description,
     });
 
     return (
-        <section className="px-6 pt-12 pb-20 mt-20">
+        <section className="relative px-6 pt-20 pb-12 mt-20 z-40 bg-pink border-0">
             <div className="max-w-4xl mx-auto">
                 <div
                     className="
@@ -103,7 +103,8 @@ export default function QuickDetails() {
             rounded-sm
             shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
             px-5 py-5
-            
+            min-h-[60vh]
+            flex flex-col
           "
                 >
                     {/* Header */}
@@ -112,9 +113,16 @@ export default function QuickDetails() {
                             <h3 className="font-monoton uppercase tracking-widest text-sm [word-spacing:0.4em]">
                                 {t("Detalii eveniment")}
                             </h3>
-                            <h3 className="font-monoton uppercase tracking-widest text-sm mt-8 [word-spacing:0.4em]">
-                                {t("event-title")}</h3>
-                            <p className="font-prata text-xs tracking-widest uppercase mt-2">
+                            <h3 className="flex items-center gap-2 font-monoton uppercase tracking-widest text-sm mt-8 [word-spacing:0.4em]">
+                                {t("event-title")}
+                                <img
+                                    className="w-8 sm:w-12 inline-block translate-y-[1px]"
+                                    src="/images/wedding-ring.svg"
+                                    alt="Wedding rings"
+                                />
+                            </h3>
+
+                            <p className="font-prata text-xs tracking-widest uppercase mt-8">
                                 {dateLabel}
                             </p>
                             <p className="font-prata text-[0.7rem] tracking-widest uppercase text-black/60">
@@ -129,7 +137,7 @@ export default function QuickDetails() {
                     <div className="h-px bg-black/20 my-4" />
 
                     {/* Timeline */}
-                    <div className="flex flex-col gap-2 font-prata text-xs tracking-widest uppercase">
+                    <div className="flex flex-col gap-2 font-prata text-xs tracking-widest uppercase mt-6">
                         <div className="flex justify-between">
                             <span>{t("ORA 14")}</span>
                             <span>{t("Iertăciune")}</span>
@@ -145,22 +153,22 @@ export default function QuickDetails() {
                     </div>
 
                     {/* Add to calendar */}
-                    <div className="mt-6 text-center">
+                    <div className="mt-auto text-center">
                         <button
                             onClick={() =>
                                 downloadIcs("Theodora-Cozmin-Wedding.ics", ics)
                             }
                             className="
-                font-prata
-                text-[0.6rem]
-                tracking-[0.35em]
-                uppercase
-                px-4 py-2
-                border border-black/40
-                rounded-sm
-                shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
-                active:translate-x-[2px] active:translate-y-[2px] active:shadow-none
-              "
+                        font-prata
+                        text-[0.6rem]
+                        tracking-[0.35em]
+                        uppercase
+                        px-4 py-2
+                        border border-black/40
+                        rounded-sm
+                        shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
+                        active:translate-x-[2px] active:translate-y-[2px] active:shadow-none
+                        "
                         >
                             {t("add_to_calendar")}
                         </button>

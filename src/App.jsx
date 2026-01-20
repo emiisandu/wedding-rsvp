@@ -10,6 +10,9 @@ import { useTranslation } from "react-i18next";
 import Footer from "./components/Footer";
 import QuickDetails from "./components/QuickDetails";
 import Loader from "./components/Loader";
+import { useParallaxController } from "react-scroll-parallax";
+import ScrollToSectionButton from "./components/ScrollToSectionButton";
+import Gift from "./components/Gift";
 
 
 function App() {
@@ -21,12 +24,25 @@ function App() {
   const formRef = useRef(null);
   const menuRef = useRef(null);
   const quickDetailsRef = useRef(null);
+  const footerRef = useRef(null);
+  const giftRef = useRef(null);
 
+  const parallaxController = useParallaxController();
 
   // Scroll function
   const scrollToSection = (ref) => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
+
+    let frames = 0;
+    const raf = () => {
+      parallaxController?.update();
+      frames += 1;
+      if (frames < 40) requestAnimationFrame(raf); // ~40 frames ≈ 0.6s
+    };
+    requestAnimationFrame(raf);
   };
+
+
 
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -63,6 +79,8 @@ function App() {
   }, [menuOpen]);
 
 
+
+
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -91,7 +109,7 @@ function App() {
   }, []);
 
 
-   if (!ready) {
+  if (!ready) {
     return <Loader />;
   }
 
@@ -106,23 +124,47 @@ function App() {
           {/* round button */}
           <button
             onClick={() => setMenuOpen((prev) => !prev)}
-            className={`hamburger-toggle ${menuOpen ? "is-open" : ""}`}
+            className={`hamburger-toggle 
+              bg-transparent border-0 appearance-none outline-none shadow-none p-0 
+              ${menuOpen ? "is-open" : ""}`}
             aria-label="Toggle navigation"
           >
-            <img className="w-32 sm:w-36 md:w-40 max-w-none"
-              src="/images/cake.svg"
-              alt="Theo & Didi"
-            />
+            <div className="flex flex-col items-center">
+              <img
+                className="block w-32 sm:w-36 md:w-40 max-w-none"
+                src="/images/cake.svg"
+                alt="Theo & Didi"
+              />
+
+              <span
+                className="
+                    mt-[-2px]
+                    ml-1
+                    w-full
+                    text-center
+                    font-prata
+                    text-[0.55rem]
+                    tracking-[0.35em]
+                    uppercase
+                    text-black/80
+                    leading-none
+                    
+                  "
+              >
+                {t("menu")}
+              </span>
+            </div>
             {/* <span className="hamburger-line line-1" />
           <span className="hamburger-line line-2" />
           <span className="hamburger-line line-3" /> */}
+
           </button>
 
           {menuOpen && (
             <div className="hamburger-panel font-prata">
-              <div className="panel-header">
+              {/* <div className="panel-header">
                 <span className="panel-label">{t("menu")}</span>
-              </div>
+              </div> */}
 
               <div className="panel-buttons">
                 <button
@@ -152,12 +194,24 @@ function App() {
 
                 <button
                   onClick={() => {
+                    scrollToSection(giftRef);
+                    setMenuOpen(false);
+                  }}
+                >
+                  {t("location")}
+                </button>
+
+                <button
+                  onClick={() => {
                     scrollToSection(quickDetailsRef);
                     setMenuOpen(false);
                   }}
                 >
                   {t("quick_details")}
                 </button>
+
+
+
               </div>
 
             </div>
@@ -175,13 +229,18 @@ function App() {
         <Details />
       </section>
 
+      <ScrollToSectionButton
+        targetRef={formRef}
+        stopRef={footerRef}
+        label="RSVP"
+      />
 
       {/* PARALLAX SECTION */}
       <section ref={formRef} className=" px-6 pt-10 ">
 
 
         {/* Scrollable area */}
-        <div className="relative max-w-4xl mx-auto ">
+        <div className="relative max-w-4xl mx-auto z-40  ">
 
 
           <div className="sticky top-0 pt-4 overflow-hidden z-40 bg-pink mb-10">
@@ -191,7 +250,7 @@ function App() {
                 src="/images/carnation.svg"
                 alt="Theo & Didi"
               />
-              <h2 className="text-2xl sml:3xl mb-8 text-center font-monoton z-40  uppercase [word-spacing:0.4em]">
+              <h2 className="text-2xl sm:3xl mb-8 font-monoton z-40  uppercase [word-spacing:0.4em]">
                 {t("confirm attendance")}
               </h2>
 
@@ -205,12 +264,20 @@ function App() {
 
 
 
+      <section ref={giftRef} >
+        <Gift />
+      </section>
+
+
+
       <section ref={quickDetailsRef}>
         <QuickDetails
         />
       </section>
 
-      <Footer />
+      <section ref={footerRef}>
+        <Footer />
+      </section>
 
     </div>
   );

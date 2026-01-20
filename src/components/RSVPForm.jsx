@@ -96,7 +96,7 @@ export default function RSVPForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-lg mx-auto flex flex-col gap-6 px-4 pb-10 font-prata-light "
+      className="w-full max-w-lg mx-auto flex flex-col gap-6 px-4 pb-10 font-prata-light z-40 bg-pink"
     >
       {/* === GUESTS SECTION === */}
       <div className="flex flex-col gap-3 ">

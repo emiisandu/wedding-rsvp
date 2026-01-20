@@ -59,7 +59,8 @@ export default function Poster() {
         </Parallax>
 
         <p className="mt-16 sm:mt-0 md:mt-28 min-h-[20vh] max-w-xl font-prata z-40">
-          {t("invitation text")}  &#x3c;3
+          {t("invitation text")}  ❤️
+          {/* &#x3c;3 */}
         </p>
       </div>
 

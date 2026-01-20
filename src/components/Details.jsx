@@ -60,7 +60,7 @@ export default function Details() {
           <NotebookSection
             title="ORA 14"
             children={`Iertăciune,
-Pensiunea La Moara`}
+la_moara`}
             locationLink="https://maps.app.goo.gl/PN59jzskmuTTfvYR7"
             customClass="transform-1"
             bgImage="/images/ripped-1.png"
@@ -70,7 +70,7 @@ Pensiunea La Moara`}
             <NotebookSection
               title="ORA 16"
               children={`Cununia religioasă,
-Biserica Sf. Dumitru`}
+sf_dumitru`}
               customClass="transform-2"
               locationLink="https://maps.app.goo.gl/GnNc6iYsGZYJq1BZ9"
               bgImage="/images/ripped-2.png"
@@ -81,7 +81,7 @@ Biserica Sf. Dumitru`}
             <NotebookSection
               title="ORA 18"
               children={`Petrecerea,
-Sala de Evenimente La Baciu`}
+la_baciu`}
               customClass="transform-3"
               locationLink="https://maps.app.goo.gl/SYgho5d2TUPX75JNA"
               bgImage="/images/ripped-3.png"
