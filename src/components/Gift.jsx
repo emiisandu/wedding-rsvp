@@ -5,7 +5,7 @@ export default function Gift() {
     const { t } = useTranslation();
 
     return (
-        <section className="bg-pink px-6 bg-pink border-0">
+        <section className=" px-6 bg-pink border-0">
             {/* Make this section tall so scrolling can happen */}
             <div className="relative mx-auto max-w-4xl h-[150vh] ">
 
@@ -68,31 +68,22 @@ export default function Gift() {
             </div>
 
 
-            <div className="relative z-10 flex justify-center pointer-events-none">
-                <Parallax speed={-26}>
+            <div className="relative overflow-hidden">
+                {/* deer */}
+                <div className="relative z-10 flex justify-center pointer-events-none">
+                    <Parallax speed={-26}>
+                        <img className="w-80 lg:w-96" src="/images/fm-deer.svg" alt="" />
+                    </Parallax>
+                </div>
 
-                    <img
-                        className="w-80 lg:w-96 "
-                        src="/images/fm-deer.svg"
-                        alt="FM forest top"
-                    />
-                </Parallax>
+                {/* mount */}
+                <div className="relative z-40 flex justify-center pointer-events-none">
+                    <img className="w-96 lg:w-96" src="/images/fm-mount.svg" alt="" />
+                </div>
             </div>
 
 
-            <div className="relative flex justify-center pointer-events-none z-40 overflow-hidden">
-                {/* <Parallax speed={-26}> */}
-
-                <img
-                    className="w-96 lg:w-96"
-                    src="/images/fm-mount.svg"
-                    alt="FM forest top"
-                />
-                {/* </Parallax> */}
-            </div>
-
-
-            <div className="bg-pink h-[20vh] z-40 w-80 overflow-hidden bottom-0 mb-0 relative">
+            <div className="left-0 right-0 mx-auto gifts-end bg-pink h-[20vh] z-30 w-80 overflow-hidden bottom-0 mb-0 top-[-3em]  mt-0 relative">
 
             </div>
         </section>
