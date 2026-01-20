@@ -82,7 +82,28 @@ export default function RSVPForm() {
         throw new Error("Server returned non-JSON. Check console for HTML response.");
       }
 
-      if (!json.ok) throw new Error(json.error || "Failed");
+      if (!json.ok) {
+        setStatus({
+          type: "error",
+          message: json.message || t("unexpected_error"),
+        });
+        return;
+      }
+
+      const confirmed = (json.confirmedSubmitted || []).join(", ");
+      const already = (json.alreadyRegistered || []).join(", ");
+
+      let msg = `${t("confirmation_submitted_for")}: ${confirmed || "—"}`;
+
+      if (already) {
+        msg += `\n${t("already_registered")}: ${already}`;
+      }
+
+      setStatus({
+        type: "success",
+        message: msg,
+      });
+
 
 
     } catch (err) {
@@ -552,6 +573,21 @@ export default function RSVPForm() {
         />
       </label>
 
+      {status?.message && (
+        <div
+          className={`
+            text-xs tracking-widest uppercase
+            whitespace-pre-line
+            ${status.type === "error"
+              ? "text-red-700"
+              : "text-green-700"
+            }
+          `}
+        >
+          {status.message}
+        </div>
+      )}
+
       {/* SUBMIT */}
       <button
         type="submit"
@@ -573,5 +609,7 @@ export default function RSVPForm() {
         {t("send")}
       </button>
     </form>
+
+
   );
 }
