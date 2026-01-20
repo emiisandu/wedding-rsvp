@@ -11,6 +11,11 @@ body {
   color: #d62423;
 }
 
+html, body {
+  overflow-x: clip;
+}
+
+
 .bg-red{
   background-color: #d62423;
 }

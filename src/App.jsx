@@ -13,7 +13,7 @@ import Loader from "./components/Loader";
 import { useParallaxController } from "react-scroll-parallax";
 import ScrollToSectionButton from "./components/ScrollToSectionButton";
 import Gift from "./components/Gift";
-
+import { preloadImages, preloadFonts } from "./preloadAssets";
 
 function App() {
 
@@ -84,38 +84,33 @@ function App() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const images = Array.from(document.images);
+    let cancelled = false;
 
-    const preloadImages = Promise.all(
-      images.map(
-        (img) =>
-          new Promise((resolve) => {
-            if (img.complete) resolve();
-            else {
-              img.onload = resolve;
-              img.onerror = resolve;
-            }
-          })
-      )
-    );
+    async function load() {
+      await Promise.all([
+        preloadImages(),
+        preloadFonts(),
+        new Promise((r) => setTimeout(r, 600)), // aesthetic minimum
+      ]);
 
-    const minDelay = new Promise((resolve) =>
-      setTimeout(resolve, 600)
-    );
+      if (!cancelled) setReady(true);
+    }
 
-    Promise.all([preloadImages, minDelay]).then(() => {
-      setReady(true);
-    });
+    load();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
-
 
   if (!ready) {
     return <Loader />;
   }
 
 
+
   return (
-    <div className="min-h-screen bg-pink px-0 sm:px-20">
+    <div className="min-h-screen bg-pink px-0 sm:px-20 ">
       <LangSwitch />
       {/* HAMBURGER MENU */}
       {showMenuButton && (
@@ -154,9 +149,6 @@ function App() {
                 {t("menu")}
               </span>
             </div>
-            {/* <span className="hamburger-line line-1" />
-          <span className="hamburger-line line-2" />
-          <span className="hamburger-line line-3" /> */}
 
           </button>
 
@@ -198,7 +190,13 @@ function App() {
                     setMenuOpen(false);
                   }}
                 >
-                  {t("location")}
+                  <img
+                    className="left-0 right-0 mx-auto block w-8 sm:w-12 md:w-12 max-w-12"
+                    src="/images/heart-box.svg"
+                    alt="Theo & Didi"
+                  />
+
+                  {/* {t("location")} */}
                 </button>
 
                 <button
