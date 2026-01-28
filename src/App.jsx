@@ -52,7 +52,7 @@ function App() {
   useEffect(() => {
     const handleScroll = () => {
       // show button only after leaving the very top
-      setShowMenuButton(window.scrollY > 110);
+      setShowMenuButton(window.scrollY > 130);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -115,7 +115,7 @@ function App() {
       {/* HAMBURGER MENU */}
       {showMenuButton && (
 
-        <nav className="hamburger-wrapper right-4 sm:right-8 bg-pink " ref={menuRef}>
+        <nav className="d-none hamburger-wrapper right-4 sm:right-8 " ref={menuRef}>
           {/* round button */}
           <button
             onClick={() => setMenuOpen((prev) => !prev)}
@@ -126,7 +126,7 @@ function App() {
           >
             <div className="flex flex-col items-center">
               <img
-                className="block w-32 sm:w-36 md:w-40 max-w-none"
+                className="block w-28 sm:w-36 md:w-40 max-w-none"
                 src="/images/cake.svg"
                 alt="Theo & Didi"
               />
