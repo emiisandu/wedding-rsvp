@@ -98,11 +98,12 @@ export default function QuickDetails() {
             <div className="max-w-4xl mx-auto">
                 <div
                     className="
+                    mt-10
             bg-[#f5ead5]
             border border-black/30
             rounded-sm
             shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
-            px-5 py-5
+            px-5 py-10 
             min-h-[60vh]
             flex flex-col
           "
