@@ -11,11 +11,11 @@ export default function Details() {
   return (
     <div>
       <div className="relative max-w-4xl mx-auto
-    min-h-[170vh]
+    min-h-[150vh]
     sm:min-h-[200vh]
     [@media(min-height:900px)]:min-h-[140vh]
     [@media(min-height:1200px)]:min-h-[120vh]">
-        <div className="sticky top-0 pt-2 overflow-hidden z-40 bg-pink">
+        <div className="sticky top-0  overflow-hidden z-40 bg-pink">
           <div className="flex flex-row items-center justify-center gap-4">
             {/* <h2 className="text-2xl font-semibold mb-8 text-center font-monoton z-40 text-beige">
               Sinopsis
@@ -24,7 +24,7 @@ export default function Details() {
             
           </div>
 
-          <div className="flex items-center justify-center date-div text-align text-right top-0">
+          <div className="flex items-center justify-center date-div text-align text-right">
             <p className="font-bold uppercase font-monoton
                           [font-size:clamp(1.8rem,7vw,3rem)]
                           [letter-spacing:clamp(0.12em,1.8vw,0.4em)]

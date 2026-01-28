@@ -56,7 +56,7 @@ export default function Gift() {
                 </Parallax>
             </div>
 
-            <div className="flex justify-center pointer-events-none">
+            {/* <div className="flex justify-center pointer-events-none">
                 <Parallax speed={16}>
 
                     <img
@@ -65,7 +65,7 @@ export default function Gift() {
                         alt="FM forest top"
                     />
                 </Parallax>
-            </div>
+            </div> */}
 
 
             <div className="relative overflow-hidden">

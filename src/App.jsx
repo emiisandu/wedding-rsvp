@@ -52,7 +52,7 @@ function App() {
   useEffect(() => {
     const handleScroll = () => {
       // show button only after leaving the very top
-      setShowMenuButton(window.scrollY > 10);
+      setShowMenuButton(window.scrollY > 110);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -115,7 +115,7 @@ function App() {
       {/* HAMBURGER MENU */}
       {showMenuButton && (
 
-        <nav className="hamburger-wrapper right-4 sm:right-8" ref={menuRef}>
+        <nav className="hamburger-wrapper right-4 sm:right-8 bg-pink " ref={menuRef}>
           {/* round button */}
           <button
             onClick={() => setMenuOpen((prev) => !prev)}
@@ -153,7 +153,7 @@ function App() {
           </button>
 
           {menuOpen && (
-            <div className="hamburger-panel font-prata">
+            <div className="hamburger-panel font-prata bg-pink">
               {/* <div className="panel-header">
                 <span className="panel-label">{t("menu")}</span>
               </div> */}
@@ -223,7 +223,7 @@ function App() {
       </section>
 
       {/* PARALLAX SECTION */}
-      <section ref={detailsRef} className="min-h-[150vh] px-6 pt-0 sm:pt-40">
+      <section ref={detailsRef} className="min-h-[150vh] px-6 pt-0 ">
         <Details />
       </section>
 

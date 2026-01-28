@@ -58,10 +58,18 @@ export default function Poster() {
           </motion.div>
         </Parallax>
 
-        <p className="mt-16 sm:mt-0 md:mt-28 min-h-[20vh] max-w-xl font-prata z-40">
+        {/* <p className="mt-16 sm:mt-0 md:mt-28 min-h-[20vh] max-w-xl font-prata z-40">
+          {t("invitation text")}  ❤️
+           &#x3c;3 
+        </p> */}
+
+
+
+        <p className="mt-32 sm:mt-40 md:mt-64 min-h-[10vh] sm:min-h-[1vh] max-w-xl font-prata z-40">
           {t("invitation text")}  ❤️
           {/* &#x3c;3 */}
         </p>
+
       </div>
 
 
