@@ -41,9 +41,20 @@
   "Detalii eveniment": "Event details",
   "screenshot-friendly": "Screenshot-friendly",
   "event-title": "Theodora & Cozmin — Wedding Day",
-  "add_to_calendar" : "Add to Calendar",
-  "quick_details":"Quick Details",
-  "loading":"Loading",
-  "gift_msg":"Whether you are able to join us or not, thank you for being with us."
-  
+  "add_to_calendar": "Add to Calendar",
+  "quick_details": "Quick Details",
+  "loading": "Loading",
+  "gift_msg": "Whether you are able to join us or not, thank you for being with us.",
+  "direction_title": "how to travel to FM",
+  "direction_subtitle": "directions",
+  "train_link": "https://mersultrenurilor.infofer.ro/en-GB/Train-itineraries/Pojorata/Pojorata",
+  "plane_link": "https://www.aeroportsuceava.ro/en/",
+  "info_train": "Info train",
+  "info_plane": "Info plane",
+  "by_car" : "by car",
+  "by_train" : "by train",
+  "by_plane" : "by_plane",
+  "train_text":"overnight train in a sleeper couchette",
+  "plane_text":"Suceava airport (SCV), we’ll be happy to arrange transport",
+  "gift_text": "If you wish to offer us a gift, a monetary one would be greatly appreciated."
 }

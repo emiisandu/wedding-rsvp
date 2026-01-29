@@ -13,7 +13,9 @@ import Loader from "./components/Loader";
 import { useParallaxController } from "react-scroll-parallax";
 import ScrollToSectionButton from "./components/ScrollToSectionButton";
 import Gift from "./components/Gift";
+import Directions from "./components/Directions";
 import { preloadImages, preloadFonts } from "./preloadAssets";
+import { Trans } from "react-i18next";
 
 function App() {
 
@@ -25,7 +27,7 @@ function App() {
   const menuRef = useRef(null);
   const quickDetailsRef = useRef(null);
   const footerRef = useRef(null);
-  const giftRef = useRef(null);
+  const directionsRef = useRef(null);
 
   const parallaxController = useParallaxController();
 
@@ -115,7 +117,7 @@ function App() {
       {/* HAMBURGER MENU */}
       {showMenuButton && (
 
-        <nav className="d-none hamburger-wrapper right-4 sm:right-8 " ref={menuRef}>
+        <nav className="hamburger-wrapper right-4 sm:right-12 " ref={menuRef}>
           {/* round button */}
           <button
             onClick={() => setMenuOpen((prev) => !prev)}
@@ -138,7 +140,8 @@ function App() {
                     w-full
                     text-center
                     font-prata
-                    text-[0.55rem]
+                    text-[0.50rem]
+                    sm:text-[0.65rem]
                     tracking-[0.35em]
                     uppercase
                     text-black/80
@@ -175,6 +178,20 @@ function App() {
                 >
                   {t("schedule")}
                 </button>
+
+                <button
+                  onClick={() => {
+                    scrollToSection(directionsRef);
+                    setMenuOpen(false);
+                  }}
+                >
+                  {/* <img
+                    className="left-0 right-0 mx-auto block w-8 sm:w-12 md:w-12 max-w-12"
+                    src="/images/heart-box.svg"
+                    alt="Theo & Didi"
+                  /> */}
+                  <Trans i18nKey="direction_subtitle" components={[<span className="diacritic-nudge-huge" />]} />
+                </button>
                 <button
                   onClick={() => {
                     scrollToSection(formRef);
@@ -184,20 +201,7 @@ function App() {
                   {t("confirmation")}
                 </button>
 
-                <button
-                  onClick={() => {
-                    scrollToSection(giftRef);
-                    setMenuOpen(false);
-                  }}
-                >
-                  <img
-                    className="left-0 right-0 mx-auto block w-8 sm:w-12 md:w-12 max-w-12"
-                    src="/images/heart-box.svg"
-                    alt="Theo & Didi"
-                  />
 
-                  {/* {t("location")} */}
-                </button>
 
                 <button
                   onClick={() => {
@@ -226,6 +230,12 @@ function App() {
       <section ref={detailsRef} className="min-h-[150vh] px-6 pt-0 ">
         <Details />
       </section>
+
+
+      <section ref={directionsRef}>
+        <Directions />
+      </section>
+
 
       <ScrollToSectionButton
         targetRef={formRef}
@@ -259,13 +269,6 @@ function App() {
 
         </div>
       </section>
-
-
-
-      <section ref={giftRef} >
-        <Gift />
-      </section>
-
 
 
       <section ref={quickDetailsRef}>

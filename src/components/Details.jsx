@@ -46,10 +46,10 @@ export default function Details() {
           </p>
         </div>
 
-        <Parallax speed={-10}>
-          <div className="flex items-center justify-center z-30 mt-3 sm:mt-10">
+        <Parallax speed={-7}>
+          <div className="flex items-center justify-center z-30 mt-12 sm:mt-10">
             <img
-              className="w-80 sm:w-76 md:w-84 lg:w-80 cartoon-couple"
+              className="w-80 sm:w-76 md:w-96 lg:w-96 cartoon-couple"
               src="/images/theo-didi-cartoon.svg"
               alt="Theo & Didi"
             />

@@ -1,0 +1,99 @@
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+
+export default function HoraReveal() {
+    const ref = useRef(null);
+
+    // progress 0..1 while scrolling through this section
+    const { scrollYProgress } = useScroll({
+        target: ref,
+        offset: ["start start", "end start"],
+    });
+
+    // Foreground appears first
+    const fgOpacity = useTransform(scrollYProgress, [0.0, 0.08, 0.25], [0, 1, 1]);
+    const fgScale = useTransform(scrollYProgress, [0.0, 0.2], [1.03, 1]);
+
+    // Background appears later
+    const bgOpacity = useTransform(scrollYProgress, [0.28, 0.45], [0, 1]);
+    const bgScale = useTransform(scrollYProgress, [0.28, 0.55], [1.06, 1]);
+
+    // Optional: scene leaves together at the end
+    const sceneLift = useTransform(scrollYProgress, [0.85, 1], [0, -240]);
+    const sceneFade = useTransform(scrollYProgress, [0.9, 1], [1, 0]);
+
+
+    // Bucovina cocktail note appears last
+    const noteOpacity = useTransform(scrollYProgress, [0.45, 0.6], [0, 1]);
+    const noteY = useTransform(scrollYProgress, [0.45, 0.6], [20, 0]);
+
+
+    return (
+        <section ref={ref} className="bg-pink px-6">
+            {/* scroll fuel */}
+            <div className="relative mx-auto max-w-4xl h-[200vh]">
+                {/* pinned viewport */}
+                <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
+                    <motion.div style={{ y: sceneLift, opacity: sceneFade }} className="relative w-[92vw] max-w-[520px]">
+                        {/* background (reveals second) */}
+                        <motion.img
+                            src="/images/hora-background.png"
+                            alt=""
+                            className="block w-full h-auto select-none pointer-events-none"
+                            style={{ opacity: bgOpacity, scale: bgScale }}
+                        />
+
+                        {/* foreground left */}
+                        <motion.img
+                            src="/images/hora-foreground-left.png"
+                            alt=""
+                            className="absolute inset-0 block w-full h-auto select-none pointer-events-none"
+                            style={{ opacity: fgOpacity, scale: fgScale }}
+                        />
+
+                        {/* foreground right */}
+                        <motion.img
+                            src="/images/hora-foreground-right.png"
+                            alt=""
+                            className="absolute inset-0 block w-full h-auto select-none pointer-events-none"
+                            style={{ opacity: fgOpacity, scale: fgScale }}
+                        />
+                    </motion.div>
+                </div>
+
+
+                {/* Bucovina cocktail note */}
+                <motion.div
+                    style={{ opacity: noteOpacity, y: noteY }}
+                    className="
+                            absolute 
+                            bottom-16 
+                            right-[-2rem] 
+                            sm:right-8
+                            z-30
+                            max-w-[220px]
+                            rounded-[18px]
+                            bg-pink/90
+                            p-3
+                        "
+                >
+                    <img
+                        src="/images/bucovina-cocktail.png"
+                        alt=""
+                        className="w-full rounded-[12px] mb-2 pointer-events-none select-none rotate-[-1deg]"
+                    />
+
+                    <p className="font-prata text-sm text-red leading-snug">
+                        <span className="block font-meow text-[1.4rem]">Dress code:</span>
+                        <span className="tracking-wide">Bucovina cocktail</span>
+                    </p>
+
+                    <p className="mt-1 font-prata text-xs text-red/80 tracking-widest">
+                        See you @FM
+                    </p>
+                </motion.div>
+
+            </div>
+        </section>
+    );
+}

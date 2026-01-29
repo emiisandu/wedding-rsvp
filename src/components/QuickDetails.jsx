@@ -94,7 +94,7 @@ export default function QuickDetails() {
     });
 
     return (
-        <section className="relative px-6 pt-20 pb-12 mt-20 z-40 bg-pink border-0">
+        <section className="relative px-6 pt-32 pb-12 mt-30 z-40 bg-pink border-0">
             <div className="max-w-4xl mx-auto">
                 <div
                     className="

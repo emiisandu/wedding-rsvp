@@ -7,21 +7,22 @@ export default function Gift() {
     const { t } = useTranslation();
 
     return (
-        <section className="mt-16 px-6 bg-pink border-0">
+        <section className=" px-6 bg-pink border-0">
             {/* Make this section tall so scrolling can happen */}
             <div className="relative mx-auto max-w-4xl h-[150vh] ">
 
-                <div className="sticky top-0 z-30 ">
-                    <div className="flex justify-center pt-6 pointer-events-none">
-                        <img
-                            className=""
-                            src="/images/fm-forest-top.svg"
-                            alt="FM forest top"
-                        />
-                    </div>
+                <div className="sticky top-0 z-30 flex justify-center pt-6 pointer-events-none">
+                    <img
+                        className=""
+                        src="/images/fm-forest-top.svg"
+                        alt="FM forest top"
+                    />
+                </div>
 
-
-                    <div className="flex items-center gap-4 bg-pink/0 mt-[-3rem]">
+                {/* 2) HEART + TEXT: becomes sticky below top forest */}
+                {/* Pick a top offset that matches the height of the top image */}
+                <div className="sticky top-[220px] sm:top-[14rem] z-20 flex justify-center w-80  left-0 right-0 mx-auto">
+                    <div className="flex items-center gap-4 bg-pink/0">
                         <img className="w-24" src="/images/heart-box.svg" alt="Heart box" />
                         <div className="font-prata leading-snug text-[.9rem] sm:text-[1.2rem]">
                             <p>
@@ -39,19 +40,17 @@ export default function Gift() {
                             </div>
                         </div>
                     </div>
-
-
-                    <div className=" z-10 mt-[-9rem] flex justify-center pointer-events-none">
+                </div>
+                {/* caprioara sa aterizeze pe colina (sa nu dispara in ea) si sa se faca asa freeze */}
+                {/* 3) BOTTOM FOREST: becomes sticky below heart/text */}
+                {/* Pick a top offset that matches: top image + heart/text block */}
+                <div className="sticky fixed top-[15rem] sm:top-[10rem] z-10 flex justify-center pointer-events-none">
                     <img
 
                         src="/images/fm-forest-bottom.svg"
                         alt="FM forest bottom"
                     />
                 </div>
-
-                </div>
-
-    
 
             </div>
 

@@ -21,8 +21,20 @@
   "add_to_calendar": "Adaugă în calendar",
   "quick_details": "Detalii rapide",
   "loading": "Se încarcă",
-  "la_baciu" : "Sala de evenimente \n„La Baciu”",
+  "la_baciu": "Sala de evenimente \n„La Baciu”",
   "sf_dumitru": "Biserica \n„Sf. Dumitru”",
   "la_moara": "Pensiunea \n„La Moara”",
-  "gift_msg": "Fie că ajungeți până la noi sau ne sunteți alături de la distanță, vă mulțumim."
+  "gift_msg": "Fie că ajunge<0>ț</0>i până la noi sau ne sunte<0>ț</0>i alături de la distan<0>ț</0>ă, vă mul<0>ț</0>umim.",
+  "direction_title": "cum ajungi în FM",
+  "direction_subtitle": "indica<0>ț</0>ii",
+  "train_link": "https://mersultrenurilor.infofer.ro/ro-RO/Rute-trenuri/Pojorata/Pojorata",
+  "plane_link": "https://www.aeroportsuceava.ro/ro/",
+  "info_train": "Info tren",
+  "info_plane": "Info avion",
+  "by_car": "cu mașina",
+  "by_train": "cu trenul",
+  "by_plane": "cu avionul",
+  "train_text": "tren de noapte la cu<0>ș</0>etă",
+  "plane_text": "aeroport Suceava, organizare transport",
+  "gift_text": "Dacă dori<0>ț</0>i să ne face<0>ț</0>i un cadou, un dar în bani ar fi foarte apreciat."
 }
