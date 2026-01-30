@@ -19,8 +19,6 @@ async function verifyTurnstile(token, ip) {
 }
 
 export async function handler(event) {
-  console.log("Turnstile site key:", import.meta.env.VITE_TURNSTILE_SITE_KEY);
-
   const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": "Content-Type",
@@ -69,11 +67,7 @@ export async function handler(event) {
 
     // Remove token before forwarding
     delete payload.turnstileToken;
-
-    if (widgetIdRef.current && window.turnstile) {
-      window.turnstile.reset(widgetIdRef.current);
-    }
-    setTurnstileToken("");
+    
 
     const scriptUrl = process.env.GAS_RSVP_URL;
     if (!scriptUrl) {

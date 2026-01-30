@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function RSVPForm() {
@@ -8,6 +8,8 @@ export default function RSVPForm() {
   const [turnstileToken, setTurnstileToken] = useState("");
   const turnstileElRef = useRef(null);
   const widgetIdRef = useRef(null);
+
+
   useEffect(() => {
     // Wait until the turnstile script is available
     const interval = setInterval(() => {
@@ -130,6 +132,12 @@ export default function RSVPForm() {
       const already = (json.alreadyRegistered || []).join(", ");
 
       let msg = `${t("confirmation_submitted_for")}: ${confirmed || "—"}`;
+
+      if (widgetIdRef.current && window.turnstile) {
+        window.turnstile.reset(widgetIdRef.current);
+      }
+      setTurnstileToken("");
+
 
       if (already) {
         msg += `\n${t("already_registered")}: ${already}`;
