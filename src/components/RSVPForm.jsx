@@ -67,10 +67,15 @@ export default function RSVPForm() {
     e.preventDefault();
 
     try {
+      const token =
+        e.currentTarget.querySelector('input[name="cf-turnstile-response"]')?.value;
+
+      const payload = { ...formData, turnstileToken: token };
+
       const res = await fetch("/.netlify/functions/rsvp", {
         method: "POST",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(formData),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
 
       const text = await res.text();
@@ -589,6 +594,13 @@ export default function RSVPForm() {
           {status.message}
         </div>
       )}
+      
+      <div className="flex justify-center opacity-90">
+        <div className="scale-[0.95] origin-top">
+          <div className="cf-turnstile" data-sitekey={import.meta.env.VITE_TURNSTILE_SITE_KEY} />
+        </div>
+      </div>
+
 
       {/* SUBMIT */}
       <button
