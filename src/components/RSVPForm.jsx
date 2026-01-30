@@ -70,6 +70,11 @@ export default function RSVPForm() {
       const token =
         e.currentTarget.querySelector('input[name="cf-turnstile-response"]')?.value;
 
+      if (!token) {
+        setStatus({ type: "error", message: "Please complete the human check." });
+        return;
+      }
+
       const payload = { ...formData, turnstileToken: token };
 
       const res = await fetch("/.netlify/functions/rsvp", {
@@ -594,7 +599,7 @@ export default function RSVPForm() {
           {status.message}
         </div>
       )}
-      
+
       <div className="flex justify-center opacity-90">
         <div className="scale-[0.95] origin-top">
           <div className="cf-turnstile" data-sitekey={import.meta.env.VITE_TURNSTILE_SITE_KEY} />
