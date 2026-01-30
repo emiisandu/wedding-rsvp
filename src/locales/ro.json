@@ -16,7 +16,7 @@
   "accommodation_yes": "Da, trimite-mi sugestii",
   "accommodation_no": "Nu, mulțumesc",
   "write us": "Scrie-ne ceva drăguț… (opțional)",
-  "screenshot-friendly": "Gata de salvat",
+  "screenshot-friendly": "Ușor de salvat",
   "event-title": "Theodora & Cozmin — Nunta",
   "add_to_calendar": "Adaugă în calendar",
   "quick_details": "Detalii rapide",
@@ -24,9 +24,9 @@
   "la_baciu": "Sala de evenimente \n„La Baciu”",
   "sf_dumitru": "Biserica \n„Sf. Dumitru”",
   "la_moara": "Pensiunea \n„La Moara”",
-  "gift_msg": "Fie că ajunge<0>ț</0>i până la noi sau ne sunte<0>ț</0>i alături de la distan<0>ț</0>ă, vă mul<0>ț</0>umim.",
+  "gift_msg": "Fie că ajungeți până la noi sau ne sunteți alături de la distanță, vă mulțumim.",
   "direction_title": "cum ajungi în FM",
-  "direction_subtitle": "indica<0>ț</0>ii",
+  "direction_subtitle": "indicații",
   "train_link": "https://mersultrenurilor.infofer.ro/ro-RO/Rute-trenuri/Pojorata/Pojorata",
   "plane_link": "https://www.aeroportsuceava.ro/ro/",
   "info_train": "Info tren",
@@ -34,7 +34,9 @@
   "by_car": "cu mașina",
   "by_train": "cu trenul",
   "by_plane": "cu avionul",
-  "train_text": "tren de noapte la cu<0>ș</0>etă",
+  "train_text": "tren de noapte la cușetă",
   "plane_text": "aeroport Suceava, organizare transport",
-  "gift_text": "Dacă dori<0>ț</0>i să ne face<0>ț</0>i un cadou, un dar în bani ar fi foarte apreciat."
+  "gift_text": "Dacă doriți să ne faceți un cadou, un dar în bani ar fi foarte apreciat.",
+  "bucovina_cocktail": "Cocktail în Bucovina",
+  "dress_code_text":"Nuanțe vibrante de vară și farmec bucovinean"
 }

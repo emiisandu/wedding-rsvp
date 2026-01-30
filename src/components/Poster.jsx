@@ -8,7 +8,7 @@ export default function Poster() {
 
   return (
     <div>
-      <h1 className="mt-14 sm:mt-10 text-4xl sm:text-5xl font-semibold font-prata uppercase leading-none mb-[-1.8rem] sm:mb-[0rem]">
+      <h1 className="mt-14 sm:mt-10 text-4xl sm:text-5xl font-semibold font-prata-light scale-y-[1.1] uppercase leading-none mb-[-1.8rem] sm:mb-[0rem]">
         {t("us")},
       </h1>
       <div className="grid grid-cols-3 items-center pt-5 mt-12 text-beige w-full px-0 sm:px-12">

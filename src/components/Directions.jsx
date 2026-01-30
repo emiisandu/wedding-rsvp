@@ -3,7 +3,6 @@ import { Parallax } from "react-scroll-parallax";
 import CopyRow from "./CopyRow";
 import HoraReveal from "./HoraReveal";
 import Gift from "./Gift";
-import { Trans } from "react-i18next";
 
 export default function Directions() {
     const { t } = useTranslation();
@@ -81,9 +80,8 @@ export default function Directions() {
                                 </div>
 
                                 {/* tiny caption (optional) */}
-                                <p className="mt-3 text-right font-prata text-xs tracking-widest text-red/80 ">
-                                    {/* ex: “cum ajungi” */}
-                                     <Trans i18nKey="direction_subtitle" components={[<span className="diacritic-nudge" />]} />
+                                <p className="mt-3 text-right font-prata text-xs tracking-widest text-red/80 text-[.8rem]  sm:text-[1rem]">
+                                    {t("direction_subtitle")}
                                 </p>
                             </div>
 
@@ -154,8 +152,8 @@ function TravelCard({ title, subtitle, img, align = "left", locationLink = null,
                         {isRight && <span className="mt-[2px] inline-block h-2 w-2 rounded-full bg-red/70" />}
                     </div>
 
-                    <p className="mt-1 text-sm sm:text-lg  leading-snug font-prata fix-diacritics fix-ro">
-                        <Trans i18nKey={subtitle} components={[<span className="diacritic-nudge" />]} />
+                    <p className="mt-1 text-[.8rem]  sm:text-[1rem] leading-snug font-prata whitespace-normal ">
+                        {subtitle}
                     </p>
                     {locationLink && (<a
                         href={locationLink}

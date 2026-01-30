@@ -24,7 +24,7 @@ export default function Details() {
             
           </div>
 
-          <div className="flex items-center justify-center date-div text-align text-right">
+          <div className="flex items-center justify-center date-div text-align text-right ">
             <p className="font-bold uppercase font-monoton
                           [font-size:clamp(1.8rem,7vw,3rem)]
                           [letter-spacing:clamp(0.12em,1.8vw,0.4em)]
@@ -32,6 +32,7 @@ export default function Details() {
                           text-center
                           whitespace-nowrap
                           max-w-full">
+                            
               25.07.26
             </p>
             <img
@@ -41,7 +42,12 @@ export default function Details() {
             />
           </div>
 
-          <p className="text-1xl sm:text-2xl font-bold tracking-[0.1em] uppercase font-prata mt-2 flex justify-center">
+          <p className="text-1xl sm:text-2xl font-bold tracking-[0.1em] uppercase font-prata mt-2 flex justify-center pb-2">
+                <img
+                            src="/images/pin.png"
+                            alt=""
+                            className=" w-4 sm:w-8 mr-2 object-cover"
+                        />
             FUNDU MOLDOVEI, SUCEAVA
           </p>
         </div>

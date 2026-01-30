@@ -70,7 +70,7 @@ export default function ScrollToSectionButton({
         right-0 left-0 ml-0 mr-0 mx-auto 
         z-50
         flex items-center justify-center gap-2
-        font-prata text-[0.65rem] tracking-[0.35em] uppercase
+        font-prata-light text-[0.65rem] tracking-[0.30em] uppercase
         px-4 py-3 bg-[#f5ead5]
         border border-black/40 rounded-sm
         shadow-[2px_2px_0px_rgba(0,0,0,0.35)]

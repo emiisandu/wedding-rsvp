@@ -39,14 +39,25 @@ html, body {
 }
 
 .font-prata{
-  font-family: "Prata", serif;
+  /* font-family: "Prata", serif;
+  font-weight: 700; */
+  /* font-family: "Cormorant Garamond", serif; */
+  font-family: "Libre Baskerville", serif;
+
   font-weight: 700;
+  /* font-size:24px; */
+  /* font-optical-sizing: auto; */
   font-style: normal;
-}
+    letter-spacing: 0em;
+  transform: scaleY(1.1);
+  transform-origin: 50% 60%;}
 
 .font-prata-light{
-  font-family: "Prata", serif;
-  font-weight: 400;
+  /* font-family: "Cormorant Garamond", serif; */
+  font-family: "Libre Baskerville", serif;
+  font-optical-sizing: auto;
+  /* font-family: "Prata", serif; */
+  font-weight: 500;
   font-style: normal;
 }
 
@@ -57,6 +68,22 @@ html, body {
   font-style: normal;
   letter-spacing: 0.09em; /* adjust this value */
 }
+
+@layer utilities {
+  .export-only {
+    position: fixed;
+    left: -10000px;
+    top: 0;
+    pointer-events: none;
+  }
+  .export-visible {
+    position: fixed;
+    left: -10000px;
+    top: 0;
+    pointer-events: none;
+  }
+}
+
 
 .mw-20{
   max-width: 20rem;

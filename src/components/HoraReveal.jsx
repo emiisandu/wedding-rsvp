@@ -1,8 +1,10 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function HoraReveal() {
     const ref = useRef(null);
+    const { t } = useTranslation();
 
     // progress 0..1 while scrolling through this section
     const { scrollYProgress } = useScroll({
@@ -67,11 +69,12 @@ export default function HoraReveal() {
                     style={{ opacity: noteOpacity, y: noteY }}
                     className="
                             absolute 
-                            bottom-16 
+                            bottom-4 sm:bottom-0 
                             right-[-2rem] 
                             sm:right-8
                             z-30
                             max-w-[220px]
+                            sm:max-w-[15rem]
                             rounded-[18px]
                             bg-pink/90
                             p-3
@@ -85,10 +88,18 @@ export default function HoraReveal() {
 
                     <p className="font-prata text-sm text-red leading-snug">
                         <span className="block font-meow text-[1.4rem]">Dress code:</span>
-                        <span className="tracking-wide">Bucovina cocktail</span>
+                        <span className="tracking-wide">{t("bucovina_cocktail")}</span>
                     </p>
 
-                    <p className="mt-1 font-prata text-xs text-red/80 tracking-widest">
+                    <p className="flex mt-1 font-prata text-xs sm:text-sm">
+                        {t("dress_code_text")}
+                        <img
+                        src="/images/bucovina-sun.png"
+                        alt=""
+                        className="w-16 sm:w-24 h-auto mb-2 pointer-events-none select-none rotate-[-5deg]"
+                    />
+                    </p>
+                    <p className="mt-1 font-prata-light text-xs sm:text-sm text-red/80 tracking-widest">
                         See you @FM
                     </p>
                 </motion.div>

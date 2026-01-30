@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Parallax } from "react-scroll-parallax";
 import CopyRow from "./CopyRow";
-import { Trans } from "react-i18next";
 
 export default function Gift() {
     const { t } = useTranslation();
@@ -9,7 +8,7 @@ export default function Gift() {
     return (
         <section className="mt-16 px-6 bg-pink border-0">
             {/* Make this section tall so scrolling can happen */}
-            <div className="relative mx-auto max-w-4xl h-[150vh] ">
+            <div className="relative mx-auto max-w-4xl h-[140vh] ">
 
                 <div className="sticky top-0 z-30 ">
                     <div className="flex justify-center pt-6 pointer-events-none">
@@ -21,15 +20,15 @@ export default function Gift() {
                     </div>
 
 
-                    <div className="flex items-center gap-4 bg-pink/0 mt-[-3rem]">
-                        <img className="w-24" src="/images/heart-box.svg" alt="Heart box" />
-                        <div className="font-prata leading-snug text-[.9rem] sm:text-[1.2rem]">
+                    <div className="flex items-center justify-center gap-4 bg-pink/0 mt-[-3rem] text-align">
+                        <img className="w-20 sm:w-32" src="/images/heart-box.svg" alt="Heart box" />
+                        <div className="font-prata leading-snug text-[.9rem] sm:text-[1.2rem] w-56 sm:w-96">
                             <p>
-                                <Trans i18nKey="gift_msg" components={[<span className="diacritic-nudge-big" />]} />
+                                {t("gift_msg")}
                             </p>
 
-                            <p>
-                                <Trans i18nKey="gift_text" components={[<span className="diacritic-nudge-big" />]} />
+                            <p className="mt-2">
+                                {t("gift_text")}
                             </p>
 
                             <div className="mt-3 space-y-1 text-[0.7rem] sm:text-[0.9rem] tracking-widest">

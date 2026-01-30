@@ -19,8 +19,8 @@ export default function Footer() {
             text-[0.65rem]
             tracking-[0.35em]
             uppercase
-            font-prata
-            text-black/70
+            font-prata-light
+            text-black/100
             text-center sm:text-left
           "
         >
@@ -32,8 +32,8 @@ export default function Footer() {
           className="
             text-[0.55rem]
             tracking-[0.25em]
-            font-prata
-            text-black/50
+            font-prata-light
+            text-black/100
             text-center sm:text-right
           "
         >

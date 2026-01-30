@@ -15,7 +15,6 @@ import ScrollToSectionButton from "./components/ScrollToSectionButton";
 import Gift from "./components/Gift";
 import Directions from "./components/Directions";
 import { preloadImages, preloadFonts } from "./preloadAssets";
-import { Trans } from "react-i18next";
 
 function App() {
 
@@ -139,12 +138,12 @@ function App() {
                     ml-1
                     w-full
                     text-center
-                    font-prata
+                    font-prata-light
                     text-[0.50rem]
                     sm:text-[0.65rem]
-                    tracking-[0.35em]
+                    tracking-[0.25em]
                     uppercase
-                    text-black/80
+                    text-black/100
                     leading-none
                     
                   "
@@ -190,7 +189,7 @@ function App() {
                     src="/images/heart-box.svg"
                     alt="Theo & Didi"
                   /> */}
-                  <Trans i18nKey="direction_subtitle" components={[<span className="diacritic-nudge-huge" />]} />
+                  {t("direction_subtitle")}
                 </button>
                 <button
                   onClick={() => {

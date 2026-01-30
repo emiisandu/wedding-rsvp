@@ -51,10 +51,12 @@
   "plane_link": "https://www.aeroportsuceava.ro/en/",
   "info_train": "Info train",
   "info_plane": "Info plane",
-  "by_car" : "by car",
-  "by_train" : "by train",
-  "by_plane" : "by_plane",
-  "train_text":"overnight train in a sleeper couchette",
-  "plane_text":"Suceava airport (SCV), we’ll be happy to arrange transport",
-  "gift_text": "If you wish to offer us a gift, a monetary one would be greatly appreciated."
+  "by_car": "by car",
+  "by_train": "by train",
+  "by_plane": "by_plane",
+  "train_text": "overnight train in a sleeper couchette",
+  "plane_text": "Suceava airport (SCV), we’ll be happy to arrange transport",
+  "gift_text": "If you wish to offer us a gift, a monetary one would be greatly appreciated.",
+  "bucovina_cocktail": "Bucovina Cocktail",
+  "dress_code_text": "Think vibrant summer shades and Bucovina charm"
 }
