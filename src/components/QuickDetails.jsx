@@ -291,13 +291,7 @@ export default function QuickDetails() {
 
                                 <h3 className="flex items-center gap-2 font-monoton uppercase tracking-widest text-sm mt-8 [word-spacing:0.4em]">
                                     {t("event-title")}
-                                    <img
-                                        className="w-2 left-0 right-0 mx-auto block translate-y-[1px]"
-                                        crossOrigin="anonymous"
 
-                                        src="/images/wedding-ring.svg"
-                                        alt=""
-                                    />
                                 </h3>
 
                                 <p className="font-prata text-xs uppercase mt-8">{dateLabel}</p>

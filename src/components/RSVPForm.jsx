@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 
 export default function RSVPForm() {
   const { t } = useTranslation();
+  const [status, setStatus] = useState(null);
 
   const [formData, setFormData] = useState({
     guests: [

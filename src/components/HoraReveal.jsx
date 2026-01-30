@@ -13,7 +13,7 @@ export default function HoraReveal() {
     });
 
     // Foreground appears first
-    const fgOpacity = useTransform(scrollYProgress, [0.0, 0.08, 0.25], [0, 1, 1]);
+    const fgOpacity = useTransform(scrollYProgress, [-0.1, 0.08, 0.25], [0, 1, 1]);
     const fgScale = useTransform(scrollYProgress, [0.0, 0.2], [1.03, 1]);
 
     // Background appears later
