@@ -273,7 +273,7 @@ export default function QuickDetails() {
                     <div
                         ref={exportRef}
                         className="
-                    w-[390px]
+                    w-[420px]
                     bg-[#f5ead5]
                     border border-black/30
                     rounded-sm
@@ -292,7 +292,7 @@ export default function QuickDetails() {
                                 <h3 className="flex items-center gap-2 font-monoton uppercase tracking-widest text-sm mt-8 [word-spacing:0.4em]">
                                     {t("event-title")}
                                     <img
-                                        className="w-10 inline-block translate-y-[1px]"
+                                        className="w-2 left-0 right-0 mx-auto block translate-y-[1px]"
                                         crossOrigin="anonymous"
 
                                         src="/images/wedding-ring.svg"

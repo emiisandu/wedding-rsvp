@@ -69,21 +69,22 @@ export default function HoraReveal() {
                     style={{ opacity: noteOpacity, y: noteY }}
                     className="
                             absolute 
-                            bottom-4 sm:bottom-0 
-                            right-[-2rem] 
+                            bottom-4 sm:bottom-[-10rem] 
+                            right-[-1.5rem] 
                             sm:right-8
                             z-30
-                            max-w-[220px]
-                            sm:max-w-[15rem]
+                            max-w-[240px]
+                            sm:max-w-[25rem]
                             rounded-[18px]
                             bg-pink/90
                             p-3
+                            sm:pb-[8rem]
                         "
                 >
                     <img
                         src="/images/bucovina-cocktail.png"
                         alt=""
-                        className="w-full rounded-[12px] mb-2 pointer-events-none select-none rotate-[-1deg]"
+                        className="w-40 sm:w-32 rounded-[12px] mb-2 pointer-events-none select-none rotate-[-1deg]"
                     />
 
                     <p className="font-prata text-sm text-red leading-snug">
@@ -91,7 +92,7 @@ export default function HoraReveal() {
                         <span className="tracking-wide">{t("bucovina_cocktail")}</span>
                     </p>
 
-                    <p className="flex mt-1 font-prata text-xs sm:text-sm">
+                    <p className="flex mt-1 font-prata text-xs sm:text-sm ">
                         {t("dress_code_text")}
                         <img
                         src="/images/bucovina-sun.png"
