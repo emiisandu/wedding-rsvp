@@ -74,7 +74,8 @@ export default function RSVPForm() {
       });
 
       const text = await res.text();
-      console.log("RSVP raw response:", text);
+      console.log("RSVP status:", res.status, res.headers.get("content-type"));
+      console.log("RSVP raw response (first 300):", text.slice(0, 300));
 
       let json;
       try {

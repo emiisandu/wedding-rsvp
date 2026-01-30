@@ -11,7 +11,7 @@ export async function handler(event) {
 
     const resp = await fetch(scriptUrl, {
       method: "POST",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      headers: { "Content-Type": "application/json" },
       body: event.body || "{}",
     });
 
@@ -22,7 +22,7 @@ export async function handler(event) {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
       },
-      body: text,
+      body: JSON.stringify({ ok: true }),
     };
   } catch (err) {
     return {
