@@ -21,12 +21,14 @@ export default function RSVPForm() {
       if (widgetIdRef.current) return;
 
       widgetIdRef.current = window.turnstile.render(turnstileElRef.current, {
-        sitekey: import.meta.env.VITE_TURNSTILE_SITE_KEY, // change if CRA
+        sitekey: import.meta.env.VITE_TURNSTILE_SITE_KEY,
         theme: "light",
+        appearance: "interaction-only",
         callback: (token) => setTurnstileToken(token),
         "expired-callback": () => setTurnstileToken(""),
         "error-callback": () => setTurnstileToken(""),
       });
+
     }, 100);
 
     return () => clearInterval(interval);
@@ -93,15 +95,13 @@ export default function RSVPForm() {
     e.preventDefault();
 
     try {
-      const token =
-        e.currentTarget.querySelector('input[name="cf-turnstile-response"]')?.value;
-
-      if (!token) {
-        setStatus({ type: "error", message: "Please complete the human check." });
+      if (!turnstileToken) {
+        setStatus({ type: "error", message: "Human check not ready yet — please try again in a second." });
         return;
       }
 
-      const payload = { ...formData, turnstileToken: token };
+      const payload = { ...formData, turnstileToken };
+
 
       const res = await fetch("/.netlify/functions/rsvp", {
         method: "POST",
@@ -635,6 +635,7 @@ export default function RSVPForm() {
       <div className="flex justify-center">
         <div ref={turnstileElRef} />
       </div>
+
 
 
 
