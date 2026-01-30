@@ -1,12 +1,27 @@
 export async function handler(event) {
-  try {
-    if (event.httpMethod !== "POST") {
-      return { statusCode: 405, body: "Method Not Allowed" };
-    }
+  const corsHeaders = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+  };
 
-    const scriptUrl = process.env.GAS_RSVP_URL; // set in Netlify env vars
+  // Handle preflight
+  if (event.httpMethod === "OPTIONS") {
+    return { statusCode: 204, headers: corsHeaders, body: "" };
+  }
+
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, headers: corsHeaders, body: "Method Not Allowed" };
+  }
+
+  try {
+    const scriptUrl = process.env.GAS_RSVP_URL;
     if (!scriptUrl) {
-      return { statusCode: 500, body: "Missing GAS_RSVP_URL env var" };
+      return {
+        statusCode: 500,
+        headers: corsHeaders,
+        body: JSON.stringify({ ok: false, message: "Missing GAS_RSVP_URL env var" }),
+      };
     }
 
     const resp = await fetch(scriptUrl, {
@@ -15,19 +30,19 @@ export async function handler(event) {
       body: event.body || "{}",
     });
 
-    const text = await resp.text(); // Apps Script returns JSON text
+    const text = await resp.text(); // this should already be JSON from GAS
+
+    // Pass through Apps Script response *as-is*
     return {
-      statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({ ok: true }),
+      statusCode: resp.status,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+      body: text,
     };
   } catch (err) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ ok: false, error: String(err) }),
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+      body: JSON.stringify({ ok: false, message: String(err) }),
     };
   }
 }
