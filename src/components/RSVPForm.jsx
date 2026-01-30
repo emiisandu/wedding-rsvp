@@ -5,6 +5,30 @@ export default function RSVPForm() {
   const { t } = useTranslation();
   const [status, setStatus] = useState(null);
 
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const turnstileElRef = useRef(null);
+  const widgetIdRef = useRef(null);
+  useEffect(() => {
+    // Wait until the turnstile script is available
+    const interval = setInterval(() => {
+      if (!window.turnstile || !turnstileElRef.current) return;
+
+      clearInterval(interval);
+
+      // Avoid double-rendering
+      if (widgetIdRef.current) return;
+
+      widgetIdRef.current = window.turnstile.render(turnstileElRef.current, {
+        sitekey: import.meta.env.VITE_TURNSTILE_SITE_KEY, // change if CRA
+        theme: "light",
+        callback: (token) => setTurnstileToken(token),
+        "expired-callback": () => setTurnstileToken(""),
+        "error-callback": () => setTurnstileToken(""),
+      });
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, []);
   const [formData, setFormData] = useState({
     guests: [
       {
@@ -600,11 +624,10 @@ export default function RSVPForm() {
         </div>
       )}
 
-      <div className="flex justify-center opacity-90">
-        <div className="scale-[0.95] origin-top">
-          <div className="cf-turnstile" data-sitekey={import.meta.env.VITE_TURNSTILE_SITE_KEY} />
-        </div>
+      <div className="flex justify-center">
+        <div ref={turnstileElRef} />
       </div>
+
 
 
       {/* SUBMIT */}
