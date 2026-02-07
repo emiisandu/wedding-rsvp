@@ -1,5 +1,52 @@
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+function isBlank(v) {
+  return !v || !String(v).trim();
+}
+
+function validateForm(data, t) {
+  const errors = [];
+
+  // attendance required (main guest)
+  if (isBlank(data.guests?.[0]?.attendance)) {
+    errors.push(t("err_attendance_required"));
+  }
+
+  // lodging required
+  if (isBlank(data.lodgingSuggestions)) {
+    errors.push(t("err_lodging_required"));
+  }
+
+  // guests required fields
+  (data.guests || []).forEach((g, i) => {
+    const idx = i + 1;
+
+    if (isBlank(g.firstName)) errors.push(t("err_firstname_required", { idx }));
+    if (isBlank(g.lastName)) errors.push(t("err_lastname_required", { idx }));
+
+    if (isBlank(g.email)) {
+      errors.push(t("err_email_required", { idx }));
+    } else if (!EMAIL_RE.test(String(g.email).trim())) {
+      errors.push(t("err_email_invalid", { idx }));
+    }
+
+    if (isBlank(g.menu)) errors.push(t("err_menu_required", { idx }));
+
+    // ageType required only for added guests (index !== 0)
+    if (i !== 0 && isBlank(g.ageType)) {
+      errors.push(t("err_agetype_required", { idx }));
+    }
+  });
+
+  // message required (you said all fields)
+  if (isBlank(data.message)) {
+    errors.push(t("err_message_required"));
+  }
+
+  return errors;
+}
 
 export default function RSVPForm() {
   const { t } = useTranslation();
@@ -455,7 +502,11 @@ export default function RSVPForm() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-
+    const errors = validateForm(formData, t);
+    if (errors.length) {
+      setStatus({ type: "error", message: errors.join("\n") });
+      return;
+    }
 
 
     try {
@@ -465,13 +516,6 @@ export default function RSVPForm() {
       }
 
       const payload = { ...formData, turnstileToken };
-
-      const errors = validateForm(formData, t);
-      if (errors.length) {
-        setStatus({ type: "error", message: errors.join("\n") });
-        return;
-      }
-
 
       const res = await fetch("/.netlify/functions/rsvp", {
         method: "POST",
