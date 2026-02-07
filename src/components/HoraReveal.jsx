@@ -32,7 +32,7 @@ export default function HoraReveal() {
     return (
         <section ref={ref} className="bg-pink px-6">
             {/* scroll fuel */}
-            <div className="relative mx-auto max-w-4xl h-[150vh] sm:h-[165vh] mt-[-8rem]">
+            <div className="relative mx-auto max-w-4xl h-[150vh] sm:h-[165vh] mt-[-28rem]">
                 {/* pinned viewport */}
                 <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
                     <motion.div style={{ y: sceneLift, opacity: sceneFade }} className="relative w-[92vw] max-w-[520px]">

@@ -59,5 +59,14 @@
   "gift_text": "If you wish to offer us a gift, a monetary one would be greatly appreciated.",
   "bucovina_cocktail": "Bucovina Cocktail",
   "dress_code_text": "Vibrant summer shades and Bucovina charm",
-  "accept_gifts" : "We accept monetary gifts."
+  "accept_gifts": "We accept monetary gifts.",
+  "err_attendance_required": "Please select attendance (Yes/No).",
+  "err_lodging_required": "Please select the accommodation option.",
+  "err_firstname_required": "Guest {{idx}}: first name is required.",
+  "err_lastname_required": "Guest {{idx}}: last name is required.",
+  "err_email_required": "Guest {{idx}}: email is required.",
+  "err_email_invalid": "Guest {{idx}}: email is invalid.",
+  "err_menu_required": "Guest {{idx}}: please choose a menu option.",
+  "err_agetype_required": "Guest {{idx}}: please select adult/child.",
+  "err_message_required": "Please leave us a message (it can be short)."
 }
