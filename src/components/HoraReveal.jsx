@@ -13,27 +13,26 @@ export default function HoraReveal() {
     });
 
     // Foreground appears first
-    const fgOpacity = useTransform(scrollYProgress, [-0.1, 0.08, 0.25], [0, 1, 1]);
-    const fgScale = useTransform(scrollYProgress, [0.0, 0.2], [1.03, 1]);
+    // Foreground: reveal quickly
+    const fgOpacity = useTransform(scrollYProgress, [0.0, 0.05, 0.12], [0, 1, 1]);
+    const fgScale = useTransform(scrollYProgress, [0.0, 0.10], [1.03, 1]);
 
-    // Background appears later
-    const bgOpacity = useTransform(scrollYProgress, [0.28, 0.45], [0, 1]);
-    const bgScale = useTransform(scrollYProgress, [0.28, 0.55], [1.06, 1]);
+    // Background: start soon after
+    const bgOpacity = useTransform(scrollYProgress, [0.10, 0.18], [0, 1]);
+    const bgScale = useTransform(scrollYProgress, [0.10, 0.22], [1.06, 1]);
 
-    // Optional: scene leaves together at the end
-    const sceneLift = useTransform(scrollYProgress, [0.85, 1], [0, -240]);
-    const sceneFade = useTransform(scrollYProgress, [0.9, 1], [1, 0]);
+    // Note: also earlier
+    const noteOpacity = useTransform(scrollYProgress, [0.18, 0.26], [0, 1]);
+    const noteY = useTransform(scrollYProgress, [0.18, 0.26], [16, 0]);
 
-
-    // Bucovina cocktail note appears last
-    const noteOpacity = useTransform(scrollYProgress, [0.45, 0.6], [0, 1]);
-    const noteY = useTransform(scrollYProgress, [0.45, 0.6], [20, 0]);
+    const sceneLift = useTransform(scrollYProgress, [0.92, 1.0], [0, -240]);
+    const sceneFade = useTransform(scrollYProgress, [0.96, 1.0], [1, 0]);
 
 
     return (
         <section ref={ref} className="bg-pink px-6">
             {/* scroll fuel */}
-            <div className="relative mx-auto max-w-4xl h-[200vh]">
+            <div className="relative mx-auto max-w-4xl h-[150vh] sm:h-[165vh] mt-[-8rem]">
                 {/* pinned viewport */}
                 <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
                     <motion.div style={{ y: sceneLift, opacity: sceneFade }} className="relative w-[92vw] max-w-[520px]">
@@ -70,8 +69,7 @@ export default function HoraReveal() {
                     className="
                             absolute 
                             bottom-4 sm:bottom-[-10rem] 
-                            right-[-1.5rem] 
-                            sm:right-8
+                            right-[-3.5rem] sm:right-[-1.5rem] 
                             z-30
                             max-w-[240px]
                             sm:max-w-[25rem]
@@ -79,12 +77,13 @@ export default function HoraReveal() {
                             bg-pink/90
                             p-3
                             sm:pb-[8rem]
+                            
                         "
                 >
                     <img
                         src="/images/bucovina-cocktail.png"
                         alt=""
-                        className="w-40 sm:w-32 rounded-[12px] mb-2 pointer-events-none select-none rotate-[-1deg]"
+                        className="w-32 sm:w-40  mb-2 pointer-events-none select-none rotate-[-1deg] relative top-4 right-[-5rem]"
                     />
 
                     <p className="font-prata text-sm text-red leading-snug">
@@ -95,10 +94,10 @@ export default function HoraReveal() {
                     <p className="flex mt-1 font-prata text-xs sm:text-sm ">
                         {t("dress_code_text")}
                         <img
-                        src="/images/bucovina-sun.png"
-                        alt=""
-                        className="w-16 sm:w-24 h-auto mb-2 pointer-events-none select-none rotate-[-5deg]"
-                    />
+                            src="/images/bucovina-sun.png"
+                            alt=""
+                            className="w-16 sm:w-24 h-auto mb-2 pointer-events-none select-none rotate-[-5deg]"
+                        />
                     </p>
                     <p className="mt-1 font-prata-light text-xs sm:text-sm text-red/80 tracking-widest">
                         See you @FM

@@ -18,7 +18,7 @@ export default function Directions() {
 
 
                 {/* CONTENT UNDER TITLE */}
-                <div className="sticky top-10 z-40 bg-pink">
+                <div className="sticky top-0 z-40 bg-pink pt-[.7rem] pb-[.7rem]">
                     {/* title block (your existing) */}
                     <div className="flex items-center justify-center date-div text-align text-right">
                         <svg
@@ -45,17 +45,17 @@ export default function Directions() {
                             className="ml-[-2rem] mr-[2.5rem] w-12 sm:w-24 object-cover"
                         /> */}
                     </div>
-
-                    {/* grid */}
-                    <div className="mx-auto max-w-4xl">
-                        <div className="grid gap-4 lg:grid-cols-2">
-                            {/* 1) LEFT BIG IMAGE (belongs to title) */}
-                            <div className="relative overflow-hidden  bg-pink/50 p-3">
-                                {/* wavy “frame” overlay */}
-                                <div className="pointer-events-none absolute inset-0 opacity-60">
-                                    <svg viewBox="0 0 400 300" className="h-full w-full">
-                                        <path
-                                            d="M20,40 Q60,10 100,35 T180,35 T260,35 T340,35 
+                </div>
+                {/* grid */}
+                <div className="mx-auto max-w-4xl">
+                    <div className="grid gap-6 lg:grid-cols-2">
+                        {/* 1) LEFT BIG IMAGE (belongs to title) */}
+                        <div className="relative overflow-hidden  bg-pink p-3">
+                            {/* wavy “frame” overlay */}
+                            <div className="pointer-events-none absolute inset-0 opacity-60">
+                                <svg viewBox="0 0 400 300" className="h-full w-full">
+                                    <path
+                                        d="M20,40 Q60,10 100,35 T180,35 T260,35 T340,35 
                                             Q380,40 370,80 
                                             T370,180 
                                             Q370,240 330,250 
@@ -63,62 +63,112 @@ export default function Directions() {
                                             Q30,245 30,210 
                                             T30,90 
                                             Q30,55 20,40 Z"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth="3"
-                                        />
-                                    </svg>
-                                </div>
-
-                                {/* replace this with your image */}
-                                <div className="relative overflow-hidden rounded-[22px]">
-                                    <img
-                                        src="/images/fm-hora.png"
-                                        alt=""
-                                        className="h-[210px] w-full object-cover md:h-[290px] sm:h-[240px] lg:h-[290px]"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="3"
                                     />
+                                </svg>
+                            </div>
+                            {/* replace this with your image */}
+                            <div className="relative overflow-hidden rounded-[22px]">
+                                <img
+                                    src="/images/fm-hora.png"
+                                    alt=""
+                                    className="h-[210px] w-full object-cover md:h-[290px] sm:h-[240px] lg:h-[290px]"
+                                />
+                            </div>
+
+                            {/* tiny caption (optional) */}
+                            {/* <p className="mt-3 text-right font-prata text-xs tracking-widest text-red/80 text-[.8rem]  sm:text-[1rem]">
+                                    {t("direction_subtitle")}
+                                </p> */}
+
+
+                            {/* desktop-only filler so left side isn't empty */}
+                            <div className="hidden lg:block">
+                                <div className="flex justify-center pointer-events-none mt-4">
+                                    <Parallax speed={5}>
+
+                                        <img className="w-[8rem]" src="/images/wedding-ring.svg" alt="" />
+                                    </Parallax>
                                 </div>
 
-                                {/* tiny caption (optional) */}
-                                <p className="mt-3 text-right font-prata text-xs tracking-widest text-red/80 text-[.8rem]  sm:text-[1rem]">
-                                    {t("direction_subtitle")}
-                                </p>
+                                <div className="relative overflow-hidden mt-0">
+                                    <div className="relative z-10 flex justify-center pointer-events-none">
+                                        <Parallax speed={-45}>
+                                            <img className="w-[26rem]" src="/images/fm-deer.svg" alt="" />
+                                        </Parallax>
+                                    </div>
+
+                                    <div className="relative z-40 flex justify-center pointer-events-none">
+                                        <img className="w-[28rem]" src="/images/fm-mount.svg" alt="" />
+                                    </div>
+                                </div>
+
+                                <div className="left-0 right-0 mx-auto gifts-end bg-pink h-[20vh] z-30 w-80 overflow-hidden bottom-0 mb-0 top-[-3em]  mt-0 relative">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col gap-4">
+                            <TravelCard
+                                align="right"
+                                title={t("by_car")}
+                                subtitle="A3/A7"
+                                img="/images/fm-car.png"
+                            />
+                            <div className="flex justify-center pointer-events-none">
+                                <Parallax speed={18}>
+                                    <img
+                                        className="w-80 lg:w-96"
+                                        src="/images/fm-house.svg"
+                                        alt="FM forest top"
+                                    />
+                                </Parallax>
+                            </div>
+                            <TravelCard
+                                align="left"
+                                title={t("by_train")}
+                                subtitle={t("train_text")}
+                                img="/images/fm-train.png"
+                                locationLink={t("train_link")}
+                                locationLabel={t("info_train")}
+                            />
+                            <div className="relative overflow-hidden">
+                                {/* deer */}
+                                <div className="block lg:hidden relative z-10 flex justify-center pointer-events-none">
+                                    <Parallax speed={-26}>
+                                        <img className="w-80 lg:w-96" src="/images/fm-deer.svg" alt="" />
+                                    </Parallax>
+                                </div>
+
+                                {/* mount */}
+                                <div className="block lg:hidden relative z-40 flex justify-center pointer-events-none">
+                                    <img className="w-96 lg:w-96" src="/images/fm-mount.svg" alt="" />
+                                </div>
                             </div>
 
-                            <div className="flex flex-col gap-4">
-                                <TravelCard
-                                    align="right"
-                                    title={t("by_car")}
-                                    subtitle="A3/A7"
-                                    img="/images/fm-car.png"
-                                />
+                            <div className="left-0 right-0 mx-auto gifts-end bg-pink h-[20vh] z-30 w-80 overflow-hidden bottom-0 mb-0 top-[-3em]  mt-0 relative">
 
-                                <TravelCard
-                                    align="left"
-                                    title={t("by_train")}
-                                    subtitle={t("train_text")}
-                                    img="/images/fm-train.png"
-                                    locationLink={t("train_link")}
-                                    locationLabel={t("info_train")}
-                                />
-
-                                <TravelCard
-                                    align="right"
-                                    title={t("by_plane")}
-                                    subtitle={t("plane_text")}
-                                    img="/images/fm-plane.png"
-                                    locationLink={t("plane_link")}
-                                    locationLabel={t("info_plane")}
-                                />
                             </div>
+                            <TravelCard
+                                align="right"
+                                title={t("by_plane")}
+                                subtitle={t("plane_text")}
+                                img="/images/fm-plane.png"
+                                locationLink={t("plane_link")}
+                                locationLabel={t("info_plane")}
+                            />
                         </div>
                     </div>
                 </div>
-
-
             </div>
-            <Gift/>
+
+
             <HoraReveal />
+
+            <Gift />
 
         </section >)
 

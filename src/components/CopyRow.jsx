@@ -11,14 +11,14 @@ export default function CopyRow({ label, value }) {
 
   return (
     <div className="flex items-center justify-between gap-3 ">
-      <span className="whitespace-nowrap text-[.7rem] sm:text-[.95rem]">
-        {label}: {value}
+      <span className=" text-[.7rem] sm:text-[.95rem]">
+        {label}:<br></br> {value}
       </span>
 
       <button
         onClick={handleCopy}
         className="
-          text-[.9rem]
+          text-[.9rem] sm:text-[1.2rem]
           uppercase
           px-2 py-[2px]
           rounded-sm
