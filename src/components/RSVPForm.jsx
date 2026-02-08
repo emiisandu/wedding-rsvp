@@ -45,9 +45,9 @@ function validateForm(data, t) {
     if (isBlank(g.firstName)) errors.push(t("err_firstname_required", { idx }));
     if (isBlank(g.lastName)) errors.push(t("err_lastname_required", { idx }));
 
-    if (isBlank(g.email)) {
+    if (isBlank(g.email) && g.ageType === 'adult') {
       errors.push(t("err_email_required", { idx }));
-    } else if (!EMAIL_RE.test(String(g.email).trim())) {
+    } else if (g.ageType === 'adult' && !EMAIL_RE.test(String(g.email).trim())) {
       errors.push(t("err_email_invalid", { idx }));
     }
 

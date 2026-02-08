@@ -32,6 +32,36 @@ export function preloadImages() {
 }
 
 
+export async function waitForAllImagesInDocument() {
+  const imgs = Array.from(document.images || []);
+
+  // include images that might be added quickly after mount
+  await new Promise((r) => requestAnimationFrame(r));
+
+  const tasks = imgs.map(async (img) => {
+    try {
+      // If not loaded yet, wait
+      if (!img.complete) {
+        await new Promise((resolve, reject) => {
+          img.addEventListener("load", resolve, { once: true });
+          img.addEventListener("error", resolve, { once: true }); // don't block forever
+        });
+      }
+
+      // Decode if supported (prevents "loaded but not rendered" pop-in)
+      if (img.decode) {
+        await img.decode().catch(() => {});
+      }
+    } catch {
+      // ignore per-image failures so loader doesn't hang
+    }
+  });
+
+  await Promise.all(tasks);
+}
+
+
+
 export function preloadFonts() {
   if (!document.fonts) return Promise.resolve();
   return document.fonts.ready;

@@ -14,7 +14,7 @@ import { useParallaxController } from "react-scroll-parallax";
 import ScrollToSectionButton from "./components/ScrollToSectionButton";
 import Gift from "./components/Gift";
 import Directions from "./components/Directions";
-import { preloadImages, preloadFonts } from "./preloadAssets";
+import { preloadImages, preloadFonts, waitForAllImagesInDocument } from "./preloadAssets";
 
 function App() {
 
@@ -106,20 +106,23 @@ function App() {
     let cancelled = false;
 
     async function load() {
+      // show loader first
+      await new Promise((r) => requestAnimationFrame(r));
+
+      // wait for initial render to place images in DOM
+      await new Promise((r) => setTimeout(r, 0));
+
       await Promise.all([
-        preloadImages(),
-        preloadFonts(),
-        new Promise((r) => setTimeout(r, 600)), // aesthetic minimum
+        preloadFonts(),                // your font preload
+        waitForAllImagesInDocument(),  // ✅ actual DOM images + decode
+        new Promise((r) => setTimeout(r, 600)), // optional aesthetic minimum
       ]);
 
       if (!cancelled) setReady(true);
     }
 
     load();
-
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, []);
 
   if (!ready) {
