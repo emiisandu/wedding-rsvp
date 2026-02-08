@@ -759,20 +759,6 @@ export default function RSVPForm() {
         />
 
       </label>
-      {status?.message && (
-        <div ref={statusRef}
-          className={[
-            "mt-3 relative z-20", // ✅ ensures it sits above weird overlays
-            "rounded-sm border px-3 py-3 shadow-[2px_2px_0px_rgba(0,0,0,0.35)]",
-            "whitespace-pre-line text-[0.75rem] tracking-widest uppercase",
-            status.type === "error"
-              ? "bg-[#f5ead5] border-red-600 text-red-700"
-              : "bg-[#f5ead5] border-green-700 text-green-800",
-          ].join(" ")}
-        >
-          {status.message}
-        </div>
-      )}
 
 
       <div className="flex justify-center min-h-[2px]">
@@ -803,6 +789,22 @@ export default function RSVPForm() {
       >
         {t("send")}
       </button>
+
+      {status?.message && (
+        <div ref={statusRef}
+          className={[
+            "mt-3 relative z-20", // ✅ ensures it sits above weird overlays
+            "rounded-sm border px-3 py-3 shadow-[2px_2px_0px_rgba(0,0,0,0.35)]",
+            "whitespace-pre-line text-[0.75rem] tracking-widest uppercase",
+            status.type === "error"
+              ? "bg-[#f5ead5] border-red-600 text-red-700"
+              : "bg-[#f5ead5] border-green-700 text-green-800",
+          ].join(" ")}
+        >
+          {status.message}
+        </div>
+      )}
+
 
     </form>
 
