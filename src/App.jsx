@@ -14,7 +14,7 @@ import { useParallaxController } from "react-scroll-parallax";
 import ScrollToSectionButton from "./components/ScrollToSectionButton";
 import Gift from "./components/Gift";
 import Directions from "./components/Directions";
-import { preloadImages, preloadFonts, waitForAllImagesInDocument } from "./preloadAssets";
+import { preloadFonts, preloadAllImagesAndBackgrounds } from "./preloadAssets";
 
 function App() {
 
@@ -27,6 +27,7 @@ function App() {
   const quickDetailsRef = useRef(null);
   const footerRef = useRef(null);
   const directionsRef = useRef(null);
+  const [detailsKey, setDetailsKey] = useState(0);
 
   const parallaxController = useParallaxController();
 
@@ -106,16 +107,10 @@ function App() {
     let cancelled = false;
 
     async function load() {
-      // show loader first
-      await new Promise((r) => requestAnimationFrame(r));
-
-      // wait for initial render to place images in DOM
-      await new Promise((r) => setTimeout(r, 0));
-
       await Promise.all([
-        preloadFonts(),                // your font preload
-        waitForAllImagesInDocument(),  // ✅ actual DOM images + decode
-        new Promise((r) => setTimeout(r, 600)), // optional aesthetic minimum
+        preloadFonts(),
+        preloadAllImagesAndBackgrounds({ timeoutMs: 10000 }),
+        new Promise((r) => setTimeout(r, 600)),
       ]);
 
       if (!cancelled) setReady(true);
@@ -184,14 +179,19 @@ function App() {
               <div className="panel-buttons">
                 <button
                   onClick={() => {
+                    setDetailsKey((k) => k + 1);
+
                     scrollToSection(posterRef);
                     setMenuOpen(false);
+
                   }}
                 >
                   {t("home")}
                 </button>
                 <button
                   onClick={() => {
+                    setDetailsKey((k) => k + 1);
+
                     scrollToSection(detailsRef);
                     setMenuOpen(false);
                   }}
@@ -248,7 +248,7 @@ function App() {
 
       {/* PARALLAX SECTION */}
       <section ref={detailsRef} className="min-h-[150vh] px-6 pt-0 ">
-        <Details />
+        <Details key={detailsKey} />
       </section>
 
 
@@ -271,7 +271,7 @@ function App() {
         <div className="relative max-w-4xl mx-auto z-40  ">
 
 
-          <div className="sticky top-0 pt-4 overflow-hidden z-40 bg-pink mb-10">
+          <div className="sticky top-0 pt-6 overflow-hidden z-40 bg-pink mb-10">
             <div className="flex flex-row items-center justify-center gap-4">
               <img
                 className="w-24 sm:w-28 md:w-32"

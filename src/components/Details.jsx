@@ -15,7 +15,7 @@ export default function Details() {
     sm:min-h-[200vh]
     [@media(min-height:900px)]:min-h-[140vh]
     [@media(min-height:1200px)]:min-h-[120vh]">
-        <div className="sticky top-0  overflow-hidden z-40 bg-pink">
+        <div className="sticky top-0  overflow-hidden z-40 bg-pink pt-3 w-[]">
           <div className="flex flex-row items-center justify-center gap-4">
             {/* <h2 className="text-2xl font-semibold mb-8 text-center font-monoton z-40 text-beige">
               Sinopsis

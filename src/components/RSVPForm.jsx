@@ -258,6 +258,8 @@ export default function RSVPForm() {
         message: msgParts.join("\n"),
       });
 
+      requestAnimationFrame(() => statusRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }));
+
       resetForm();
 
     } catch (err) {
@@ -271,6 +273,7 @@ export default function RSVPForm() {
   }
 
 
+  const statusRef = useRef(null);
 
 
 
@@ -756,10 +759,10 @@ export default function RSVPForm() {
         />
 
       </label>
-
       {status?.message && (
-        <div
+        <div ref={statusRef}
           className={[
+            "mt-3 relative z-20", // ✅ ensures it sits above weird overlays
             "rounded-sm border px-3 py-3 shadow-[2px_2px_0px_rgba(0,0,0,0.35)]",
             "whitespace-pre-line text-[0.75rem] tracking-widest uppercase",
             status.type === "error"
@@ -770,6 +773,7 @@ export default function RSVPForm() {
           {status.message}
         </div>
       )}
+
 
       <div className="flex justify-center min-h-[2px]">
         <div ref={turnstileElRef} />
