@@ -40,11 +40,6 @@ function validateForm(data, t) {
     }
   });
 
-  // message required (you said all fields)
-  if (isBlank(data.message)) {
-    errors.push(t("err_message_required"));
-  }
-
   return errors;
 }
 
@@ -200,15 +195,11 @@ export default function RSVPForm() {
         .setValues(rowsToAppend);
 
       // 3) Return UI-friendly response
-      const outMsgParts = [];
-      if (confirmedSubmitted.length) outMsgParts.push(`Confirmation submitted for: ${confirmedSubmitted.join(", ")}`);
-      if (alreadyRegistered.length) outMsgParts.push(`Guests already registered: ${alreadyRegistered.join(", ")}`);
-
       return jsonOk_({
         confirmedSubmitted,
         alreadyRegistered,
-        message: outMsgParts.join("\n"),
       });
+
 
     } catch (err) {
       return jsonError_(String(err && err.message ? err.message : err));
@@ -499,19 +490,31 @@ export default function RSVPForm() {
   }
 
 
+  function resetTurnstile() {
+    setTurnstileToken("");
+    if (widgetIdRef.current && window.turnstile) {
+      window.turnstile.reset(widgetIdRef.current);
+    }
+  }
+
+
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const errors = validateForm(formData, t);
-    if (errors.length) {
-      setStatus({ type: "error", message: errors.join("\n") });
-      return;
-    }
-
-
     try {
+      // ✅ 1) validate FIRST (don’t waste Turnstile tokens)
+      const errors = validateForm(formData, t);
+      if (errors.length) {
+        setStatus({ type: "error", message: errors.join("\n") });
+        return;
+      }
+
+      // ✅ 2) now require a fresh token
       if (!turnstileToken) {
-        setStatus({ type: "error", message: "Human check not ready yet — please try again in a second." });
+        setStatus({
+          type: "error",
+          message: t("err_humancheck") || "Human check not ready yet — please try again.",
+        });
         return;
       }
 
@@ -524,52 +527,65 @@ export default function RSVPForm() {
       });
 
       const text = await res.text();
-      console.log("RSVP status:", res.status, res.headers.get("content-type"));
-      console.log("RSVP raw response (first 300):", text.slice(0, 300));
-
       let json;
       try {
         json = JSON.parse(text);
       } catch {
-        throw new Error("Server returned non-JSON. Check console for HTML response.");
+        // if server returned html
+        resetTurnstile();
+        throw new Error("Server returned non-JSON.");
       }
 
       if (!json.ok) {
+        // ✅ IMPORTANT: reset Turnstile on ANY backend error,
+        // because the token is now likely consumed
+        resetTurnstile();
+
+        // If it was specifically Turnstile failing, show a nicer message
+        const codes = json.verification?.["error-codes"]?.join(", ");
+        const isTurnstileFail = json.message?.toLowerCase().includes("turnstile");
+
         setStatus({
           type: "error",
-          message: json.message || t("unexpected_error"),
+          message: isTurnstileFail
+            ? (t("err_turnstile_retry") || "Human check failed — please try again.") + (codes ? `\n(${codes})` : "")
+            : (json.message || t("unexpected_error")),
         });
         return;
       }
 
-      const confirmed = (json.confirmedSubmitted || []).join(", ");
-      const already = (json.alreadyRegistered || []).join(", ");
+      const confirmed = json.confirmedSubmitted || [];
+      const already = json.alreadyRegistered || [];
 
-      let msg = `${t("confirmation_submitted_for")}: ${confirmed || "—"}`;
+      let msgParts = [];
 
-      if (widgetIdRef.current && window.turnstile) {
-        window.turnstile.reset(widgetIdRef.current);
+      if (confirmed.length) {
+        msgParts.push(
+          t("rsvp_confirmed_for", { names: confirmed.join(", ") })
+        );
       }
-      setTurnstileToken("");
 
-
-      if (already) {
-        msg += `\n${t("already_registered")}: ${already}`;
+      if (already.length) {
+        msgParts.push(
+          t("rsvp_already_registered", { names: already.join(", ") })
+        );
       }
 
       setStatus({
         type: "success",
-        message: msg,
+        message: msgParts.join("\n"),
       });
-
-      setTimeout(() => resetForm(), 1500);
 
 
     } catch (err) {
       console.error("RSVP submission failed:", err);
-      // OPTIONAL: show error message in UI
+      resetTurnstile();
+      setStatus({ type: "error", message: t("unexpected_error") || "Something went wrong. Please try again." });
     }
   }
+
+
+
 
 
   return (

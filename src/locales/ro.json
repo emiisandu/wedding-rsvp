@@ -38,7 +38,7 @@
   "plane_text": "aeroport Suceava, organizare transport",
   "gift_text": "Dacă doriți să ne faceți un cadou, un dar în bani ar fi foarte apreciat.",
   "bucovina_cocktail": "Cocktail în Bucovina",
-  "dress_code_text": "Nuanțe vibrante de vară și farmec bucovinean",
+  "dress_code_text": "Nuanțe vibrante de vară",
   "accept_gifts": "Primim cu drag daruri în bani.",
   "err_attendance_required": "Te rugăm să selectezi participarea (Da/Nu).",
   "err_lodging_required": "Te rugăm să alegi opțiunea pentru cazare.",
@@ -48,5 +48,9 @@
   "err_email_invalid": "Invitatul {{idx}}: emailul nu este valid.",
   "err_menu_required": "Invitatul {{idx}}: te rugăm să alegi meniul.",
   "err_agetype_required": "Invitatul {{idx}}: te rugăm să selectezi adult/copil.",
-  "err_message_required": "Te rugăm să ne lași un mesaj (poate fi scurt)."
+  "err_message_required": "Te rugăm să ne lași un mesaj (poate fi scurt).",
+  "err_humancheck": "Verificarea tip captcha nu e gata încă — te rugăm încearcă din nou.",
+  "err_turnstile_retry": "Verificarea tip captcha a eșuat — te rugăm încearcă din nou.",
+  "rsvp_confirmed_for": "Mulțumim! Răspuns înregistrat pentru: {{names}}",
+  "rsvp_already_registered": "Răspuns deja înregistrat pentru: {{names}}"
 }

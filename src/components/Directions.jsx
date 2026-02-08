@@ -18,7 +18,7 @@ export default function Directions() {
 
 
                 {/* CONTENT UNDER TITLE */}
-                <div className="sticky top-0 z-40 bg-pink pt-[.7rem] pb-[.7rem]">
+                <div className="sticky top-0 z-40 bg-pink pt-[1rem] pb-[.7rem]">
                     {/* title block (your existing) */}
                     <div className="flex items-center justify-center date-div text-align text-right">
                         <svg
@@ -47,7 +47,7 @@ export default function Directions() {
                     </div>
                 </div>
                 {/* grid */}
-                <div className="mx-auto max-w-4xl">
+                <div className="mx-auto max-w-4xl sm:mt-10">
                     <div className="grid gap-6 lg:grid-cols-2">
                         {/* 1) LEFT BIG IMAGE (belongs to title) */}
                         <div className="relative overflow-hidden  bg-pink p-3">
@@ -118,12 +118,12 @@ export default function Directions() {
                                 subtitle="A3/A7"
                                 img="/images/fm-car.png"
                             />
-                            <div className="flex justify-center pointer-events-none">
-                                <Parallax speed={18}>
+                            <div className="flex justify-center pointer-events-none mt-[-4rem] ">
+                                <Parallax speed={15}>
                                     <img
                                         className="w-80 lg:w-96"
                                         src="/images/fm-house.svg"
-                                        alt="FM forest top"
+                                        alt="FM House"
                                     />
                                 </Parallax>
                             </div>

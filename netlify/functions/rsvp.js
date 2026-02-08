@@ -61,13 +61,13 @@ export async function handler(event) {
           ok: false,
           message: "Turnstile verification failed",
           verification,
+          errorCodes: verification["error-codes"] || [],
         }),
       };
     }
 
     // Remove token before forwarding
     delete payload.turnstileToken;
-    
 
     const scriptUrl = process.env.GAS_RSVP_URL;
     if (!scriptUrl) {
