@@ -1,10 +1,22 @@
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import Loader from "./Loader";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
 
 function isBlank(v) {
   return !v || !String(v).trim();
 }
+
+
+function titleCaseName(value) {
+  return value
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trimStart()
+    .replace(/(^|[\s\-’'])\p{L}/gu, (char) => char.toUpperCase());
+}
+
 
 function validateForm(data, t) {
   const errors = [];
@@ -51,6 +63,7 @@ export default function RSVPForm() {
   const turnstileElRef = useRef(null);
   const widgetIdRef = useRef(null);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
 
   /*******************************
@@ -320,7 +333,7 @@ export default function RSVPForm() {
         .toString()
         .toLowerCase()
         .trim()
-        .replace(/[\u2019']/g, "")      // apostrophes
+        .replace(/[\u2019']/g, " ")
         .replace(/[^a-zăâîșşțţ\- ]/g, " ") // keep letters + RO diacritics + dash + space
         .replace(/\s+/g, " ")
     );
@@ -500,16 +513,17 @@ export default function RSVPForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (isSubmitting) return; // prevent double-click submits
 
     try {
-      // ✅ 1) validate FIRST (don’t waste Turnstile tokens)
+      // validate first
       const errors = validateForm(formData, t);
       if (errors.length) {
         setStatus({ type: "error", message: errors.join("\n") });
         return;
       }
 
-      // ✅ 2) now require a fresh token
+      // require fresh token
       if (!turnstileToken) {
         setStatus({
           type: "error",
@@ -517,6 +531,9 @@ export default function RSVPForm() {
         });
         return;
       }
+
+      setIsSubmitting(true);
+
 
       const payload = { ...formData, turnstileToken };
 
@@ -579,8 +596,11 @@ export default function RSVPForm() {
 
     } catch (err) {
       console.error("RSVP submission failed:", err);
-      resetTurnstile();
+      resetTurnstile?.();
       setStatus({ type: "error", message: t("unexpected_error") || "Something went wrong. Please try again." });
+    }
+    finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -593,6 +613,11 @@ export default function RSVPForm() {
       onSubmit={handleSubmit}
       className="w-full max-w-lg mx-auto flex flex-col gap-6 px-4 pb-10 font-prata-light z-40 bg-pink"
     >
+      {isSubmitting && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-pink/80">
+          <Loader />
+        </div>
+      )}
       {/* === GUESTS SECTION === */}
       <div className="flex flex-col gap-3 ">
         <h3 className="text-s tracking-widest uppercase font-semibold font-monoton">
@@ -618,8 +643,13 @@ export default function RSVPForm() {
                   type="text"
                   value={guest.firstName}
                   onChange={(e) =>
-                    handleGuestChange(index, "firstName", e.target.value)
+                    handleGuestChange(
+                      index,
+                      "firstName",
+                      titleCaseName(e.target.value)
+                    )
                   }
+
                   className="
                     w-full
                     px-2 py-2 
@@ -641,7 +671,11 @@ export default function RSVPForm() {
                   type="text"
                   value={guest.lastName}
                   onChange={(e) =>
-                    handleGuestChange(index, "lastName", e.target.value)
+                    handleGuestChange(
+                      index,
+                      "lastName",
+                      titleCaseName(e.target.value)
+                    )
                   }
                   className="
                     w-full
@@ -1091,8 +1125,9 @@ export default function RSVPForm() {
       >
         {t("send")}
       </button>
+
     </form>
 
-
+    // <Loader/>
   );
 }

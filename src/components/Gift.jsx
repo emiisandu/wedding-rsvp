@@ -24,7 +24,7 @@ export default function Gift() {
                     <div className="flex items-center justify-center gap-4 bg-pink/0 mt-[-7rem] sm:mt-[-14rem] text-align">
                         <div className="font-prata leading-snug text-[.9rem] sm:text-[1.2rem] w-56 sm:w-96">
                             <p>
-                                {t("gift_msg")}
+                                {/* {t("gift_msg")} */}
                             </p>
 
                             <p className="mt-2">
