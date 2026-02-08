@@ -582,6 +582,7 @@ export default function RSVPForm() {
         message: msgParts.join("\n"),
       });
 
+      resetForm();
 
     } catch (err) {
       console.error("RSVP submission failed:", err);
