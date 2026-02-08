@@ -132,11 +132,11 @@ function App() {
       {/* HAMBURGER MENU */}
       {showMenuButton && (
 
-        <nav className="hamburger-wrapper right-4 sm:right-12 " ref={menuRef}>
+        <nav className="hamburger-wrapper right-4 sm:right-12 fixed top-4 z-[9999] " ref={menuRef}>
           {/* round button */}
           <button
             onClick={() => setMenuOpen((prev) => !prev)}
-            className={`hamburger-toggle 
+            className={`hamburger-toggle  relative z-[10001]
               bg-transparent border-0 appearance-none outline-none shadow-none p-0 
               ${menuOpen ? "is-open" : ""}`}
             aria-label="Toggle navigation"
@@ -171,7 +171,7 @@ function App() {
           </button>
 
           {menuOpen && (
-            <div className="hamburger-panel font-prata bg-pink">
+            <div className="hamburger-panel font-prata bg-pink relative z-[10000]" >
               {/* <div className="panel-header">
                 <span className="panel-label">{t("menu")}</span>
               </div> */}

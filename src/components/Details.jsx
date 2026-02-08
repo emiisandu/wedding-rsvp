@@ -98,7 +98,7 @@ la_baciu`}
 
           <Parallax
             speed={25}
-            className="absolute left-0 right-0 bottom-20 z-50 flex justify-center pointer-events-none"
+            className="absolute left-0 right-0 bottom-[-4rem] z-50 flex justify-center pointer-events-none"
           >
             <img
               className="w-80 sm:w-76 md:w-84 lg:w-80"

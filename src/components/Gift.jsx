@@ -8,7 +8,7 @@ export default function Gift() {
     return (
         <section className="mt-16 px-6 bg-pink border-0">
             {/* Make this section tall so scrolling can happen */}
-            <div className="relative mx-auto max-w-4xl h-[140vh] ">
+            <div className="relative mx-auto max-w-4xl h-[90vh] ">
 
                 <div className="sticky top-0 z-30 ">
                     <div className="flex justify-center pt-6 pointer-events-none">

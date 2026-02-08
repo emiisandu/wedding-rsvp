@@ -3,6 +3,8 @@ import { Parallax } from "react-scroll-parallax";
 import CopyRow from "./CopyRow";
 import HoraReveal from "./HoraReveal";
 import Gift from "./Gift";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 export default function Directions() {
     const { t } = useTranslation();
@@ -18,7 +20,7 @@ export default function Directions() {
 
 
                 {/* CONTENT UNDER TITLE */}
-                <div className="sticky top-0 z-40 bg-pink pt-[1.5rem] sm:pt-[0rem] pb-[.7rem] sm:pb-0 ">
+                <div className="sticky top-0 z-50 bg-pink pt-[1.5rem] sm:pt-[0rem] pb-[.7rem] sm:pb-0 ">
                     {/* title block (your existing) */}
                     <div className="flex items-center justify-center date-div text-align text-right">
                         <svg
@@ -135,23 +137,22 @@ export default function Directions() {
                                 locationLink={t("train_link")}
                                 locationLabel={t("info_train")}
                             />
-                            <div className="relative overflow-hidden">
-                                {/* deer */}
+
+                            {/* <div className="relative overflow-hidden">
                                 <div className="block lg:hidden relative z-10 flex justify-center pointer-events-none">
                                     <Parallax speed={-26}>
                                         <img className="w-80 lg:w-96" src="/images/fm-deer.svg" alt="" />
                                     </Parallax>
                                 </div>
 
-                                {/* mount */}
                                 <div className="block lg:hidden relative z-40 flex justify-center pointer-events-none">
-                                    <img className="w-96 lg:w-96" src="/images/fm-mount.svg" alt="" />
+                                    <img className="w-96 lg:w-96" src="/images/fm-mount.png" alt="" />
                                 </div>
-                            </div>
+                            </div> 
+                            
+                            */}
+                            <MobileDeerMountSwap />
 
-                            <div className="left-0 right-0 mx-auto gifts-end bg-pink h-[20vh] z-30 w-80 overflow-hidden bottom-0 mb-0 top-[-3.5em]  mt-0 relative">
-
-                            </div>
                             <TravelCard
                                 align="right"
                                 title={t("by_plane")}
@@ -182,7 +183,7 @@ function TravelCard({ title, subtitle, img, align = "left", locationLink = null,
     return (
         <div
             className={[
-                "relative w-[92%] sm:w-[85%] overflow-hidden bg-pink/40 p-4 z-50",
+                "relative w-[92%] sm:w-[85%] overflow-hidden bg-pink/40 p-4 z-40",
                 isRight ? "self-end text-right" : "self-start text-left",
             ].join(" ")}
         >
@@ -230,3 +231,55 @@ function TravelCard({ title, subtitle, img, align = "left", locationLink = null,
     );
 }
 
+function MobileDeerMountSwap() {
+    const ref = useRef(null);
+
+    // local scroll progress for just this block
+    const { scrollYProgress } = useScroll({
+        target: ref,
+        offset: ["start end", "end start"], // starts when it enters viewport, ends when it leaves
+    });
+
+    // pick the exact “moment” (tweak these numbers)
+    const t0 = 0.48; // start of swap
+    const t1 = 0.52; // end of swap
+
+    // deer disappears during the swap window
+    const deerOpacity = useTransform(scrollYProgress, [t0, t1], [1, 0]);
+
+    // crossfade mounts in the same window
+    const mountOpacity = useTransform(scrollYProgress, [t0, t1], [1, 0]);
+    const mountDeerOpacity = useTransform(scrollYProgress, [t0, t1], [0, 1]);
+
+    return (
+
+            <div ref={ref} className="block lg:hidden relative overflow-hidden">
+                {/* deer (over everything, centered-ish) */}
+                <motion.div
+                    style={{ opacity: deerOpacity }}
+                    className="absolute inset-0 z-20 flex justify-center pointer-events-none"
+                >
+                    <Parallax speed={-26}>
+                        <img className="w-80 lg:w-96" src="/images/fm-deer.svg" alt="" />
+                    </Parallax>
+                </motion.div>
+
+                {/* base mount */}
+                <motion.div
+                    style={{ opacity: mountOpacity }}
+                    className="relative z-10 flex justify-center pointer-events-none"
+                >
+                    <img className="w-96 lg:w-96" src="/images/fm-mount.png" alt="" />
+                </motion.div>
+
+                {/* swapped mount (with deer baked into image) */}
+                <motion.div
+                    style={{ opacity: mountDeerOpacity }}
+                    className="absolute inset-0 z-10 flex justify-center pointer-events-none"
+                >
+                    <img className="w-96 lg:w-96" src="/images/fm-mount-deer.png" alt="" />
+                </motion.div>
+            </div>
+
+    );
+}
