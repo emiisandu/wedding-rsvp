@@ -89,7 +89,6 @@ export default function RSVPForm() {
 
   function resetForm() {
     setFormData(INITIAL_FORM);
-    setStatus(null);
     setTurnstileToken("");
 
     if (widgetIdRef.current && window.turnstile) {
@@ -278,48 +277,50 @@ export default function RSVPForm() {
 
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="w-full max-w-lg mx-auto flex flex-col gap-6 px-4 pb-10 font-prata-light z-40 bg-pink"
-    >
+    <div className="relative">
       {isSubmitting && (
         <div className="absolute inset-0 z-50 flex items-center justify-center bg-pink/80">
           <Loader />
         </div>
       )}
-      {/* === GUESTS SECTION === */}
-      <div className="flex flex-col gap-3 ">
-        <h3 className="text-s tracking-widest uppercase font-semibold font-monoton">
-          {t("guests")}
-        </h3>
+      <form
+        onSubmit={handleSubmit}
+        className=" w-full max-w-lg mx-auto flex flex-col gap-6 px-4 pb-10 font-prata-light z-40 bg-pink"
+      >
 
-        {formData.guests.map((guest, index) => (
-          <div
-            key={index}
-            className="
+        {/* === GUESTS SECTION === */}
+        <div className="flex flex-col gap-3 ">
+          <h3 className="text-s tracking-widest uppercase font-semibold font-monoton">
+            {t("guests")}
+          </h3>
+
+          {formData.guests.map((guest, index) => (
+            <div
+              key={index}
+              className="
                bg-[#f5ead5] rounded-sm
               
               px-3 py-3 flex flex-col gap-3  guests-form
             "
-          >
-            {/* Prenume + Nume */}
-            <div className="flex flex-col sm:flex-row gap-3 min-w-0">
-              <label className="flex-1 flex flex-col gap-1">
-                <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
-                  {t("Prenume")}
-                </span>
-                <input required
-                  type="text"
-                  value={guest.firstName}
-                  onChange={(e) =>
-                    handleGuestChange(
-                      index,
-                      "firstName",
-                      titleCaseName(e.target.value)
-                    )
-                  }
+            >
+              {/* Prenume + Nume */}
+              <div className="flex flex-col sm:flex-row gap-3 min-w-0">
+                <label className="flex-1 flex flex-col gap-1">
+                  <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
+                    {t("Prenume")}
+                  </span>
+                  <input required
+                    type="text"
+                    value={guest.firstName}
+                    onChange={(e) =>
+                      handleGuestChange(
+                        index,
+                        "firstName",
+                        titleCaseName(e.target.value)
+                      )
+                    }
 
-                  className="
+                    className="
                     w-full
                     px-2 py-2 
                     border border-black/30 
@@ -328,25 +329,25 @@ export default function RSVPForm() {
                     focus:outline-none focus:border-black
                     shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
                   "
-                  placeholder={t('Prenume')}
-                />
-              </label>
+                    placeholder={t('Prenume')}
+                  />
+                </label>
 
-              <label className="flex-1 flex flex-col gap-1">
-                <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
-                  {t("Nume")}
-                </span>
-                <input required
-                  type="text"
-                  value={guest.lastName}
-                  onChange={(e) =>
-                    handleGuestChange(
-                      index,
-                      "lastName",
-                      titleCaseName(e.target.value)
-                    )
-                  }
-                  className="
+                <label className="flex-1 flex flex-col gap-1">
+                  <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
+                    {t("Nume")}
+                  </span>
+                  <input required
+                    type="text"
+                    value={guest.lastName}
+                    onChange={(e) =>
+                      handleGuestChange(
+                        index,
+                        "lastName",
+                        titleCaseName(e.target.value)
+                      )
+                    }
+                    className="
                     w-full
                     px-3 py-2 
                     border border-black/30 
@@ -355,22 +356,22 @@ export default function RSVPForm() {
                     focus:outline-none focus:border-black
                     shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
                   "
-                  placeholder={t("Nume")}
-                />
-              </label>
-            </div>
+                    placeholder={t("Nume")}
+                  />
+                </label>
+              </div>
 
-            {/* ADULT / CHILD */}
-            {index !== 0 && (
+              {/* ADULT / CHILD */}
+              {index !== 0 && (
 
-              <div className="flex flex-col gap-2 mt-1">
-                <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
-                  {t("Tip invitat")}
-                </span>
+                <div className="flex flex-col gap-2 mt-1">
+                  <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
+                    {t("Tip invitat")}
+                  </span>
 
-                <div className="flex flex-col sm:flex-row gap-2">
-                  <label
-                    className="
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <label
+                      className="
                     flex items-center gap-3 
                     px-3 py-2 
                     bg-[#f5ead5] 
@@ -379,16 +380,16 @@ export default function RSVPForm() {
                     shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
                     active:translate-x-[1px] active:translate-y-[1px] active:shadow-none
                   "
-                  >
-                    <input required
-                      type="radio"
-                      name={`ageType-${index}`}
-                      value="adult"
-                      checked={guest.ageType === "adult"}
-                      onChange={(e) =>
-                        handleGuestChange(index, "ageType", e.target.value)
-                      }
-                      className="
+                    >
+                      <input required
+                        type="radio"
+                        name={`ageType-${index}`}
+                        value="adult"
+                        checked={guest.ageType === "adult"}
+                        onChange={(e) =>
+                          handleGuestChange(index, "ageType", e.target.value)
+                        }
+                        className="
                           appearance-none
                           h-4 w-4
                           border border-black/70
@@ -399,12 +400,12 @@ export default function RSVPForm() {
                           before:bg-transparent
                           checked:before:bg-[#d62423]
                         "
-                    />
-                    <span className="text-sm tracking-wide">Adult</span>
-                  </label>
+                      />
+                      <span className="text-sm tracking-wide">Adult</span>
+                    </label>
 
-                  <label
-                    className="
+                    <label
+                      className="
                     flex items-center gap-3 
                     px-3 py-2 
                     bg-[#f5ead5] 
@@ -413,16 +414,16 @@ export default function RSVPForm() {
                     shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
                     active:translate-x-[1px] active:translate-y-[1px] active:shadow-none
                   "
-                  >
-                    <input required
-                      type="radio"
-                      name={`ageType-${index}`}
-                      value="child"
-                      checked={guest.ageType === "child"}
-                      onChange={(e) =>
-                        handleGuestChange(index, "ageType", e.target.value)
-                      }
-                      className="
+                    >
+                      <input required
+                        type="radio"
+                        name={`ageType-${index}`}
+                        value="child"
+                        checked={guest.ageType === "child"}
+                        onChange={(e) =>
+                          handleGuestChange(index, "ageType", e.target.value)
+                        }
+                        className="
                             appearance-none
                             h-4 w-4
                             border border-black/70
@@ -433,25 +434,25 @@ export default function RSVPForm() {
                             before:bg-transparent
                             checked:before:bg-[#d62423]
                           "
-                    />
-                    <span className="text-sm tracking-wide">{t("Copil")}</span>
-                  </label>
+                      />
+                      <span className="text-sm tracking-wide">{t("Copil")}</span>
+                    </label>
+                  </div>
                 </div>
-              </div>
-            )}
-            {/* EMAIL – only if COPIL */}
-            {guest.ageType === "adult" && (
-              <label className="flex flex-col gap-1">
-                <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
-                  {t("email")}
-                </span>
-                <input required
-                  type="email"
-                  value={guest.email}
-                  onChange={(e) =>
-                    handleGuestChange(index, "email", e.target.value)
-                  }
-                  className="
+              )}
+              {/* EMAIL – only if COPIL */}
+              {guest.ageType === "adult" && (
+                <label className="flex flex-col gap-1">
+                  <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
+                    {t("email")}
+                  </span>
+                  <input required
+                    type="email"
+                    value={guest.email}
+                    onChange={(e) =>
+                      handleGuestChange(index, "email", e.target.value)
+                    }
+                    className="
                     px-3 py-2 
                     border border-black/30 
                     rounded-sm
@@ -459,31 +460,31 @@ export default function RSVPForm() {
                     shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
                     focus:outline-none focus:border-black
                   "
-                  placeholder="abc@def.com"
-                />
-              </label>
-            )}
+                    placeholder="abc@def.com"
+                  />
+                </label>
+              )}
 
-            {/* PARTICIPARE — only for FIRST guest */}
-            {index === 0 && (
-              <div className="flex flex-col gap-2 mt-1">
-                <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
-                  {t("Participare")}
-                </span>
+              {/* PARTICIPARE — only for FIRST guest */}
+              {index === 0 && (
+                <div className="flex flex-col gap-2 mt-1">
+                  <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
+                    {t("Participare")}
+                  </span>
 
-                <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2">
 
-                  {/* DA */}
-                  <label className="flex items-center gap-3 px-3 py-2 bg-[#f5ead5] border border-black/30 rounded-sm shadow-[2px_2px_0px_rgba(0,0,0,0.35)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none">
-                    <input required
-                      type="radio"
-                      name="attendance-main"
-                      value="da"
-                      checked={guest.attendance === "da"}
-                      onChange={(e) =>
-                        handleGuestChange(index, "attendance", e.target.value)
-                      }
-                      className="
+                    {/* DA */}
+                    <label className="flex items-center gap-3 px-3 py-2 bg-[#f5ead5] border border-black/30 rounded-sm shadow-[2px_2px_0px_rgba(0,0,0,0.35)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none">
+                      <input required
+                        type="radio"
+                        name="attendance-main"
+                        value="da"
+                        checked={guest.attendance === "da"}
+                        onChange={(e) =>
+                          handleGuestChange(index, "attendance", e.target.value)
+                        }
+                        className="
                         appearance-none
                         h-4 w-4
                         border border-black/70
@@ -494,21 +495,21 @@ export default function RSVPForm() {
                         before:bg-transparent
                         checked:before:bg-[#d62423]
                       "
-                    />
-                    <span className="text-sm tracking-wide">{t("Da")}</span>
-                  </label>
+                      />
+                      <span className="text-sm tracking-wide">{t("Da")}</span>
+                    </label>
 
-                  {/* NU */}
-                  <label className="flex items-center gap-3 px-3 py-2 bg-[#f5ead5] border border-black/30 rounded-sm shadow-[2px_2px_0px_rgba(0,0,0,0.35)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none">
-                    <input required
-                      type="radio"
-                      name="attendance-main"
-                      value="nu"
-                      checked={guest.attendance === "nu"}
-                      onChange={(e) =>
-                        handleGuestChange(index, "attendance", e.target.value)
-                      }
-                      className="
+                    {/* NU */}
+                    <label className="flex items-center gap-3 px-3 py-2 bg-[#f5ead5] border border-black/30 rounded-sm shadow-[2px_2px_0px_rgba(0,0,0,0.35)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none">
+                      <input required
+                        type="radio"
+                        name="attendance-main"
+                        value="nu"
+                        checked={guest.attendance === "nu"}
+                        onChange={(e) =>
+                          handleGuestChange(index, "attendance", e.target.value)
+                        }
+                        className="
                       appearance-none
                       h-4 w-4
                       border border-black/70
@@ -519,24 +520,24 @@ export default function RSVPForm() {
                       before:bg-transparent
                       checked:before:bg-[#d62423]
                     "
-                    />
-                    <span className="text-sm tracking-wide">{t("Nu")}</span>
-                  </label>
+                      />
+                      <span className="text-sm tracking-wide">{t("Nu")}</span>
+                    </label>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
 
-            {/* MENU – only if attendance === "da" */}
-            {(guest.attendance === "da" || index !== 0) && (
-              <div className="flex flex-col gap-2 mt-1">
-                <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
-                  {t("menu")}
-                </span>
+              {/* MENU – only if attendance === "da" */}
+              {(guest.attendance === "da" || index !== 0) && (
+                <div className="flex flex-col gap-2 mt-1">
+                  <span className="text-[0.65rem] tracking-widest uppercase font-semibold font-prata">
+                    {t("menu")}
+                  </span>
 
-                <div className="flex flex-col gap-2">
-                  <label
-                    className="
+                  <div className="flex flex-col gap-2">
+                    <label
+                      className="
                       flex items-center gap-3 
                       px-3 py-2 
                       bg-[#f5ead5] 
@@ -545,16 +546,16 @@ export default function RSVPForm() {
                       shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
                       active:translate-x-[1px] active:translate-y-[1px] active:shadow-none
                     "
-                  >
-                    <input required
-                      type="radio"
-                      name={`menu-${index}`}
-                      value="traditional"
-                      checked={guest.menu === "traditional"}
-                      onChange={(e) =>
-                        handleGuestChange(index, "menu", e.target.value)
-                      }
-                      className="
+                    >
+                      <input required
+                        type="radio"
+                        name={`menu-${index}`}
+                        value="traditional"
+                        checked={guest.menu === "traditional"}
+                        onChange={(e) =>
+                          handleGuestChange(index, "menu", e.target.value)
+                        }
+                        className="
                             appearance-none
                             h-4 w-4
                             border border-black/70
@@ -565,12 +566,12 @@ export default function RSVPForm() {
                             before:bg-transparent
                             checked:before:bg-[#d62423]
                           "
-                    />
-                    <span className="text-sm tracking-wide">{t("Tradițional")}</span>
-                  </label>
+                      />
+                      <span className="text-sm tracking-wide">{t("Tradițional")}</span>
+                    </label>
 
-                  <label
-                    className="
+                    <label
+                      className="
                       flex items-center gap-3 
                       px-3 py-2 
                       bg-[#f5ead5] 
@@ -579,16 +580,16 @@ export default function RSVPForm() {
                       shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
                       active:translate-x-[1px] active:translate-y-[1px] active:shadow-none
                     "
-                  >
-                    <input required
-                      type="radio"
-                      name={`menu-${index}`}
-                      value="vegetarian"
-                      checked={guest.menu === "vegetarian"}
-                      onChange={(e) =>
-                        handleGuestChange(index, "menu", e.target.value)
-                      }
-                      className="
+                    >
+                      <input required
+                        type="radio"
+                        name={`menu-${index}`}
+                        value="vegetarian"
+                        checked={guest.menu === "vegetarian"}
+                        onChange={(e) =>
+                          handleGuestChange(index, "menu", e.target.value)
+                        }
+                        className="
                        appearance-none
                         h-4 w-4
                         border border-black/70
@@ -599,20 +600,20 @@ export default function RSVPForm() {
                         before:bg-transparent
                         checked:before:bg-[#d62423]
                       "
-                    />
-                    <span className="text-sm tracking-wide">Vegetarian</span>
-                  </label>
+                      />
+                      <span className="text-sm tracking-wide">Vegetarian</span>
+                    </label>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* DELETE GUEST BUTTON */}
-            <div className="flex justify-end mt-1">
-              {formData.guests.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => removeGuest(index)}
-                  className="
+              {/* DELETE GUEST BUTTON */}
+              <div className="flex justify-end mt-1">
+                {formData.guests.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => removeGuest(index)}
+                    className="
                     font-monoton
                     text-[0.65rem] uppercase tracking-widest font-semibold
                     px-3 py-1
@@ -623,19 +624,19 @@ export default function RSVPForm() {
                     shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
                     active:translate-x-[2px] active:translate-y-[2px] active:shadow-none
                   "
-                >
-                  {t("Șterge invitat")}
-                </button>
-              )}
+                  >
+                    {t("Șterge invitat")}
+                  </button>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
 
-        {/* Add guest button */}
-        <button
-          type="button"
-          onClick={addGuest}
-          className="
+          {/* Add guest button */}
+          <button
+            type="button"
+            onClick={addGuest}
+            className="
             font-monoton
             self-start mt-1
             bg-[#f5ead5]
@@ -647,102 +648,102 @@ export default function RSVPForm() {
             shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
             active:translate-x-[2px] active:translate-y-[2px] active:shadow-none
           "
-        >
-          + {t("Adaugă invitat")}
-        </button>
-      </div>
-
-      {/* LODGING SUGGESTIONS */}
-      <div className="flex flex-col gap-2">
-        <span className="text-xs tracking-widest uppercase font-semibold font-monoton">
-          {t("accommodation_sug")}
-        </span>
-
-        <div className="flex flex-col gap-2">
-          <label
-            className="
-              flex items-center gap-3 
-              px-3 py-2 
-              bg-[#f5ead5] 
-              border border-black/30 
-              rounded-sm
-              shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
-              active:translate-x-[1px] active:translate-y-[1px] active:shadow-none
-            "
           >
-            <input required
-              type="radio"
-              name="lodgingSuggestions"
-              value="yes"
-              checked={formData.lodgingSuggestions === "yes"}
-              onChange={handleChange}
-              className="
-                        appearance-none
-                        h-4 w-4
-                        border border-black/70
-                        rounded-full
-                        relative
-                        before:content-['']
-                        before:absolute before:inset-[3px] before:rounded-full
-                        before:bg-transparent
-                        checked:before:bg-[#d62423]
-                      "
-            />
-            <span className="text-sm tracking-wide">
-              {t("accommodation_yes")}
-            </span>
-          </label>
-
-          <label
-            className="
-              flex items-center gap-3 
-              px-3 py-2 
-              bg-[#f5ead5] 
-              border border-black/30 
-              rounded-sm
-              shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
-              active:translate-x-[1px] active:translate-y-[1px] active:shadow-none
-            "
-          >
-            <input required
-              type="radio"
-              name="lodgingSuggestions"
-              value="no"
-              checked={formData.lodgingSuggestions === "no"}
-              onChange={handleChange}
-              className="
-                        appearance-none
-                        h-4 w-4
-                        border border-black/70
-                        rounded-full
-                        relative
-                        before:content-['']
-                        before:absolute before:inset-[3px] before:rounded-full
-                        before:bg-transparent
-                        checked:before:bg-[#d62423]
-                      "
-            />
-            <span className="text-sm tracking-wide">{t("accommodation_no")}</span>
-          </label>
+            + {t("Adaugă invitat")}
+          </button>
         </div>
-      </div>
 
-      {/* MESSAGE */}
-      <label className="flex flex-col gap-1">
-        <span className="text-xs tracking-widest uppercase font-semibold font-monoton">
-          {t("Mesaj")}
-        </span>
+        {/* LODGING SUGGESTIONS */}
+        <div className="flex flex-col gap-2">
+          <span className="text-xs tracking-widest uppercase font-semibold font-monoton">
+            {t("accommodation_sug")}
+          </span>
 
-        <textarea
-          name="message"
-          value={formData.message}
-          onChange={(e) => {
-            handleChange(e);
-            autoGrow(e);
-          }}
-          onInput={autoGrow}
-          rows={3}
-          className="
+          <div className="flex flex-col gap-2">
+            <label
+              className="
+              flex items-center gap-3 
+              px-3 py-2 
+              bg-[#f5ead5] 
+              border border-black/30 
+              rounded-sm
+              shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
+              active:translate-x-[1px] active:translate-y-[1px] active:shadow-none
+            "
+            >
+              <input required
+                type="radio"
+                name="lodgingSuggestions"
+                value="yes"
+                checked={formData.lodgingSuggestions === "yes"}
+                onChange={handleChange}
+                className="
+                        appearance-none
+                        h-4 w-4
+                        border border-black/70
+                        rounded-full
+                        relative
+                        before:content-['']
+                        before:absolute before:inset-[3px] before:rounded-full
+                        before:bg-transparent
+                        checked:before:bg-[#d62423]
+                      "
+              />
+              <span className="text-sm tracking-wide">
+                {t("accommodation_yes")}
+              </span>
+            </label>
+
+            <label
+              className="
+              flex items-center gap-3 
+              px-3 py-2 
+              bg-[#f5ead5] 
+              border border-black/30 
+              rounded-sm
+              shadow-[2px_2px_0px_rgba(0,0,0,0.35)]
+              active:translate-x-[1px] active:translate-y-[1px] active:shadow-none
+            "
+            >
+              <input required
+                type="radio"
+                name="lodgingSuggestions"
+                value="no"
+                checked={formData.lodgingSuggestions === "no"}
+                onChange={handleChange}
+                className="
+                        appearance-none
+                        h-4 w-4
+                        border border-black/70
+                        rounded-full
+                        relative
+                        before:content-['']
+                        before:absolute before:inset-[3px] before:rounded-full
+                        before:bg-transparent
+                        checked:before:bg-[#d62423]
+                      "
+              />
+              <span className="text-sm tracking-wide">{t("accommodation_no")}</span>
+            </label>
+          </div>
+        </div>
+
+        {/* MESSAGE */}
+        <label className="flex flex-col gap-1">
+          <span className="text-xs tracking-widest uppercase font-semibold font-monoton">
+            {t("Mesaj")}
+          </span>
+
+          <textarea
+            name="message"
+            value={formData.message}
+            onChange={(e) => {
+              handleChange(e);
+              autoGrow(e);
+            }}
+            onInput={autoGrow}
+            rows={3}
+            className="
           px-3 py-2
           border border-black/30
           rounded-sm
@@ -755,24 +756,24 @@ export default function RSVPForm() {
           overflow-hidden
           min-h-[3.5rem]
         "
-          placeholder={t('write us')}
-        />
+            placeholder={t('write us')}
+          />
 
-      </label>
-
-
-      <div className="flex justify-center min-h-[2px]">
-        <div ref={turnstileElRef} />
-      </div>
+        </label>
 
 
+        <div className="flex justify-center min-h-[2px]">
+          <div ref={turnstileElRef} />
+        </div>
 
 
 
-      {/* SUBMIT */}
-      <button
-        type="submit"
-        className="
+
+
+        {/* SUBMIT */}
+        <button
+          type="submit"
+          className="
           mt-2
           bg-red
           text-pink
@@ -785,29 +786,29 @@ export default function RSVPForm() {
           active:translate-x-[2px] active:translate-y-[2px] active:shadow-none
           font-monoton
           "
-        title="send"
-      >
-        {t("send")}
-      </button>
-
-      {status?.message && (
-        <div ref={statusRef}
-          className={[
-            "mt-3 relative z-20", // ✅ ensures it sits above weird overlays
-            "rounded-sm border px-3 py-3 shadow-[2px_2px_0px_rgba(0,0,0,0.35)]",
-            "whitespace-pre-line text-[0.75rem] tracking-widest uppercase",
-            status.type === "error"
-              ? "bg-[#f5ead5] border-red-600 text-red-700"
-              : "bg-[#f5ead5] border-green-700 text-green-800",
-          ].join(" ")}
+          title="send"
         >
-          {status.message}
-        </div>
-      )}
+          {t("send")}
+        </button>
+
+        {status?.message && (
+          <div ref={statusRef}
+            className={[
+              "mt-3 relative z-20", // ✅ ensures it sits above weird overlays
+              "rounded-sm border px-3 py-3 shadow-[2px_2px_0px_rgba(0,0,0,0.35)]",
+              "whitespace-pre-line text-[0.75rem] tracking-widest uppercase",
+              status.type === "error"
+                ? "bg-[#f5ead5] border-red-600 text-red-700"
+                : "bg-[#f5ead5] border-green-700 text-green-800",
+            ].join(" ")}
+          >
+            {status.message}
+          </div>
+        )}
 
 
-    </form>
-
+      </form>
+    </div>
     // <Loader/>
   );
 }
