@@ -30,9 +30,9 @@ export default function HoraReveal() {
 
 
     return (
-        <section ref={ref} className="bg-pink px-6">
+         <section ref={ref} className="relative z-0 bg-pink px-6">
             {/* scroll fuel */}
-            <div className="relative mx-auto max-w-4xl h-[150vh] sm:h-[165vh] mt-[-28rem]">
+            <div className="relative mx-auto max-w-4xl h-[150vh] sm:h-[165vh] mt-[-24rem]">
                 {/* pinned viewport */}
                 <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
                     <motion.div style={{ y: sceneLift, opacity: sceneFade }} className="relative w-[92vw] max-w-[520px]">
@@ -62,7 +62,7 @@ export default function HoraReveal() {
                     </motion.div>
                 </div>
 
-            {/* <img
+                {/* <img
                 src="/images/dress-code-2.png"
                 alt="no pic"
                 className="w-32 sm:w-24 h-auto mb-2 pointer-events-none select-none rotate-[-5deg]

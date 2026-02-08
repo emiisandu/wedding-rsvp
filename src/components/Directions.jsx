@@ -8,7 +8,7 @@ export default function Directions() {
     const { t } = useTranslation();
 
     return (
-        <section className=" px-6 bg-pink border-0 mt-20">
+        <section className="relative z-50 px-6 bg-pink border-0 mt-20">
             <div className="relative max-w-4xl mx-auto
                 min-h-[150vh]
                 sm:min-h-[200vh]
@@ -182,7 +182,7 @@ function TravelCard({ title, subtitle, img, align = "left", locationLink = null,
     return (
         <div
             className={[
-                "relative w-[92%] sm:w-[85%] overflow-hidden bg-pink/40 p-4",
+                "relative w-[92%] sm:w-[85%] overflow-hidden bg-pink/40 p-4 z-50",
                 isRight ? "self-end text-right" : "self-start text-left",
             ].join(" ")}
         >
