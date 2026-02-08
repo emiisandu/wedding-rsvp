@@ -141,7 +141,7 @@ export default function RSVPForm() {
 
       if (!anyMatch) {
         return jsonError_(
-          "Sorry, none of the names submitted were on the guest list. Please contact us if problem persists."
+          "Sorry, none of the names submitted were on the guest list. "
         );
       }
 
