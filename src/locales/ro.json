@@ -53,5 +53,6 @@
   "err_turnstile_retry": "Verificarea tip captcha a eșuat — te rugăm încearcă din nou.",
   "rsvp_confirmed_for": "Mulțumim! Răspuns înregistrat pentru: {{names}}",
   "rsvp_already_registered": "Răspuns deja înregistrat pentru: {{names}}",
-  "beneficiaries": "Beneficiari"
+  "beneficiaries": "Beneficiari",
+  "rsvp_date": "Dată RSVP: 1 mai 2026"
 }

@@ -283,6 +283,12 @@ export default function RSVPForm() {
           <Loader />
         </div>
       )}
+
+      <div className="flex items-center justify-center font-prata mt-[-2rem] sm:mt-0 mb-8">
+        <p className="">❗{t("rsvp_date")}  </p>
+
+      </div>
+
       <form
         onSubmit={handleSubmit}
         className=" w-full max-w-lg mx-auto flex flex-col gap-6 px-4 pb-10 font-prata-light z-40 bg-pink"

@@ -73,5 +73,6 @@
   "err_turnstile_retry": "Human check failed — please try again.",
   "rsvp_confirmed_for": "RSVP submitted for: {{names}}",
   "rsvp_already_registered": "Already RSVPd: {{names}}",
-  "beneficiaries":"Beneficiaries"
+  "beneficiaries":"Beneficiaries",
+  "rsvp_date": "RSVP Date: May 1st 2026"
 }
