@@ -135,17 +135,6 @@ export default function RSVPForm() {
 
       const addedBy = fullName_(payload.guests[0].firstName, payload.guests[0].lastName);
 
-      // 1) Validate: at least one submitted guest matches the guest list (fuzzy, swapped ok)
-      const matchResults = payload.guests.map(g => matchGuest_(g, guestList));
-      const anyMatch = matchResults.some(r => r.matched);
-
-      if (!anyMatch) {
-        return jsonError_(
-          "Sorry, none of the names submitted were on the guest list. "
-        );
-      }
-
-      // 2) Append only those who match guest list and are NOT already registered
       const confirmedSubmitted = [];
       const alreadyRegistered = [];
 
