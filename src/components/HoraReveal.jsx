@@ -62,6 +62,13 @@ export default function HoraReveal() {
                     </motion.div>
                 </div>
 
+            {/* <img
+                src="/images/dress-code-2.png"
+                alt="no pic"
+                className="w-32 sm:w-24 h-auto mb-2 pointer-events-none select-none rotate-[-5deg]
+                mt-[8rem]
+                "
+            /> */}
 
                 {/* Bucovina cocktail note */}
                 <motion.div
@@ -105,6 +112,15 @@ export default function HoraReveal() {
                 </motion.div>
 
             </div>
+
+            {/* <img
+                src="/images/dress-code-1.png"
+                alt="no pic"
+                className="w-32 sm:w-24 h-auto mb-2 pointer-events-none select-none rotate-[-5deg]
+                mt-[-3rem]
+                "
+            /> */}
+
         </section>
     );
 }

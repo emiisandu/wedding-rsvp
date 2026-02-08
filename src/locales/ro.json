@@ -52,5 +52,6 @@
   "err_humancheck": "Verificarea tip captcha nu e gata încă — te rugăm încearcă din nou.",
   "err_turnstile_retry": "Verificarea tip captcha a eșuat — te rugăm încearcă din nou.",
   "rsvp_confirmed_for": "Mulțumim! Răspuns înregistrat pentru: {{names}}",
-  "rsvp_already_registered": "Răspuns deja înregistrat pentru: {{names}}"
+  "rsvp_already_registered": "Răspuns deja înregistrat pentru: {{names}}",
+  "beneficiaries": "Beneficiari"
 }

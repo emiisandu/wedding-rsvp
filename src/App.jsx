@@ -34,14 +34,32 @@ function App() {
   const scrollToSection = (ref) => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
 
-    let frames = 0;
-    const raf = () => {
+    let lastY = window.scrollY;
+    let stableFrames = 0;
+
+    const tick = () => {
       parallaxController?.update();
-      frames += 1;
-      if (frames < 40) requestAnimationFrame(raf); // ~40 frames ≈ 0.6s
+
+      const y = window.scrollY;
+      const delta = Math.abs(y - lastY);
+
+      if (delta < 0.5) stableFrames += 1;
+      else stableFrames = 0;
+
+      lastY = y;
+
+      // wait until scroll is stable for ~10 frames
+      if (stableFrames < 10) {
+        requestAnimationFrame(tick);
+      } else {
+        // one last update after "rest"
+        requestAnimationFrame(() => parallaxController?.update());
+      }
     };
-    requestAnimationFrame(raf);
+
+    requestAnimationFrame(tick);
   };
+
 
 
 
@@ -127,14 +145,14 @@ function App() {
           >
             <div className="flex flex-col items-center">
               <img
-                className="block w-28 sm:w-36 md:w-40 max-w-none"
-                src="/images/cake.svg"
+                className="block w-14 sm:w-28 md:w-24 max-w-none"
+                src="/images/cake.png"
                 alt="Theo & Didi"
               />
 
               <span
                 className="
-                    mt-[-2px]
+                    mt-[4px]
                     ml-1
                     w-full
                     text-center

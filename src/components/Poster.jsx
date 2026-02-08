@@ -52,7 +52,7 @@ export default function Poster() {
                 xl:w-96
                 mx-auto
               "
-              src="/images/theo-didi.svg"
+              src="/images/theo-didi.png"
               alt="Theo & Didi"
             />
           </motion.div>

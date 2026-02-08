@@ -72,5 +72,6 @@
   "err_humancheck": "Human check not initialized yet — please try again.",
   "err_turnstile_retry": "Human check failed — please try again.",
   "rsvp_confirmed_for": "RSVP submitted for: {{names}}",
-  "rsvp_already_registered": "Already RSVPd: {{names}}"
+  "rsvp_already_registered": "Already RSVPd: {{names}}",
+  "beneficiaries":"Beneficiaries"
 }

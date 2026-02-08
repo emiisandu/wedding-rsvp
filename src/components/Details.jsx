@@ -36,8 +36,8 @@ export default function Details() {
               25.07.26
             </p>
             <img
-              className="w-24 sm:w-28 md:w-32"
-              src="/images/hydrangea.svg"
+              className="mt-1 w-24 sm:w-28 md:w-32"
+              src="/images/hydrangea.png"
               alt="Theo & Didi"
             />
           </div>

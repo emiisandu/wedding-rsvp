@@ -37,7 +37,7 @@ export default function Gift() {
                                 {/* <CopyRow label="BCR" value="RO002RNCB29387298" />
                                 <CopyRow label="BT" value="RO002RNCB29387298" /> */}
                                 <div className="h-1"></div>
-                                <CopyRow label="Beneficiari" value="Theodora-Paula Gitana Sandu & Teodosie Cozmin Țibu" />
+                                <CopyRow label={t("beneficiaries")} value="Theodora-Paula Gitana Sandu & Teodosie Cozmin Țibu" />
 
                                 {/* <div>Beneficiar: Țibu Cozmin</div> */}
                             </div>

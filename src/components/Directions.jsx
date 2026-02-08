@@ -18,11 +18,11 @@ export default function Directions() {
 
 
                 {/* CONTENT UNDER TITLE */}
-                <div className="sticky top-0 z-40 bg-pink pt-[1rem] pb-[.7rem]">
+                <div className="sticky top-0 z-40 bg-pink pt-[1.5rem] sm:pt-[0rem] pb-[.7rem] sm:pb-0 ">
                     {/* title block (your existing) */}
                     <div className="flex items-center justify-center date-div text-align text-right">
                         <svg
-                            viewBox="0 0 600 120"
+                            viewBox="0 0 600 100"
                             className="swirly-text [font-size:2.8rem] sm:[font-size:2.2rem]"
                             aria-hidden="true"
                         >
@@ -47,7 +47,7 @@ export default function Directions() {
                     </div>
                 </div>
                 {/* grid */}
-                <div className="mx-auto max-w-4xl sm:mt-10">
+                <div className="mx-auto max-w-4xl mt-4 sm:mt-10">
                     <div className="grid gap-6 lg:grid-cols-2">
                         {/* 1) LEFT BIG IMAGE (belongs to title) */}
                         <div className="relative overflow-hidden  bg-pink p-3">
@@ -149,7 +149,7 @@ export default function Directions() {
                                 </div>
                             </div>
 
-                            <div className="left-0 right-0 mx-auto gifts-end bg-pink h-[20vh] z-30 w-80 overflow-hidden bottom-0 mb-0 top-[-3em]  mt-0 relative">
+                            <div className="left-0 right-0 mx-auto gifts-end bg-pink h-[20vh] z-30 w-80 overflow-hidden bottom-0 mb-0 top-[-3.5em]  mt-0 relative">
 
                             </div>
                             <TravelCard

@@ -26,6 +26,7 @@ export default function CopyRow({ label, value }) {
           active:translate-y-[1px]
         "
         aria-label={`Copy ${label}`}
+        title="copy"
       >
         {copied ? "✓" : "⧉"}
       </button>
