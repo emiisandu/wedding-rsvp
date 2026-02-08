@@ -76,7 +76,7 @@ export async function handler(event) {
         headers: corsHeaders,
         body: JSON.stringify({
           ok: false,
-          message: "Missing GAS_RSVP_URL env var",
+          message: "Missing GAS_RSVP_URL env var.",
         }),
       };
     }
