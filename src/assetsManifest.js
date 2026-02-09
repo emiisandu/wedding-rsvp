@@ -1,0 +1,26 @@
+// src/assetsManifest.js
+export const IMAGE_URLS = [
+  "/images/cake.png",
+  "/images/carnation.svg",
+  "/images/hydrangea.png",
+  "/images/pin.png",
+  "/images/theo-didi-cartoon.svg",
+  "/images/champagne.svg",
+  "/images/ripped-1.png",
+  "/images/ripped-2.png",
+  "/images/ripped-3.png",
+  "/images/fm-hora.png",
+  "/images/fm-house.svg",
+  "/images/fm-deer.svg",
+  "/images/fm-mount.png",
+  "/images/fm-mount-deer.png",
+  "/images/fm-car.png",
+  "/images/fm-train.png",
+  "/images/fm-plane.png",
+  "/images/hora-background.png",
+  "/images/hora-foreground-left.png",
+  "/images/hora-foreground-right.png",
+  "/images/bucovina-cocktail.png",
+  "/images/bucovina-sun.png",
+  // add the rest once and you’re done
+];

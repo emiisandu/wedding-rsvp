@@ -94,7 +94,7 @@ export default function HoraReveal() {
                     />
 
                     <p className="font-prata text-sm text-red leading-snug">
-                        <span className="block font-meow text-[1.4rem]">Dress code:</span>
+                        <span className="block font-meow text-[1.4rem]">Dress code</span>
                         <span className="tracking-wide">{t("bucovina_cocktail")}</span>
                     </p>
 

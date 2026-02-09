@@ -54,7 +54,7 @@ export default function Directions() {
                         {/* 1) LEFT BIG IMAGE (belongs to title) */}
                         <div className="relative overflow-hidden  bg-pink p-3">
                             {/* wavy “frame” overlay */}
-                            <div className="pointer-events-none absolute inset-0 opacity-60">
+                            <div className="pointer-events-none absolute inset-0 opacity-60 sm:top-[-30rem]">
                                 <svg viewBox="0 0 400 300" className="h-full w-full">
                                     <path
                                         d="M20,40 Q60,10 100,35 T180,35 T260,35 T340,35 
@@ -88,14 +88,14 @@ export default function Directions() {
 
                             {/* desktop-only filler so left side isn't empty */}
                             <div className="hidden lg:block">
-                                <div className="flex justify-center pointer-events-none mt-4">
+                                {/* <div className="flex justify-center pointer-events-none mt-4">
                                     <Parallax speed={5}>
 
                                         <img className="w-[8rem]" src="/images/wedding-ring.svg" alt="" />
                                     </Parallax>
-                                </div>
+                                </div> */}
 
-                                <div className="relative overflow-hidden mt-0">
+                                {/* <div className="relative overflow-hidden mt-0">
                                     <div className="relative z-10 flex justify-center pointer-events-none">
                                         <Parallax speed={-45}>
                                             <img className="w-[26rem]" src="/images/fm-deer.svg" alt="" />
@@ -103,13 +103,15 @@ export default function Directions() {
                                     </div>
 
                                     <div className="relative z-40 flex justify-center pointer-events-none">
-                                        <img className="w-[28rem]" src="/images/fm-mount.svg" alt="" />
+                                        <img className="w-[28rem]" src="/images/fm-mount.png" alt="" />
                                     </div>
                                 </div>
 
                                 <div className="left-0 right-0 mx-auto gifts-end bg-pink h-[20vh] z-30 w-80 overflow-hidden bottom-0 mb-0 top-[-3em]  mt-0 relative">
 
-                                </div>
+                                </div> */}
+
+                                <MobileDeerMountSwap />
                             </div>
                         </div>
 
@@ -151,8 +153,12 @@ export default function Directions() {
                             </div> 
                             
                             */}
-                            <MobileDeerMountSwap />
 
+                            <div className="block lg:hidden">
+                                <MobileDeerMountSwap />
+                            </div>
+
+                            <div className="mt-4"></div>
                             <TravelCard
                                 align="right"
                                 title={t("by_plane")}
@@ -183,7 +189,7 @@ function TravelCard({ title, subtitle, img, align = "left", locationLink = null,
     return (
         <div
             className={[
-                "relative w-[92%] sm:w-[85%] overflow-hidden bg-pink/40 p-4 z-40",
+                "relative w-[90%] sm:w-[85%] overflow-hidden bg-pink/40 p-4 z-40",
                 isRight ? "self-end text-right" : "self-start text-left",
             ].join(" ")}
         >
@@ -197,7 +203,7 @@ function TravelCard({ title, subtitle, img, align = "left", locationLink = null,
 
                 {/* text */}
                 <div className="min-w-0">
-                    <div className={["flex items-center gap-2", isRight ? "justify-end" : ""].join(" ")}>
+                    <div className={["flex items-center ", isRight ? " justify-end" : "ml-[-.5rem]"].join(" ")}>
                         {!isRight && <span className="mt-[2px] inline-block h-2 w-2 rounded-full bg-red/70" />}
                         <p className="font-meow [font-size:2.2rem] text-base text-red">{title}</p>
                         {isRight && <span className="mt-[2px] inline-block h-2 w-2 rounded-full bg-red/70" />}
@@ -253,33 +259,33 @@ function MobileDeerMountSwap() {
 
     return (
 
-            <div ref={ref} className="block lg:hidden relative overflow-hidden">
-                {/* deer (over everything, centered-ish) */}
-                <motion.div
-                    style={{ opacity: deerOpacity }}
-                    className="absolute inset-0 z-20 flex justify-center pointer-events-none"
-                >
-                    <Parallax speed={-26}>
-                        <img className="w-80 lg:w-96" src="/images/fm-deer.svg" alt="" />
-                    </Parallax>
-                </motion.div>
+        <div ref={ref} className="block lg:mt-32 relative overflow-hidden">
+            {/* deer (over everything, centered-ish) */}
+            <motion.div
+                style={{ opacity: deerOpacity }}
+                className="absolute inset-0 z-20 flex justify-center pointer-events-none "
+            >
+                <Parallax speed={-26}>
+                    <img className="w-80 lg:w-96" src="/images/fm-deer.svg" alt="" />
+                </Parallax>
+            </motion.div>
 
-                {/* base mount */}
-                <motion.div
-                    style={{ opacity: mountOpacity }}
-                    className="relative z-10 flex justify-center pointer-events-none"
-                >
-                    <img className="w-96 lg:w-96" src="/images/fm-mount.png" alt="" />
-                </motion.div>
+            {/* base mount */}
+            <motion.div
+                style={{ opacity: mountOpacity }}
+                className="relative z-10 flex justify-center pointer-events-none"
+            >
+                <img className="w-96 lg:w-96" src="/images/fm-mount.png" alt="" />
+            </motion.div>
 
-                {/* swapped mount (with deer baked into image) */}
-                <motion.div
-                    style={{ opacity: mountDeerOpacity }}
-                    className="absolute inset-0 z-10 flex justify-center pointer-events-none"
-                >
-                    <img className="w-96 lg:w-96" src="/images/fm-mount-deer.png" alt="" />
-                </motion.div>
-            </div>
+            {/* swapped mount (with deer baked into image) */}
+            <motion.div
+                style={{ opacity: mountDeerOpacity }}
+                className="absolute inset-0 z-10 flex justify-center pointer-events-none"
+            >
+                <img className="w-96 lg:w-96" src="/images/fm-mount-deer.png" alt="" />
+            </motion.div>
+        </div>
 
     );
 }

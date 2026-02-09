@@ -61,7 +61,7 @@ export default function QuickDetails() {
     const schedule = [
         {
             timeLabel: t("ORA 14"),
-            title: t("Iertăciune"),
+            title: t("iertaciune_short"),
             place: t("Pensiunea La Moara"),
             link: "https://maps.app.goo.gl/PN59jzskmuTTfvYR7",
         },
@@ -189,7 +189,7 @@ export default function QuickDetails() {
                     <div className="flex flex-col gap-2 font-prata text-xs uppercase mt-6">
                         <div className="flex justify-between">
                             <span>{t("ORA 14")}</span>
-                            <span>{t("Iertăciune")}</span>
+                            <span>{t("iertaciune_short")}</span>
                         </div>
                         <div className="flex justify-between">
                             <span>{t("ORA 16")}</span>
@@ -305,7 +305,7 @@ export default function QuickDetails() {
                         <div className="flex flex-col gap-2 font-prata text-xs uppercase mt-6">
                             <div className="flex justify-between">
                                 <span>{t("ORA 14")}</span>
-                                <span>{t("Iertăciune")}</span>
+                                <span>{t("iertaciune_short")}</span>
                             </div>
                             <div className="flex justify-between">
                                 <span>{t("ORA 16")}</span>
