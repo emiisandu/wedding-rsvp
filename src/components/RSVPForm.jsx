@@ -199,7 +199,17 @@ export default function RSVPForm() {
       setIsSubmitting(true);
 
 
-      const payload = { ...formData, turnstileToken };
+      const mainAttendance = (formData.guests?.[0]?.attendance || "da").toString().trim().toLowerCase();
+
+      // you use "da"/"nu" in the UI, so keep that
+      const normalizedGuests = (formData.guests || []).map((g, i) => ({
+        ...g,
+        attendance:
+          (g.attendance && String(g.attendance).trim()) ||
+          (i === 0 ? mainAttendance : mainAttendance),
+      }));
+
+      const payload = { ...formData, guests: normalizedGuests, turnstileToken };
 
       const res = await fetch("/.netlify/functions/rsvp", {
         method: "POST",
@@ -214,6 +224,7 @@ export default function RSVPForm() {
       } catch {
         // if server returned html
         resetTurnstile();
+        console.log("??? ", text);
         throw new Error("Server returned non-JSON.");
       }
 
