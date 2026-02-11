@@ -59,7 +59,7 @@
   "gift_text": "If you wish to offer us a gift, a monetary one would be greatly appreciated.",
   "bucovina_cocktail": "Bucovina Cocktail",
   "dress_code_text": "Vibrant summer shades",
-  "accept_gifts": "We accept monetary gifts.",
+  "accept_gifts": "We kindly welcome monetary gifts.",
   "err_attendance_required": "Please select attendance (Yes/No).",
   "err_lodging_required": "Please select the accommodation option.",
   "err_firstname_required": "Guest {{idx}}: first name is required.",

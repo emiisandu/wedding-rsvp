@@ -285,7 +285,7 @@ export default function RSVPForm() {
       )}
 
       <div className="flex items-center justify-center font-prata mt-[-2rem] sm:mt-0 mb-8">
-        <p className="">❗{t("rsvp_date")}  </p>
+        <p className=""> {t("rsvp_date")}  </p>
 
       </div>
 
